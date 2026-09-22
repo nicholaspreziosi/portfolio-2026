@@ -1,7 +1,15 @@
+import { getProfile } from "@/lib/content";
+
 export default function Home() {
+  const profile = getProfile();
+
   return (
-    <main>
-      <div>Hello world!</div>
+    <main className="flex min-h-screen items-center justify-center px-6">
+      <div className="space-y-3 text-center">
+        <p className="text-sm tracking-[0.2em] uppercase">{profile.name}</p>
+        <h1 className="text-4xl font-semibold tracking-tight">Portfolio</h1>
+        <p className="text-neutral-500">{profile.title}</p>
+      </div>
     </main>
   );
 }
