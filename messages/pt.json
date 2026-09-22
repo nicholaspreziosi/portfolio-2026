@@ -1,0 +1,44 @@
+{
+  "Metadata": {
+    "title": "Nick Preziosi",
+    "titleTemplate": "%s | Nick Preziosi",
+    "description": "Portfólio de Nick Preziosi, designer de produto e engenheiro especializado em design systems, Next.js e produtos digitais cuidados.",
+    "keywords": "Nick Preziosi, Designer de produto, UI/UX, Design systems, Next.js, TypeScript, Portfólio"
+  },
+  "Navigation": {
+    "home": "Início",
+    "work": "Trabalho",
+    "about": "Sobre",
+    "contact": "Contato"
+  },
+  "LocaleSwitcher": {
+    "label": "Idioma",
+    "en": "English",
+    "es": "Español",
+    "pt": "Português"
+  },
+  "HomePage": {
+    "heading": "Portfólio",
+    "role": "Designer de produto e engenheiro"
+  },
+  "Theme": {
+    "light": "Tema claro. Mudar para escuro.",
+    "dark": "Tema escuro. Mudar para o sistema.",
+    "system": "Tema do sistema. Mudar para claro."
+  },
+  "GradientPreview": {
+    "centered": "Centralizado",
+    "start": "No início",
+    "heading": "Desenhando produtos intuitivos",
+    "body": "Campo ambiente atrás da página. As superfícies o cobrem; não o pintam de novo.",
+    "button": "Botão da marca",
+    "accent": "Acento"
+  },
+  "Assistant": {
+    "title": "Assistente",
+    "greeting": "Pergunte sobre o trabalho, o processo ou como entrar em contato.",
+    "placeholder": "Faça uma pergunta",
+    "send": "Enviar",
+    "close": "Fechar"
+  }
+}

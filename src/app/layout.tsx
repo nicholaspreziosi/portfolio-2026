@@ -1,7 +1,9 @@
-import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
-import { ThemeToggle } from "@/ui/components/ThemeToggle";
-import { themeInitScript } from "@/ui/components/theme";
+import { headers } from "next/headers";
+import { hasLocale } from "next-intl";
+import { routing } from "@/i18n/routing";
+import { ThemeInitScript } from "@/ui/components/ThemeInitScript";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,48 +16,21 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: "Nick Preziosi",
-    template: "%s | Nick Preziosi",
-  },
-  description:
-    "Portfolio of Nick Preziosi — product designer and engineer specializing in design systems, Next.js, and thoughtful digital products.",
-  keywords: [
-    "Nick Preziosi",
-    "Product Designer",
-    "UI/UX",
-    "Design Systems",
-    "Next.js",
-    "TypeScript",
-    "Portfolio",
-  ],
-  authors: [{ name: "Nick Preziosi" }],
-  creator: "Nick Preziosi",
-  openGraph: {
-    title: "Nick Preziosi",
-    description:
-      "Portfolio of Nick Preziosi — product designer and engineer specializing in design systems, Next.js, and thoughtful digital products.",
-    type: "website",
-    locale: "en_US",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+export default async function RootLayout({ children }: { children: ReactNode }) {
+  const headerList = await headers();
+  const requested = headerList.get("x-next-intl-locale");
+  const lang = hasLocale(routing.locales, requested) ? requested : routing.defaultLocale;
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
-      </head>
+    <html
+      lang={lang}
+      dir="ltr"
+      className={`${geistSans.variable} ${geistMono.variable}`}
+      suppressHydrationWarning
+    >
       <body className="min-h-screen font-sans antialiased">
+        <ThemeInitScript />
         {children}
-        <div className="fixed top-4 end-4 z-50">
-          <ThemeToggle />
-        </div>
       </body>
     </html>
   );

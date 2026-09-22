@@ -362,6 +362,18 @@ html.disable-transitions *::after {
   background: var(--surface-muted);
 }
 
+.theme-toggle__icon {
+  transform: scale(0) rotate(90deg);
+  transition: transform 200ms;
+}
+
+html[data-theme-choice="light"] .theme-toggle__icon--light,
+html[data-theme-choice="dark"] .theme-toggle__icon--dark,
+html[data-theme-choice="system"] .theme-toggle__icon--system,
+html:not([data-theme-choice]) .theme-toggle__icon--system {
+  transform: scale(1) rotate(0deg);
+}
+
 body {
   background: var(--surface-primary);
   color: var(--color-text-primary);
