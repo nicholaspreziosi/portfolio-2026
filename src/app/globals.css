@@ -2,7 +2,7 @@
 
 /*
   Class on <html> switches themes. Semantic names stay the same;
-  only the values change. Gradient treatments are defined separately.
+  only the values change.
 */
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -70,6 +70,42 @@
   --shadow-elevated: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   --shadow-overlay: 0 0 0 1px rgb(0 0 0 / 0.05), 0 12px 48px rgb(0 0 0 / 0.18);
 
+  /* Homepage light fields, including the hero accent that holds color to its edge. */
+  --ambient-wash: radial-gradient(
+    778px 919px at center top,
+    rgb(0 113 227 / 0.35) 0%,
+    rgb(0 210 255 / 0.2) 50%,
+    transparent 100%
+  );
+  --ambient-hero: radial-gradient(
+    672px 339px at center,
+    rgb(0 113 227 / 0.4) 0%,
+    rgb(0 210 255 / 0.25) 50%,
+    rgb(16 185 129 / 0.15) 100%
+  );
+  --ambient-start: radial-gradient(
+    495px circle at center,
+    rgb(16 185 129 / 0.3) 0%,
+    rgb(5 150 105 / 0.15) 50%,
+    transparent 100%
+  );
+  --ambient-end: radial-gradient(
+    530px circle at center,
+    rgb(0 113 227 / 0.3) 0%,
+    rgb(16 185 129 / 0.2) 50%,
+    transparent 100%
+  );
+  --ambient-wash-blur: 60px;
+  --ambient-hero-blur: 55px;
+  --ambient-orb-blur: 70px;
+  --ambient-end-opacity: 1;
+
+  --gradient-brand: linear-gradient(90deg, #0071e3 0%, #10b981 100%);
+  --gradient-text: var(--gradient-brand);
+  --gradient-button: var(--gradient-brand);
+  --gradient-button-shadow: 0 4px 8px rgb(0 113 227 / 0.25);
+  --gradient-accent: var(--gradient-brand);
+
   --blur-sm: 0.375rem;
   --blur-md: 0.75rem;
   --blur-lg: 1.25rem;
@@ -135,6 +171,175 @@
   --shadow-sm: 0 1px 1px rgb(0 0 0 / 0.35);
   --shadow-elevated: 0 8px 32px rgb(0 0 0 / 0.45);
   --shadow-overlay: 0 0 0 1px rgb(255 255 255 / 0.08), 0 12px 48px rgb(0 0 0 / 0.45);
+
+  --ambient-wash: radial-gradient(
+    778px 919px at center top,
+    rgb(0 113 227 / 0.3) 0%,
+    rgb(6 182 212 / 0.15) 50%,
+    transparent 100%
+  );
+  --ambient-hero: radial-gradient(
+    672px 339px at center,
+    rgb(0 113 227 / 0.35) 0%,
+    rgb(6 182 212 / 0.2) 50%,
+    rgb(16 185 129 / 0.15) 100%
+  );
+  --ambient-start: radial-gradient(
+    530px circle at center,
+    rgb(16 185 129 / 0.2) 0%,
+    rgb(0 113 227 / 0.1) 50%,
+    transparent 100%
+  );
+  --ambient-end: transparent;
+  --ambient-wash-blur: 65px;
+  --ambient-hero-blur: 60px;
+  --ambient-orb-blur: 75px;
+  --ambient-end-opacity: 0;
+
+  --gradient-brand: linear-gradient(135deg, #0071e3 0%, #06b6d4 50%, #10b981 100%);
+  --gradient-button-shadow: 0 0 10px rgb(0 113 227 / 0.4);
+}
+
+.ambient {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  height: 100dvh;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ambient--contained {
+  position: absolute;
+  height: 100%;
+}
+
+.ambient__stage {
+  position: absolute;
+  top: 0;
+  height: 100%;
+}
+
+/* Homepage frame: 1360 wide, centered in the viewport, with the hero accent. */
+.ambient--centered .ambient__stage {
+  left: 50%;
+  width: 1360px;
+  translate: -50% 0;
+}
+
+/* About frame: 1280 wide, pinned to the start edge. No centered hero accent. */
+.ambient--start .ambient__stage {
+  width: 1280px;
+  inset-inline-start: 0;
+}
+
+.ambient__wash,
+.ambient__hero,
+.ambient__field {
+  position: absolute;
+  display: block;
+}
+
+.ambient__wash {
+  top: -120px;
+  left: 50%;
+  width: 1100px;
+  height: 650px;
+  translate: -50% 0;
+  background: var(--ambient-wash);
+  filter: blur(var(--ambient-wash-blur));
+}
+
+.ambient__hero {
+  top: 88px;
+  left: 50%;
+  width: 950px;
+  height: 480px;
+  translate: -50% 0;
+  border-radius: var(--radius-full);
+  background: var(--ambient-hero);
+  filter: blur(var(--ambient-hero-blur));
+}
+
+.ambient--start .ambient__hero {
+  display: none;
+}
+
+.ambient__field--start {
+  top: 280px;
+  width: 700px;
+  height: 700px;
+  border-radius: var(--radius-full);
+  inset-inline-start: -192px;
+  background: var(--ambient-start);
+  filter: blur(var(--ambient-orb-blur));
+}
+
+.ambient__field--end {
+  top: 480px;
+  width: 750px;
+  height: 750px;
+  border-radius: var(--radius-full);
+  opacity: var(--ambient-end-opacity);
+  inset-inline-end: -192px;
+  background: var(--ambient-end);
+  filter: blur(var(--ambient-orb-blur));
+}
+
+.dark .ambient__wash {
+  top: -96px;
+}
+
+.dark .ambient__field--start {
+  top: 256px;
+  width: 750px;
+  height: 750px;
+}
+
+.ambient--start .ambient__field--end {
+  opacity: 0;
+}
+
+/* Centered only. The end orb is hidden on start in both themes. */
+.ambient--centered .ambient__field--end {
+  top: 280px;
+  width: 700px;
+  height: 700px;
+  background: var(--ambient-start);
+}
+
+.dark .ambient--centered {
+  --ambient-end: radial-gradient(
+    530px circle at center,
+    rgb(0 113 227 / 0.3) 0%,
+    rgb(16 185 129 / 0.2) 50%,
+    transparent 100%
+  );
+  --ambient-end-opacity: 1;
+}
+
+.dark .ambient--centered .ambient__field--start,
+.dark .ambient--centered .ambient__field--end {
+  top: 464px;
+  width: 800px;
+  height: 800px;
+  background: var(--ambient-end);
+}
+
+.gradient-text {
+  background-image: var(--gradient-text);
+  background-clip: text;
+  color: transparent;
+}
+
+.gradient-button {
+  background-image: var(--gradient-button);
+  box-shadow: var(--gradient-button-shadow);
+  color: var(--color-text-inverse);
+}
+
+.gradient-accent {
+  background-image: var(--gradient-accent);
 }
 
 body {
