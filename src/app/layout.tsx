@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { ThemeToggle } from "@/ui/components/ThemeToggle";
+import { themeInitScript } from "@/ui/components/theme";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -45,8 +47,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body className="min-h-screen font-sans antialiased">{children}</body>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
+      <body className="min-h-screen font-sans antialiased">
+        {children}
+        <div className="fixed top-4 end-4 z-50">
+          <ThemeToggle />
+        </div>
+      </body>
     </html>
   );
 }

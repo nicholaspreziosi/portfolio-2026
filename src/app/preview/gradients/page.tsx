@@ -4,25 +4,18 @@ import { useState } from "react";
 import { AmbientGradient } from "@/ui/patterns/AmbientGradient";
 
 type Variant = "centered" | "start";
-type Theme = "light" | "dark";
 
 const variants: { id: Variant; label: string }[] = [
   { id: "centered", label: "Centered" },
   { id: "start", label: "Start" },
 ];
 
-const themes: { id: Theme; label: string }[] = [
-  { id: "light", label: "Light" },
-  { id: "dark", label: "Dark" },
-];
-
 export default function GradientPreviewPage() {
   const [variant, setVariant] = useState<Variant>("centered");
-  const [theme, setTheme] = useState<Theme>("light");
 
   return (
     <div
-      className={`${theme === "dark" ? "dark" : ""} relative h-dvh overflow-hidden`}
+      className="relative h-dvh overflow-hidden"
       style={{
         background: "var(--surface-primary)",
         color: "var(--color-text-primary)",
@@ -55,30 +48,6 @@ export default function GradientPreviewPage() {
               </button>
             ))}
           </div>
-          <div
-            className="flex gap-1 rounded-full p-1"
-            style={{
-              background: "var(--surface-glass)",
-              border: "1px solid var(--surface-glass-border)",
-              backdropFilter: "blur(var(--surface-glass-blur))",
-            }}
-          >
-            {themes.map((item) => (
-              <button
-                key={item.id}
-                type="button"
-                aria-pressed={theme === item.id}
-                onClick={() => setTheme(item.id)}
-                className="rounded-full px-4 py-1.5 text-[13px]"
-                style={{
-                  background: theme === item.id ? "var(--surface-muted)" : "transparent",
-                  color: "var(--color-text-primary)",
-                }}
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
         </div>
 
         <div className={variant === "centered" ? "mx-auto max-w-3xl text-center" : "max-w-xl"}>
@@ -86,7 +55,7 @@ export default function GradientPreviewPage() {
             className="text-[11px] font-semibold tracking-[0.05em] uppercase"
             style={{ color: "var(--color-text-accent)" }}
           >
-            {variant} · {theme}
+            {variant}
           </p>
           <h1 className="gradient-text mt-4 font-semibold" style={{ fontSize: "var(--text-display-size)", lineHeight: "var(--text-display-leading)", letterSpacing: "var(--text-display-tracking)" }}>
             Designing intuitive products
