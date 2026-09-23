@@ -75,7 +75,7 @@ function KeepPageScroll() {
 
 export function ComponentShowcase() {
   return (
-    <section className="mx-auto flex w-full max-w-5xl flex-col gap-10 px-6 pb-24">
+    <section className="mx-auto flex w-full max-w-5xl flex-col gap-10 px-6 pb-32 sm:pb-24">
       <header className="space-y-2">
         <h2 className="text-2xl font-semibold tracking-tight">Components</h2>
         <p className="text-sm text-neutral-500">Stock shadcn/ui, before customization.</p>

@@ -51,6 +51,17 @@ export function persistThemeChoice(choice: ThemeChoice) {
   document.cookie = `${THEME_STORAGE_KEY}=${encodeURIComponent(choice)}; Path=/; Max-Age=${THEME_MAX_AGE}; SameSite=Lax`;
 }
 
+export function commitThemeChoice(choice: ThemeChoice) {
+  const root = document.documentElement;
+  root.classList.add("disable-transitions");
+  applyTheme(choice);
+  persistThemeChoice(choice);
+  root.dispatchEvent(new Event("themechange"));
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => root.classList.remove("disable-transitions"));
+  });
+}
+
 export function applyTheme(choice: ThemeChoice) {
   const root = document.documentElement;
   const resolved = resolveTheme(choice);

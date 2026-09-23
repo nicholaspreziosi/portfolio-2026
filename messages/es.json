@@ -10,6 +10,7 @@
     "work": "Portafolio",
     "about": "Acerca de",
     "contact": "Contacto",
+    "settings": "Ajustes",
     "menu": "Menú"
   },
   "LocaleSwitcher": {
@@ -35,6 +36,12 @@
     "about": "Acerca de mí"
   },
   "Theme": {
+    "label": "Tema",
+    "choice": {
+      "light": "Claro",
+      "dark": "Oscuro",
+      "system": "Sistema"
+    },
     "light": "Tema claro. Cambiar a oscuro.",
     "dark": "Tema oscuro. Cambiar al sistema.",
     "system": "Tema del sistema. Cambiar a claro."

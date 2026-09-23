@@ -107,7 +107,7 @@
   --surface-glass-border: rgb(255 255 255 / 0.6);
   --surface-glass-blur: 1.25rem;
   --surface-glass-shadow: 0 2px 12px rgb(0 0 0 / 0.04), 0 12px 32px rgb(0 0 0 / 0.02);
-  --nav-highlight: var(--surface-muted);
+  --nav-highlight: #c8c8ce;
   --nav-glass: rgb(255 255 255 / 0.4);
   --nav-glass-border: rgb(255 255 255 / 0.35);
 
@@ -253,7 +253,7 @@
   --surface-glass-border: rgb(255 255 255 / 0.1);
   --surface-glass-blur: 0.75rem;
   --surface-glass-shadow: 0 8px 32px rgb(0 0 0 / 0.5);
-  --nav-highlight: var(--surface-primary);
+  --nav-highlight: #3e465c;
   --nav-glass: var(--surface-glass);
   --nav-glass-border: var(--surface-glass-border);
 

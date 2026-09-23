@@ -10,6 +10,7 @@
     "work": "Portfolio",
     "about": "About",
     "contact": "Contact",
+    "settings": "Settings",
     "menu": "Menu"
   },
   "LocaleSwitcher": {
@@ -35,6 +36,12 @@
     "about": "About Me"
   },
   "Theme": {
+    "label": "Theme",
+    "choice": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    },
     "light": "Light theme. Switch to dark.",
     "dark": "Dark theme. Switch to system.",
     "system": "System theme. Switch to light."

@@ -2,7 +2,8 @@
 
 import { useEffect, useLayoutEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import { applyTheme, persistThemeChoice, readThemeChoice, type ThemeChoice } from "./theme";
+import { cn } from "cn";
+import { applyTheme, commitThemeChoice, readThemeChoice, type ThemeChoice } from "./theme";
 
 const nextTheme: Record<ThemeChoice, ThemeChoice> = {
   light: "dark",
@@ -10,7 +11,7 @@ const nextTheme: Record<ThemeChoice, ThemeChoice> = {
   system: "light",
 };
 
-export function ThemeToggle() {
+export function ThemeToggle({ className }: { className?: string }) {
   const t = useTranslations("Theme");
   const [theme, setTheme] = useState<ThemeChoice>("system");
 
@@ -18,6 +19,12 @@ export function ThemeToggle() {
     const stored = readThemeChoice();
     applyTheme(stored);
     setTheme(stored);
+  }, []);
+
+  useEffect(() => {
+    const onChange = () => setTheme(readThemeChoice());
+    document.documentElement.addEventListener("themechange", onChange);
+    return () => document.documentElement.removeEventListener("themechange", onChange);
   }, []);
 
   useEffect(() => {
@@ -38,15 +45,7 @@ export function ThemeToggle() {
   }, [theme]);
 
   function handleClick() {
-    const root = document.documentElement;
-    const choice = nextTheme[theme];
-    root.classList.add("disable-transitions");
-    applyTheme(choice);
-    persistThemeChoice(choice);
-    setTheme(choice);
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => root.classList.remove("disable-transitions"));
-    });
+    commitThemeChoice(nextTheme[theme]);
   }
 
   return (
@@ -54,7 +53,7 @@ export function ThemeToggle() {
       type="button"
       onClick={handleClick}
       aria-label={t(theme)}
-      className="theme-toggle relative grid size-10 place-items-center rounded-full"
+      className={cn("theme-toggle relative grid size-10 place-items-center rounded-full", className)}
     >
       <Sun />
       <Moon />
