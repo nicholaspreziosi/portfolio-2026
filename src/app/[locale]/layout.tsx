@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { DocumentLangSync } from "@/ui/shell/DocumentLangSync";
 import { Navbar } from "@/ui/shell/Navbar";
+import { SocialDock } from "@/ui/shell/SocialDock";
 
 const openGraphLocale: Record<Locale, string> = {
   en: "en_US",
@@ -57,6 +58,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
     <NextIntlClientProvider>
       <DocumentLangSync />
       <Navbar />
+      <SocialDock />
       {children}
     </NextIntlClientProvider>
   );

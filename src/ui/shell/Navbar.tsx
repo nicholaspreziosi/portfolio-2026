@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState, type MouseEvent } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore, type MouseEvent } from "react";
 import { createPortal } from "react-dom";
 import {
   BriefcaseIcon,
@@ -38,20 +38,25 @@ function isActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
+function subscribeToClient() {
+  return () => {};
+}
+
+function subscribeToTheme(onChange: () => void) {
+  document.documentElement.addEventListener("themechange", onChange);
+  return () => document.documentElement.removeEventListener("themechange", onChange);
+}
+
 export function Navbar() {
   const pathname = usePathname();
   const t = useTranslations("Navigation");
   const [scrolled, setScrolled] = useState(false);
   const [compactTabs, setCompactTabs] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(subscribeToClient, () => true, () => false);
   const sentinelRef = useRef<HTMLDivElement>(null);
   const lastScrollY = useRef(0);
   const activeId = links.find((link) => isActive(pathname, link.href))?.id ?? "";
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     const sentinel = sentinelRef.current;
@@ -212,17 +217,7 @@ function TabLabel({ compact, children }: { compact: boolean; children: string })
 const themeChoices = ["light", "dark", "system"] as const satisfies readonly ThemeChoice[];
 
 function ThemeChoices({ label, name }: { label: string; name: (choice: ThemeChoice) => string }) {
-  const [choice, setChoice] = useState<ThemeChoice>("system");
-
-  useLayoutEffect(() => {
-    setChoice(readThemeChoice());
-  }, []);
-
-  useEffect(() => {
-    const onChange = () => setChoice(readThemeChoice());
-    document.documentElement.addEventListener("themechange", onChange);
-    return () => document.documentElement.removeEventListener("themechange", onChange);
-  }, []);
+  const choice = useSyncExternalStore(subscribeToTheme, readThemeChoice, () => "system" as const);
 
   return (
     <section className="flex flex-col gap-1" role="radiogroup" aria-label={label}>

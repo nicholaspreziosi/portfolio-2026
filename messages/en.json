@@ -60,5 +60,13 @@
     "placeholder": "Ask a question",
     "send": "Send",
     "close": "Close"
+  },
+  "Social": {
+    "label": "Contact",
+    "email": "Email",
+    "phone": "Phone",
+    "linkedin": "LinkedIn",
+    "facebook": "Facebook",
+    "instagram": "Instagram"
   }
 }
