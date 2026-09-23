@@ -7,9 +7,10 @@
   },
   "Navigation": {
     "home": "Home",
-    "work": "Work",
+    "work": "Portfolio",
     "about": "About",
-    "contact": "Contact"
+    "contact": "Contact",
+    "menu": "Menu"
   },
   "LocaleSwitcher": {
     "label": "Language",
@@ -18,8 +19,20 @@
     "pt": "Português"
   },
   "HomePage": {
-    "heading": "Portfolio",
-    "role": "Product Designer & Engineer"
+    "eyebrow": "UI/UX • Product • Front-end • Marketing",
+    "headlineLine1": "Designing intuitive products and",
+    "headlineLine2": "the systems that make them scale.",
+    "body": "I'm Nick Preziosi, a UI/UX leader and front-end developer combining product strategy, design systems, modern engineering, and a marketing background to turn complex ideas into intuitive digital experiences.",
+    "name": "Nick Preziosi",
+    "title": "UI/UX & Front-End",
+    "experienceValue": "10+ Years",
+    "experienceLabel": "Digital Experience",
+    "developmentValue": "4+ Years",
+    "developmentLabel": "Professional Development",
+    "executionValue": "Design + Code",
+    "executionLabel": "End-to-End Execution",
+    "work": "View Selected Work",
+    "about": "About Me"
   },
   "Theme": {
     "light": "Light theme. Switch to dark.",

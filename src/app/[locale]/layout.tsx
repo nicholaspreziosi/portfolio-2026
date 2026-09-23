@@ -3,9 +3,8 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing, type Locale } from "@/i18n/routing";
-import { ThemeToggle } from "@/ui/components/ThemeToggle";
 import { DocumentLangSync } from "@/ui/shell/DocumentLangSync";
-import { LocaleSwitcher } from "@/ui/shell/LocaleSwitcher";
+import { Navbar } from "@/ui/shell/Navbar";
 
 const openGraphLocale: Record<Locale, string> = {
   en: "en_US",
@@ -57,11 +56,8 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   return (
     <NextIntlClientProvider>
       <DocumentLangSync />
+      <Navbar />
       {children}
-      <div className="fixed top-4 end-4 z-50 flex items-center gap-2">
-        <LocaleSwitcher />
-        <ThemeToggle />
-      </div>
     </NextIntlClientProvider>
   );
 }

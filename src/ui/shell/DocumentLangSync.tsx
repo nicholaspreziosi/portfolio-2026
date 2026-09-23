@@ -2,7 +2,7 @@
 
 import { useLayoutEffect } from "react";
 import { useLocale } from "next-intl";
-import { applyTheme, readThemeChoice } from "@/ui/components/theme";
+import { applyTheme, readThemeChoice } from "@/ui/shared/components/theme";
 
 export function DocumentLangSync() {
   const locale = useLocale();

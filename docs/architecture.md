@@ -17,7 +17,7 @@ Path alias: `@/*` maps to `src/*`.
 
 ```text
 src/
-  app/                     routes, layouts, metadata
+  app/                     routes, layouts, metadata. Pages are thin wrappers.
   content/                 source-of-truth JSON
     case-studies/          one file per case study
     profile.json
@@ -26,9 +26,19 @@ src/
   lib/content/             types and loaders for published content
   contexts/                domain, application, infrastructure, dependency container
   ui/
-    components/            shared primitives
-    patterns/              portfolio compositions
-    shell/                 navigation, footer, providers
+    {context}/             one folder per page or feature
+      views/{viewName}/    page-level composition
+      containers/          feature sections with their own UI logic
+      components/          presentational pieces used by that context
+      hooks/
+      actions/
+    shared/
+      components/          primitives used by more than one context
+      containers/          application-wide layout
+      hooks/
+      providers/
+    patterns/              portfolio compositions reused across pages
+    shell/                 navigation, footer, document sync
     motion/                tokens, variants, primitives
     case-studies/          detail sections and bespoke sequences
 public/
@@ -37,7 +47,7 @@ public/
   fonts/                   self-hosted fonts, when needed
 ```
 
-Add a folder when a real repeated need shows up. Keep one-off page sections next to the route until a second page needs them.
+A page gets a context folder (`home`, `about`, `work`, `contact`) as soon as it has UI. Do not leave section markup in `src/app`.
 
 ## Layers
 
@@ -46,13 +56,13 @@ Add a folder when a real repeated need shows up. Keep one-off page sections next
 | `src/content` | Copy, metadata, media references | Markup, styles, motion, business rules |
 | `src/lib/content` | Types, reading JSON, published/featured filters | Rendering, external I/O |
 | `src/contexts` | Domain models, application services, repositories, errors | JSX, Tailwind, page copy |
-| `src/app` | Routes, metadata, loading content, composing the page | Reusable primitives, direct repository access |
-| `src/ui` | Components, motion, shell | Content authoring, domain rules |
+| `src/app` | Routes, metadata, loading content, rendering the view | Section markup, reusable primitives, direct repository access |
+| `src/ui` | Views, containers, components, motion, shell | Content authoring, domain rules |
 
 Published content flows in one direction:
 
 ```text
-JSON → getCaseStudy / getProfile / … → page → UI props
+JSON → getCaseStudy / getProfile / … → page → view props
 ```
 
 Pages load that content on the server and pass it down. Client components receive props. They do not import JSON or call the filesystem loaders.
@@ -75,33 +85,47 @@ Hooks resolve services from the dependency container with `useMemo`. They do not
 | `/work` | Case study listing |
 | `/work/[slug]` | Case study detail |
 
-`app/**/page.tsx` files stay thin: load content, export metadata, render a view or a short composition of patterns. Interactive pieces are client components in `src/ui`.
+`app/**/page.tsx` files are thin wrappers. A page loads content, exports metadata, and renders one view. It does not contain section markup, Tailwind layout, or interactive UI.
+
+```tsx
+import { HomeView } from "@/ui/home/views/home/HomeView";
+
+export default async function HomePage() {
+  return <HomeView name={name} heading={heading} role={role} />;
+}
+```
 
 Locale routing (`next-intl`) is added before large amounts of page copy are written. Until then, user-facing strings that are not content JSON stay in one place per page so they can move into message files later.
 
-## Component organization
+## Presentation
 
-Build shared UI before finishing pages. Two levels:
+Pages render views. Views compose containers and components. Business rules stay in `src/contexts`.
 
-**Primitives** in `src/ui/components/` — generic, no portfolio copy:
+| Piece | Location | Responsibility |
+| --- | --- | --- |
+| Page | `src/app/{route}/page.tsx` | Server component. Load content, pass props, render the view. |
+| View | `src/ui/{context}/views/{viewName}/{viewName}View.tsx` | Page-level composition. Client component when the page is interactive. |
+| Container | `src/ui/{context}/containers/{containerName}/` | A section or feature block with its own state or composition. |
+| Component | `src/ui/{context}/components/{componentName}/` | Presentational UI used inside that context. |
+| Shared component | `src/ui/shared/components/` | Generic primitive, no portfolio copy. |
+| Shared container | `src/ui/shared/containers/` | Chrome used by every page, such as the app bar. |
 
-Button, Badge, Card, Section, Container, Tabs, Dialog, Sheet, Tooltip, Carousel, MediaLightbox, ThemeToggle, and the few form controls the contact page needs.
+**Shared primitives:** Button, Badge, Card, Section, Tabs, Dialog, Sheet, Tooltip, Carousel, MediaLightbox, ThemeToggle, and the form controls the contact page needs.
 
-**Patterns** in `src/ui/patterns/` — portfolio compositions that use primitives:
-
-CaseStudyCard, FeaturedWork, ExperienceItem, Testimonial, MediaCarousel, AmbientGradient, SectionHeading, Stat, CapabilityTags.
+**Patterns** in `src/ui/patterns/` are compositions reused by more than one page: CaseStudyCard, FeaturedWork, ExperienceItem, Testimonial, MediaCarousel, AmbientGradient, SectionHeading, Stat, CapabilityTags.
 
 Shell chrome (floating navigation, mobile sheet, footer, theme and locale controls) lives in `src/ui/shell/`.
 
-A pattern owns the motion that is part of its behavior. Callers pass content and variants. They do not reimplement hover, drag, or enter/exit on the outside.
+A container or pattern owns the motion that is part of its behavior. Callers pass content and variants. They do not reimplement hover, drag, or enter/exit on the outside.
 
-Promote a local component into `components/` or `patterns/` when a second page needs the same behavior. A visual tweak is a variant or a token change, not a second component.
+Move a context component into `shared/components/` or `patterns/` when a second page needs the same behavior. A visual tweak is a variant or a token change, not a second component.
 
 ### Naming
 
 | Kind | Pattern | Example |
 | --- | --- | --- |
-| Component file and export | PascalCase, file matches export | `CaseStudyCard.tsx` |
+| View file and export | `{Name}View` | `HomeView.tsx` |
+| Container / component file and export | PascalCase, file matches export | `HeroAmbient.tsx`, `HeroIntro.tsx` |
 | Props | `{Name}Props` | `CaseStudyCardProps` |
 | Hook | `use` + PascalCase, camelCase file | `useTheme.ts` |
 | Content type | PascalCase in `types.ts` | `CaseStudy`, `MediaAsset` |

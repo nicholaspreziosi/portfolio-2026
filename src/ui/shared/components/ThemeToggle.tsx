@@ -54,7 +54,7 @@ export function ThemeToggle() {
       type="button"
       onClick={handleClick}
       aria-label={t(theme)}
-      className="theme-toggle relative grid size-10 place-items-center rounded-full transition-transform hover:scale-110 active:scale-95"
+      className="theme-toggle relative grid size-10 place-items-center rounded-full"
     >
       <Sun />
       <Moon />
