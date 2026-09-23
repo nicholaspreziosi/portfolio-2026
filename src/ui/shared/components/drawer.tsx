@@ -4,6 +4,24 @@ import * as React from "react"
 import { cn } from "cn"
 import { Drawer as DrawerPrimitive } from "vaul"
 
+function bindSettle(node: HTMLElement) {
+  if (node.dataset.settleBound === "true") return
+  node.dataset.settleBound = "true"
+  const settle = () => {
+    if (node.isConnected && node.getAttribute("data-state") === "open") {
+      node.dataset.settled = "true"
+    }
+  }
+  node.addEventListener("animationend", (event) => {
+    if (event.target === node) settle()
+  })
+  const observer = new MutationObserver(() => {
+    if (node.getAttribute("data-state") !== "open") delete node.dataset.settled
+  })
+  observer.observe(node, { attributes: true, attributeFilter: ["data-state"] })
+  window.setTimeout(settle, 700)
+}
+
 function Drawer({
   ...props
 }: React.ComponentProps<typeof DrawerPrimitive.Root>) {
@@ -49,6 +67,20 @@ function DrawerContent({
   children,
   ...props
 }: React.ComponentProps<typeof DrawerPrimitive.Content>) {
+  React.useEffect(() => {
+    const scan = () => {
+      document
+        .querySelectorAll<HTMLElement>(
+          "[data-vaul-drawer], [data-vaul-overlay], [data-slot='dialog-content'], [data-slot='dialog-overlay'], [data-slot='sheet-content'], [data-slot='sheet-overlay']"
+        )
+        .forEach(bindSettle)
+    }
+    scan()
+    const observer = new MutationObserver(scan)
+    observer.observe(document.body, { childList: true, subtree: true })
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <DrawerPortal data-slot="drawer-portal">
       <DrawerOverlay />

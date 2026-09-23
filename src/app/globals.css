@@ -476,10 +476,47 @@
 }
 
 html.disable-transitions,
-html.disable-transitions *,
-html.disable-transitions *::before,
-html.disable-transitions *::after {
+html.disable-transitions *:not(
+  [data-vaul-drawer],
+  [data-vaul-overlay],
+  [data-slot="dialog-content"],
+  [data-slot="dialog-overlay"],
+  [data-slot="sheet-content"],
+  [data-slot="sheet-overlay"],
+  [data-slot="drawer-content"],
+  [data-slot="drawer-overlay"],
+  [data-slot="popover-content"],
+  [data-slot="dropdown-menu-content"]
+),
+html.disable-transitions *:not(
+  [data-vaul-drawer],
+  [data-vaul-overlay],
+  [data-slot="dialog-content"],
+  [data-slot="dialog-overlay"],
+  [data-slot="sheet-content"],
+  [data-slot="sheet-overlay"],
+  [data-slot="drawer-content"],
+  [data-slot="drawer-overlay"]
+)::before,
+html.disable-transitions *:not(
+  [data-vaul-drawer],
+  [data-vaul-overlay],
+  [data-slot="dialog-content"],
+  [data-slot="dialog-overlay"],
+  [data-slot="sheet-content"],
+  [data-slot="sheet-overlay"],
+  [data-slot="drawer-content"],
+  [data-slot="drawer-overlay"]
+)::after {
   transition: none !important;
+}
+
+[data-vaul-drawer][data-state="open"][data-settled="true"],
+[data-vaul-overlay][data-state="open"][data-settled="true"],
+[data-slot="dialog-content"][data-state="open"][data-settled="true"],
+[data-slot="dialog-overlay"][data-state="open"][data-settled="true"],
+[data-slot="sheet-content"][data-state="open"][data-settled="true"],
+[data-slot="sheet-overlay"][data-state="open"][data-settled="true"] {
   animation: none !important;
 }
 

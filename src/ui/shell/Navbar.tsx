@@ -233,6 +233,7 @@ function ThemeChoices({ label, name }: { label: string; name: (choice: ThemeChoi
           type="button"
           role="radio"
           aria-checked={item === choice}
+          onPointerDown={(event) => event.stopPropagation()}
           onClick={() => commitThemeChoice(item)}
           className={cn(
             "flex items-center justify-between rounded-full px-4 py-2.5 text-sm",
