@@ -15,7 +15,7 @@ export function Hero() {
       <p className="inline-flex items-center gap-1 rounded-full border border-(--hero-chip-border) bg-(--hero-chip-bg) px-3.5 py-1.5 text-[length:var(--text-eyebrow-size)] leading-[var(--text-eyebrow-leading)] font-semibold tracking-[var(--text-eyebrow-tracking)] text-(--hero-chip-fg) uppercase shadow-[var(--hero-chip-shadow)]">
         <span
           aria-hidden
-          className="gradient-button inline-block size-2 rounded-full dark:shadow-[0_0_8px_rgb(6_182_212/0.8)]"
+          className="gradient-button inline-block size-2 rounded-full shadow-[var(--hero-dot-shadow)]"
         />
         {t("eyebrow")}
       </p>
@@ -37,7 +37,7 @@ export function Hero() {
             alt=""
             width={40}
             height={40}
-            className="size-10 rounded-full object-cover shadow-[0_0_0_1px_rgb(255_255_255/0.15)]"
+            className="size-10 rounded-full object-cover shadow-[var(--avatar-ring)]"
           />
           <div>
             <p className="text-base leading-5 font-semibold tracking-[-0.01em] text-(--color-text-primary)">
