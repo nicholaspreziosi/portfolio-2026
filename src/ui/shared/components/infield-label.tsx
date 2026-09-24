@@ -201,15 +201,15 @@ function InfieldShell({
             invalid
               ? "text-destructive"
               : active
-                ? "text-ring"
+                ? undefined
                 : floating
                   ? "text-foreground"
                   : "text-muted-foreground"
           )}
         >
-          <span className="truncate">{label}</span>
+          <span className={cn("truncate", active && !invalid && "gradient-text")}>{label}</span>
           {required ? (
-            <span aria-hidden="true" className="ms-0.5 shrink-0">
+            <span aria-hidden="true" className={cn("ms-0.5 shrink-0", active && !invalid && "gradient-text")}>
               *
             </span>
           ) : null}

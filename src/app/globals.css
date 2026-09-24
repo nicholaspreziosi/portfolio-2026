@@ -634,3 +634,112 @@ body {
     @apply font-sans;
   }
 }
+
+/*
+  Keyboard focus uses the brand gradient as a 2px outline, 2px outside the
+  control. Same targets as the k-lab global focus rule. The ring is a masked
+  pseudo-element because outline-color cannot be a gradient. Text fields are
+  replaced elements, so they use a gradient border instead.
+*/
+:root {
+  --focus-outline-width: 2px;
+  --focus-outline-offset: 2px;
+}
+
+:is(
+    button,
+    input,
+    select,
+    textarea,
+    a,
+    [tabindex],
+    [role="button"]
+  ):focus-visible:not([aria-invalid="true"]):not([data-radix-focus-guard]) {
+  outline: none;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --ring: transparent;
+}
+
+:is(
+    button,
+    a,
+    [tabindex],
+    [role="button"]
+  ):focus-visible:not([aria-invalid="true"]):not([data-radix-focus-guard]):not(
+    :is(.absolute, .relative, .fixed, .sticky)
+  ) {
+  position: relative;
+}
+
+:is(
+    button,
+    a,
+    [tabindex],
+    [role="button"]
+  ):focus-visible:not([aria-invalid="true"]):not([data-radix-focus-guard]):not(
+    :is(.infield-label *, [data-slot="input-group"] *)
+  )::before,
+:is(.infield-label, [data-slot="input-group"]):has(:focus-visible):not(:has([aria-invalid="true"]))::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  inset: calc(-1 * (var(--focus-outline-width) + var(--focus-outline-offset)));
+  padding: var(--focus-outline-width);
+  border-radius: inherit;
+  background: var(--gradient-brand);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+}
+
+:is(.infield-label, [data-slot="input-group"]):has(:focus-visible):not(:has([aria-invalid="true"])) {
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-ring-offset-shadow: 0 0 #0000;
+  border-color: var(--border);
+}
+
+:is(
+    input,
+    select,
+    textarea
+  ):focus-visible:not([aria-invalid="true"]):not(
+    :is(
+      .infield-label *,
+      [data-slot="input-group"] *,
+      [type="button"],
+      [type="submit"],
+      [type="reset"],
+      [type="checkbox"],
+      [type="radio"],
+      [type="range"],
+      [type="file"],
+      [type="color"],
+      [type="hidden"]
+    )
+  ) {
+  border-width: var(--focus-outline-width);
+  border-color: transparent;
+  background-image: var(--gradient-brand);
+  background-origin: border-box;
+  background-clip: border-box;
+  box-shadow: inset 0 0 0 100vmax var(--background);
+}
+
+@media (forced-colors: active) {
+  :is(button, input, select, textarea, a, [tabindex], [role="button"]):focus-visible {
+    outline: 2px solid CanvasText;
+    outline-offset: 2px;
+  }
+
+  :is(button, a, [tabindex], [role="button"]):focus-visible::before,
+  :is(.infield-label, [data-slot="input-group"]):has(:focus-visible)::before {
+    content: none;
+  }
+}
