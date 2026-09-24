@@ -36,6 +36,7 @@ import {
   DropdownMenuTrigger,
 } from "@/ui/shared/components/dropdown-menu";
 import { Field, FieldGroup, FieldLabel } from "@/ui/shared/components/field";
+import { InfieldLabel } from "@/ui/shared/components/infield-label";
 import { Input } from "@/ui/shared/components/input";
 import { Label } from "@/ui/shared/components/label";
 import { Popover, PopoverContent, PopoverTrigger } from "@/ui/shared/components/popover";
@@ -61,6 +62,19 @@ import { Skeleton } from "@/ui/shared/components/skeleton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/ui/shared/components/tabs";
 import { Textarea } from "@/ui/shared/components/textarea";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/ui/shared/components/tooltip";
+
+const infieldRoles = [
+  { value: "product", label: "Product" },
+  { value: "brand", label: "Brand" },
+  { value: "engineering", label: "Engineering" },
+];
+
+const infieldCities = [
+  { value: "lisbon", label: "Lisbon" },
+  { value: "mexico-city", label: "Mexico City" },
+  { value: "new-york", label: "New York" },
+  { value: "sao-paulo", label: "São Paulo" },
+];
 
 function KeepPageScroll() {
   useLayoutEffect(() => {
@@ -237,6 +251,49 @@ export function ComponentShowcase() {
               <Button type="submit" className="w-fit">
                 Submit
               </Button>
+            </form>
+          </CardContent>
+        </Card>
+
+        <Card className="md:col-span-2">
+          <CardHeader>
+            <CardTitle>Infield label</CardTitle>
+            <CardDescription>
+              Top-aligned floating label inside the field for input, textarea, select, and combobox.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form
+              className="grid gap-4 md:grid-cols-2"
+              onSubmit={(event) => event.preventDefault()}
+            >
+              <InfieldLabel label="Name" name="name" autoComplete="name" />
+              <InfieldLabel
+                label="Email"
+                type="email"
+                name="email"
+                required
+                autoComplete="email"
+                description="We only use this to reply."
+              />
+              <InfieldLabel label="Company" name="company" defaultValue="Northwind" />
+              <InfieldLabel
+                label="Website"
+                type="url"
+                name="website"
+                defaultValue="northwind"
+                error="Enter a full URL, including https://."
+              />
+              <InfieldLabel control="select" label="Role" name="role" options={infieldRoles} />
+              <InfieldLabel
+                control="combobox"
+                label="City"
+                name="city"
+                options={infieldCities}
+                emptyMessage="No cities found."
+              />
+              <InfieldLabel control="textarea" label="Note" name="note" className="md:col-span-2" />
+              <InfieldLabel label="Disabled" defaultValue="Unavailable" disabled />
             </form>
           </CardContent>
         </Card>
