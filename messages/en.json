@@ -19,6 +19,27 @@
     "es": "Español",
     "pt": "Português"
   },
+  "WorkPage": {
+    "eyebrow": "Case studies & selected work",
+    "headlineLine1": "Architecting scalable systems",
+    "headlineLine2": "and precision product",
+    "headlineLine3": "experiences.",
+    "body": "A curated selection of end-to-end product design, multi-tier design systems, and AI-accelerated front-end engineering shipped across fintech, developer tooling, and enterprise platforms.",
+    "metricShipped": "8+ Shipped Ecosystems",
+    "metricTokens": "Zero-Drift Token Architecture",
+    "metricAi": "Human-Led, AI-Accelerated",
+    "filtersLabel": "Filter work by capability",
+    "techLabel": "Technologies",
+    "filter": {
+      "all": "All Work",
+      "uiux": "UI/UX",
+      "systems": "Design Systems",
+      "frontend": "Front-End",
+      "product": "Product",
+      "ai": "AI",
+      "leadership": "Leadership"
+    }
+  },
   "HomePage": {
     "eyebrow": "UI/UX • Product • Front-end • Marketing",
     "headlineLine1": "Designing intuitive products and",

@@ -19,6 +19,27 @@
     "es": "Español",
     "pt": "Português"
   },
+  "WorkPage": {
+    "eyebrow": "Casos de estudio y trabajo seleccionado",
+    "headlineLine1": "Arquitectura de sistemas escalables",
+    "headlineLine2": "y experiencias de producto",
+    "headlineLine3": "precisas.",
+    "body": "Una selección de diseño de producto de punta a punta, sistemas de diseño de varios niveles e ingeniería front-end acelerada con IA, publicada en fintech, herramientas para desarrolladores y plataformas empresariales.",
+    "metricShipped": "8+ ecosistemas publicados",
+    "metricTokens": "Arquitectura de tokens sin deriva",
+    "metricAi": "Liderado por personas, acelerado con IA",
+    "filtersLabel": "Filtrar el trabajo por capacidad",
+    "techLabel": "Tecnologías",
+    "filter": {
+      "all": "Todo el trabajo",
+      "uiux": "UI/UX",
+      "systems": "Sistemas de diseño",
+      "frontend": "Front-end",
+      "product": "Producto",
+      "ai": "IA",
+      "leadership": "Liderazgo"
+    }
+  },
   "HomePage": {
     "eyebrow": "UI/UX • Producto • Front-end • Marketing",
     "headlineLine1": "Diseñando productos intuitivos y",
