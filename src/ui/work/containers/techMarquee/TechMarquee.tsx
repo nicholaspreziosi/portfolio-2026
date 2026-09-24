@@ -42,15 +42,15 @@ const fadeHorizontal =
 
 function TechPill({ name, src, mono }: Technology) {
   return (
-    <div className="flex items-center gap-2.5 rounded-full px-3 py-2.5">
+    <div className="flex items-center gap-3 rounded-full px-3.5 py-3">
       <img
         src={src}
         alt=""
-        width={20}
-        height={20}
-        className={cn("size-5 shrink-0", mono && "dark:invert")}
+        width={32}
+        height={32}
+        className={cn("size-8 shrink-0", mono && "dark:invert")}
       />
-      <span className="text-[length:var(--text-caption-size)] leading-5 font-medium tracking-[-0.025em] whitespace-nowrap text-(--color-text-secondary)">
+      <span className="text-base leading-6 font-medium tracking-[-0.025em] whitespace-nowrap text-(--color-text-secondary)">
         {name}
       </span>
     </div>
@@ -61,55 +61,68 @@ function TechList({ items }: { items: readonly Technology[] }) {
   return items.map((item) => <TechPill key={item.name} {...item} />);
 }
 
-export function TechMarquee() {
+type TechMarqueeProps = {
+  orientation: "horizontal" | "vertical";
+  className?: string;
+};
+
+export function TechMarquee({ orientation, className }: TechMarqueeProps) {
   const t = useTranslations("WorkPage");
   const reduceMotion = useReducedMotion();
 
   return (
-    <div aria-label={t("techLabel")} role="region" className="min-w-0">
-      <ul className="sr-only">
-        {technologies.map((item) => (
-          <li key={item.name}>{item.name}</li>
-        ))}
-      </ul>
+    <div
+      aria-label={orientation === "horizontal" ? t("techLabel") : undefined}
+      role={orientation === "horizontal" ? "region" : undefined}
+      className={className}
+    >
+      {orientation === "horizontal" ? (
+        <ul className="sr-only">
+          {technologies.map((item) => (
+            <li key={item.name}>{item.name}</li>
+          ))}
+        </ul>
+      ) : null}
 
       {reduceMotion ? (
-        <ul className="flex flex-wrap gap-x-2 gap-y-1 xl:max-w-[19.5rem]" aria-hidden>
+        <ul
+          className={cn(
+            "flex flex-wrap gap-x-3 gap-y-1",
+            orientation === "horizontal" ? "xl:hidden" : "hidden max-w-md xl:flex",
+          )}
+          aria-hidden
+        >
           {technologies.map((item) => (
             <li key={item.name}>
               <TechPill {...item} />
             </li>
           ))}
         </ul>
+      ) : orientation === "horizontal" ? (
+        <div className={cn("flex flex-col gap-2 xl:hidden", fadeHorizontal)} aria-hidden>
+          <InfiniteSlider gap={20} speed={36} speedOnHover={12}>
+            <TechList items={firstColumn} />
+          </InfiniteSlider>
+          <InfiniteSlider gap={20} speed={36} speedOnHover={12} reverse>
+            <TechList items={secondColumn} />
+          </InfiniteSlider>
+        </div>
       ) : (
-        <>
-          <div className={cn("flex flex-col gap-1 xl:hidden", fadeHorizontal)} aria-hidden>
-            <InfiniteSlider gap={16} speed={36} speedOnHover={12}>
-              <TechList items={firstColumn} />
-            </InfiniteSlider>
-            <InfiniteSlider gap={16} speed={36} speedOnHover={12} reverse>
-              <TechList items={secondColumn} />
-            </InfiniteSlider>
-          </div>
-          <div
-            className={cn("hidden h-[340px] w-[19.5rem] shrink-0 gap-4 xl:flex", fadeVertical)}
-            aria-hidden
+        <div className={cn("flex h-full w-max shrink-0 gap-6", fadeVertical)} aria-hidden>
+          <InfiniteSlider direction="vertical" gap={20} speed={28} speedOnHover={10} className="h-full">
+            <TechList items={firstColumn} />
+          </InfiniteSlider>
+          <InfiniteSlider
+            direction="vertical"
+            gap={20}
+            speed={28}
+            speedOnHover={10}
+            reverse
+            className="h-full"
           >
-            <InfiniteSlider direction="vertical" gap={16} speed={28} speedOnHover={10} className="h-full">
-              <TechList items={firstColumn} />
-            </InfiniteSlider>
-            <InfiniteSlider
-              direction="vertical"
-              gap={16}
-              speed={28}
-              speedOnHover={10}
-              reverse
-              className="h-full"
-            >
-              <TechList items={secondColumn} />
-            </InfiniteSlider>
-          </div>
-        </>
+            <TechList items={secondColumn} />
+          </InfiniteSlider>
+        </div>
       )}
     </div>
   );

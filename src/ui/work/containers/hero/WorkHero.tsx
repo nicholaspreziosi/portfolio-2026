@@ -28,7 +28,7 @@ export function WorkHero() {
   const t = useTranslations("WorkPage");
 
   return (
-    <section className="flex flex-col gap-10 xl:flex-row xl:items-center xl:justify-between">
+    <section className="flex flex-col gap-10">
       <div className="max-w-3xl">
         <p className="inline-flex items-center gap-1 rounded-full bg-(--surface-glass) px-2 py-1 text-[length:var(--text-eyebrow-size)] leading-[var(--text-eyebrow-leading)] font-semibold tracking-[var(--text-eyebrow-tracking)] text-(--color-text-secondary) uppercase shadow-[var(--shadow-sm)] backdrop-blur-(--blur-sm)">
           <span aria-hidden className="gradient-accent inline-block size-2 rounded-full" />
@@ -58,7 +58,7 @@ export function WorkHero() {
         </ul>
       </div>
 
-      <TechMarquee />
+      <TechMarquee orientation="horizontal" />
     </section>
   );
 }

@@ -295,6 +295,12 @@
   }
 }
 
+@media (min-width: 1280px) {
+  :root {
+    --page-padding-x: 5rem;
+  }
+}
+
 .dark {
   color-scheme: dark;
 
@@ -360,12 +366,7 @@
   --ambient-orb-blur: 75px;
   --ambient-end-opacity: 0;
 
-  --gradient-brand: linear-gradient(
-    135deg,
-    var(--blue) 0%,
-    var(--cyan) 50%,
-    var(--emerald) 100%
-  );
+  --gradient-brand: linear-gradient(135deg, var(--blue) 0%, var(--cyan) 50%, var(--emerald) 100%);
 
   --card: var(--navy-panel);
   --card-shadow: 0 8px 24px rgb(0 0 0 / 0.3);
@@ -523,38 +524,41 @@
 }
 
 html.disable-transitions,
-html.disable-transitions *:not(
-  [data-vaul-drawer],
-  [data-vaul-overlay],
-  [data-slot="dialog-content"],
-  [data-slot="dialog-overlay"],
-  [data-slot="sheet-content"],
-  [data-slot="sheet-overlay"],
-  [data-slot="drawer-content"],
-  [data-slot="drawer-overlay"],
-  [data-slot="popover-content"],
-  [data-slot="dropdown-menu-content"]
-),
-html.disable-transitions *:not(
-  [data-vaul-drawer],
-  [data-vaul-overlay],
-  [data-slot="dialog-content"],
-  [data-slot="dialog-overlay"],
-  [data-slot="sheet-content"],
-  [data-slot="sheet-overlay"],
-  [data-slot="drawer-content"],
-  [data-slot="drawer-overlay"]
-)::before,
-html.disable-transitions *:not(
-  [data-vaul-drawer],
-  [data-vaul-overlay],
-  [data-slot="dialog-content"],
-  [data-slot="dialog-overlay"],
-  [data-slot="sheet-content"],
-  [data-slot="sheet-overlay"],
-  [data-slot="drawer-content"],
-  [data-slot="drawer-overlay"]
-)::after {
+html.disable-transitions
+  *:not(
+    [data-vaul-drawer],
+    [data-vaul-overlay],
+    [data-slot="dialog-content"],
+    [data-slot="dialog-overlay"],
+    [data-slot="sheet-content"],
+    [data-slot="sheet-overlay"],
+    [data-slot="drawer-content"],
+    [data-slot="drawer-overlay"],
+    [data-slot="popover-content"],
+    [data-slot="dropdown-menu-content"]
+  ),
+html.disable-transitions
+  *:not(
+    [data-vaul-drawer],
+    [data-vaul-overlay],
+    [data-slot="dialog-content"],
+    [data-slot="dialog-overlay"],
+    [data-slot="sheet-content"],
+    [data-slot="sheet-overlay"],
+    [data-slot="drawer-content"],
+    [data-slot="drawer-overlay"]
+  )::before,
+html.disable-transitions
+  *:not(
+    [data-vaul-drawer],
+    [data-vaul-overlay],
+    [data-slot="dialog-content"],
+    [data-slot="dialog-overlay"],
+    [data-slot="sheet-content"],
+    [data-slot="sheet-overlay"],
+    [data-slot="drawer-content"],
+    [data-slot="drawer-overlay"]
+  )::after {
   transition: none !important;
 }
 
