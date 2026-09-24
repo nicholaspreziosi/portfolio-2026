@@ -25,6 +25,7 @@ import {
 import { commitThemeChoice, readThemeChoice, type ThemeChoice } from "@/ui/shared/components/theme";
 import { ThemeToggle } from "@/ui/shared/components/ThemeToggle";
 import { LocaleSwitcher } from "@/ui/shell/LocaleSwitcher";
+import { pageContainerClassName } from "@/ui/shell/pageContainer";
 
 const links = [
   { href: "/", id: "home", icon: HouseIcon },
@@ -102,26 +103,28 @@ export function Navbar() {
             document.body
           )
         : null}
-      <header className="fixed inset-x-0 top-4 z-50 hidden px-4 sm:block">
-        <div
-          className={cn(
-            "mx-auto flex h-14 max-w-5xl items-center justify-between gap-3 rounded-full border px-3 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-200 sm:px-4",
-            scrolled
-              ? "border-(--nav-glass-border) bg-(--nav-glass) shadow-[var(--surface-glass-shadow)] backdrop-blur-(--surface-glass-blur)"
-              : "border-transparent bg-transparent shadow-none backdrop-blur-none"
-          )}
-        >
-          <Link href="/" onClick={scrollHome} className="text-lg font-semibold tracking-tight">
-            <span className="gradient-text">nickprez</span>
-            <span className="text-(--color-text-primary)">.dev</span>
-          </Link>
+      <header className="fixed inset-x-0 top-4 z-50 hidden sm:block">
+        <div className={pageContainerClassName}>
+          <div
+            className={cn(
+              "flex h-14 items-center justify-between gap-3 rounded-full border px-3 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-200 sm:px-4",
+              scrolled
+                ? "border-(--nav-glass-border) bg-(--nav-glass) shadow-[var(--surface-glass-shadow)] backdrop-blur-(--surface-glass-blur)"
+                : "border-transparent bg-transparent shadow-none backdrop-blur-none"
+            )}
+          >
+            <Link href="/" onClick={scrollHome} className="text-lg font-semibold tracking-tight">
+              <span className="gradient-text">nickprez</span>
+              <span className="text-(--color-text-primary)">.dev</span>
+            </Link>
 
-          <div className="flex items-center gap-1 sm:gap-2">
-            <nav aria-label={t("menu")} className="hidden sm:block">
-              <NavLinks activeId={activeId} label={(id) => t(id)} onHomeClick={scrollHome} />
-            </nav>
-            <ThemeToggle />
-            <LocaleSwitcher />
+            <div className="flex items-center gap-1 sm:gap-2">
+              <nav aria-label={t("menu")} className="hidden sm:block">
+                <NavLinks activeId={activeId} label={(id) => t(id)} onHomeClick={scrollHome} />
+              </nav>
+              <ThemeToggle />
+              <LocaleSwitcher />
+            </div>
           </div>
         </div>
       </header>

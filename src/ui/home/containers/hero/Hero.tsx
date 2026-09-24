@@ -20,7 +20,7 @@ export function Hero() {
   const t = useTranslations("HomePage");
 
   return (
-    <section className="flex min-h-screen w-full flex-col items-center justify-center px-6 pt-10 pb-28 text-center sm:pb-10">
+    <section className="flex min-h-screen w-full flex-col items-center justify-center pt-10 pb-28 text-center sm:pb-10">
       <p className="inline-flex items-center gap-1 rounded-full border border-(--hero-chip-border) bg-(--hero-chip-bg) px-3.5 py-1.5 text-[length:var(--text-eyebrow-size)] leading-[var(--text-eyebrow-leading)] font-semibold tracking-[var(--text-eyebrow-tracking)] text-(--hero-chip-fg) uppercase shadow-[var(--hero-chip-shadow)]">
         <span
           aria-hidden

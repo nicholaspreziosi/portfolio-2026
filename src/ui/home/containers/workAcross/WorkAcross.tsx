@@ -87,7 +87,7 @@ export function WorkAcross() {
 
   return (
     <section ref={sectionRef} id="work-across" className="relative h-[200dvh]">
-      <div className="@container sticky top-0 flex h-dvh w-full items-center justify-center px-6">
+      <div className="@container sticky top-0 flex h-dvh w-full items-center justify-center">
         <p className="sr-only">{t("acrossSummary")}</p>
         <InView
           once
