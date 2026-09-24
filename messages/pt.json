@@ -32,8 +32,16 @@
     "developmentLabel": "Desenvolvimento profissional",
     "executionValue": "Design + código",
     "executionLabel": "Execução de ponta a ponta",
-    "work": "Ver trabalhos selecionados",
-    "about": "Sobre mim"
+    "learnMore": "Saiba mais",
+    "about": "Sobre mim",
+    "acrossPrefix": "Trabalho em",
+    "acrossDevelopment": "Desenvolvimento",
+    "acrossDesign": "Design UI/UX",
+    "acrossProduct": "Produto",
+    "acrossMarketing": "Marketing",
+    "acrossManagement": "Gestão",
+    "acrossSummary": "Trabalho em desenvolvimento, design UI/UX, produto, marketing e gestão.",
+    "scrollHint": "Role"
   },
   "Theme": {
     "label": "Tema",

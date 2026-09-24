@@ -7,6 +7,15 @@ import { Button } from "@/ui/shared/components/button";
 
 const stats = ["experience", "development", "execution"] as const;
 
+function scrollToWorkAcross() {
+  const target = document.getElementById("work-across");
+  if (!target) return;
+
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const top = target.getBoundingClientRect().top + window.scrollY;
+  window.scrollTo({ top: Math.max(0, top), behavior: reduce ? "auto" : "smooth" });
+}
+
 export function Hero() {
   const t = useTranslations("HomePage");
 
@@ -62,11 +71,9 @@ export function Hero() {
       </div>
 
       <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
-        <Button variant="gradient" asChild>
-          <Link href="/work">
-            {t("work")}
-            <ArrowDownIcon data-icon="inline-end" className="size-3" />
-          </Link>
+        <Button variant="gradient" type="button" onClick={scrollToWorkAcross}>
+          {t("learnMore")}
+          <ArrowDownIcon data-icon="inline-end" className="size-3" />
         </Button>
         <Button variant="secondary" asChild>
           <Link href="/about">

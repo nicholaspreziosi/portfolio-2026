@@ -32,8 +32,16 @@
     "developmentLabel": "Professional Development",
     "executionValue": "Design + Code",
     "executionLabel": "End-to-End Execution",
-    "work": "View Selected Work",
-    "about": "About Me"
+    "learnMore": "Learn More",
+    "about": "About Me",
+    "acrossPrefix": "I work across",
+    "acrossDevelopment": "Development",
+    "acrossDesign": "UI/UX Design",
+    "acrossProduct": "Product",
+    "acrossMarketing": "Marketing",
+    "acrossManagement": "Management",
+    "acrossSummary": "I work across Development, UI/UX Design, Product, Marketing, and Management.",
+    "scrollHint": "Scroll"
   },
   "Theme": {
     "label": "Theme",
