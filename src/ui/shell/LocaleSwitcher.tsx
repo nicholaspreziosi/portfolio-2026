@@ -27,7 +27,7 @@ export function LocaleSwitcher({
     <DropdownMenu>
       <DropdownMenuTrigger
         aria-label={t("label")}
-        className={cn("theme-toggle relative grid size-10 place-items-center rounded-full", className)}
+        className={cn("theme-toggle relative grid size-10 place-items-center rounded-pill", className)}
       >
         <LanguagesIcon className="size-4" />
       </DropdownMenuTrigger>

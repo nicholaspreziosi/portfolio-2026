@@ -53,7 +53,7 @@ export function ThemeToggle({ className }: { className?: string }) {
       type="button"
       onClick={handleClick}
       aria-label={t(theme)}
-      className={cn("theme-toggle relative grid size-10 place-items-center rounded-full", className)}
+      className={cn("theme-toggle relative grid size-10 place-items-center rounded-pill", className)}
     >
       <Sun />
       <Moon />

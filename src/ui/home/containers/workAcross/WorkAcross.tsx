@@ -154,7 +154,7 @@ export function WorkAcross() {
         <button
           type="button"
           onClick={() => scrollToNextSection(sectionRef.current)}
-          className="absolute bottom-28 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-2 text-(--color-text-tertiary) transition-colors hover:text-(--color-text-primary) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:bottom-8"
+          className="absolute bottom-28 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-2 text-(--color-text-tertiary) transition-colors hover:text-(--color-text-primary) focus-visible:outline-none sm:bottom-8"
         >
           <motion.span
             aria-hidden

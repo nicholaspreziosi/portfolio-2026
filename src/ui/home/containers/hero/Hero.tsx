@@ -21,7 +21,7 @@ export function Hero() {
 
   return (
     <section className="flex min-h-screen w-full flex-col items-center justify-center pt-10 pb-28 text-center sm:pb-10">
-      <p className="inline-flex items-center gap-1 rounded-full border border-(--hero-chip-border) bg-(--hero-chip-bg) px-3.5 py-1.5 text-[length:var(--text-eyebrow-size)] leading-[var(--text-eyebrow-leading)] font-semibold tracking-[var(--text-eyebrow-tracking)] text-(--hero-chip-fg) uppercase shadow-[var(--hero-chip-shadow)]">
+      <p className="inline-flex items-center gap-1 rounded-pill border border-(--hero-chip-border) bg-(--hero-chip-bg) px-3.5 py-1.5 text-[length:var(--text-eyebrow-size)] leading-[var(--text-eyebrow-leading)] font-semibold tracking-[var(--text-eyebrow-tracking)] text-(--hero-chip-fg) uppercase shadow-[var(--hero-chip-shadow)]">
         <span
           aria-hidden
           className="gradient-button inline-block size-2 rounded-full shadow-[var(--hero-dot-shadow)]"
@@ -39,14 +39,14 @@ export function Hero() {
         {t("body")}
       </p>
 
-      <div className="mt-6 flex max-w-full flex-wrap items-center justify-center gap-4 rounded-full border border-(--hero-panel-border) bg-(--hero-panel-bg) py-2 pr-6 pl-4 shadow-[var(--hero-panel-shadow)] backdrop-blur-[6px]">
+      <div className="mt-6 flex max-w-full flex-wrap items-center justify-center gap-4 rounded-pill border border-(--hero-panel-border) bg-(--hero-panel-bg) py-2 pr-6 pl-4 shadow-[var(--hero-panel-shadow)] backdrop-blur-[6px]">
         <div className="flex items-center gap-2 text-left">
           <img
             src="/images/nick-preziosi.png"
             alt=""
             width={40}
             height={40}
-            className="size-10 rounded-full object-cover shadow-[var(--avatar-ring)]"
+            className="size-10 rounded-pill object-cover shadow-[var(--avatar-ring)]"
           />
           <div>
             <p className="text-base leading-5 font-semibold tracking-[-0.01em] text-(--color-text-primary)">
@@ -59,7 +59,7 @@ export function Hero() {
         <div className="flex flex-wrap items-start justify-center gap-4">
           {stats.map((stat) => (
             <div key={stat} className="flex w-[7.5rem] flex-col items-center gap-0.5">
-              <span className="gradient-button rounded-full px-2.5 py-0.5 text-base leading-6 font-semibold tracking-[-0.01em]">
+              <span className="gradient-button rounded-pill px-2.5 py-0.5 text-base leading-6 font-semibold tracking-[-0.01em]">
                 {t(`${stat}Value`)}
               </span>
               <span className="text-xs leading-4 text-(--color-text-secondary)">

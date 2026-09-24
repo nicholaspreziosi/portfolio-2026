@@ -24,7 +24,7 @@ export default function GradientPreviewPage() {
       <div className="relative z-10 flex h-full flex-col justify-between px-[var(--page-padding-x)] py-[var(--page-padding-y)]">
         <div className="flex flex-wrap items-center gap-3">
           <div
-            className="flex gap-1 rounded-full p-1"
+            className="flex gap-1 rounded-pill p-1"
             style={{
               background: "var(--surface-glass)",
               border: "1px solid var(--surface-glass-border)",
@@ -37,7 +37,7 @@ export default function GradientPreviewPage() {
                 type="button"
                 aria-pressed={variant === item}
                 onClick={() => setVariant(item)}
-                className="rounded-full px-4 py-1.5 text-[13px]"
+                className="rounded-pill px-4 py-1.5 text-[13px]"
                 style={{
                   background: variant === item ? "var(--surface-muted)" : "transparent",
                   color: "var(--color-text-primary)",
@@ -75,7 +75,7 @@ export default function GradientPreviewPage() {
         </div>
 
         <div className="flex flex-wrap items-center gap-4">
-          <span className="gradient-button rounded-full px-4 py-2 text-[13px] font-medium">{t("button")}</span>
+          <span className="gradient-button rounded-pill px-4 py-2 text-[13px] font-medium">{t("button")}</span>
           <span className="inline-flex items-center gap-2 text-[13px]" style={{ color: "var(--color-text-secondary)" }}>
             <span className="gradient-accent size-2 rounded-full" />
             {t("accent")}

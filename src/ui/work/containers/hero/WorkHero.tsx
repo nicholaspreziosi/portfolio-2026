@@ -30,7 +30,7 @@ export function WorkHero() {
   return (
     <section className="flex flex-col gap-10">
       <div className="max-w-3xl">
-        <p className="inline-flex items-center gap-1 rounded-full bg-(--surface-glass) px-2 py-1 text-[length:var(--text-eyebrow-size)] leading-[var(--text-eyebrow-leading)] font-semibold tracking-[var(--text-eyebrow-tracking)] text-(--color-text-secondary) uppercase shadow-[var(--shadow-sm)] backdrop-blur-(--blur-sm)">
+        <p className="inline-flex items-center gap-1 rounded-pill bg-(--surface-glass) px-2 py-1 text-[length:var(--text-eyebrow-size)] leading-[var(--text-eyebrow-leading)] font-semibold tracking-[var(--text-eyebrow-tracking)] text-(--color-text-secondary) uppercase shadow-[var(--shadow-sm)] backdrop-blur-(--blur-sm)">
           <span aria-hidden className="gradient-accent inline-block size-2 rounded-full" />
           {t("eyebrow")}
         </p>
@@ -49,7 +49,7 @@ export function WorkHero() {
           {metrics.map((metric) => (
             <li
               key={metric.id}
-              className="inline-flex items-center gap-1 rounded-full bg-(--surface-glass) px-4 py-1 text-[length:var(--text-button-size)] leading-[var(--text-button-leading)] font-semibold text-(--color-text-primary) shadow-[var(--shadow-sm)] backdrop-blur-(--blur-sm)"
+              className="inline-flex items-center gap-1 rounded-pill bg-(--surface-glass) px-4 py-1 text-[length:var(--text-button-size)] leading-[var(--text-button-leading)] font-semibold text-(--color-text-primary) shadow-[var(--shadow-sm)] backdrop-blur-(--blur-sm)"
             >
               <img src={metric.src} alt="" width={metric.width} height={metric.height} />
               {t(metric.id)}

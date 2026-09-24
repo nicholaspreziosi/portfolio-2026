@@ -28,7 +28,7 @@ export function AboutHero() {
           {highlights.map((highlight) => (
             <li
               key={highlight.id}
-              className="inline-flex items-center gap-2.5 rounded-full border border-(--hero-panel-border) bg-(--hero-panel-bg) px-4 py-2 text-[length:var(--text-button-size)] leading-[var(--text-button-leading)] font-semibold text-(--color-text-primary) shadow-[var(--shadow-sm)]"
+              className="inline-flex items-center gap-2.5 rounded-pill border border-(--hero-panel-border) bg-(--hero-panel-bg) px-4 py-2 text-[length:var(--text-button-size)] leading-[var(--text-button-leading)] font-semibold text-(--color-text-primary) shadow-[var(--shadow-sm)]"
             >
               {highlight.mark === "icon" ? (
                 <img src="/images/about/architecture.svg" alt="" width={8.25} height={13.5} />
@@ -68,7 +68,7 @@ export function AboutHero() {
                   {t("location")}
                 </p>
               </div>
-              <p className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[rgb(28_36_56/0.8)] px-2.5 py-1 text-[length:var(--text-body-size)] leading-[var(--text-body-leading)] tracking-[-0.005em] text-[#34d399] shadow-[0_1px_2px_rgb(0_0_0/0.05)] backdrop-blur-[6px]">
+              <p className="inline-flex shrink-0 items-center gap-1.5 rounded-pill bg-[rgb(28_36_56/0.8)] px-2.5 py-1 text-[length:var(--text-body-size)] leading-[var(--text-body-leading)] tracking-[-0.005em] text-[#34d399] shadow-[0_1px_2px_rgb(0_0_0/0.05)] backdrop-blur-[6px]">
                 <span aria-hidden className="size-2 rounded-full bg-[#34d399]" />
                 {t("availability")}
               </p>

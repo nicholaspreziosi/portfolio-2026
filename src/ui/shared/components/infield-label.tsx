@@ -173,12 +173,11 @@ function InfieldShell({
       data-control={control}
     >
       <div
+        data-active={active ? "true" : undefined}
         className={cn(
-          "infield-label relative w-full rounded-xl border border-border bg-input outline-none transition-colors",
-          "has-[:focus-visible]:border-ring has-[:focus-visible]:ring-3 has-[:focus-visible]:ring-ring/50",
+          "infield-label relative w-full rounded-surface border border-border bg-input outline-none transition-colors",
           "has-[:disabled]:cursor-not-allowed has-[:disabled]:bg-muted has-[:disabled]:opacity-50",
-          "has-aria-invalid:border-destructive has-aria-invalid:ring-3 has-aria-invalid:ring-destructive/30",
-          active && !invalid && "border-ring ring-3 ring-ring/50",
+          !active && "has-aria-invalid:border-destructive has-aria-invalid:ring-3 has-aria-invalid:ring-destructive/30",
           textarea ? "min-h-28" : "h-14"
         )}
       >
@@ -198,7 +197,7 @@ function InfieldShell({
               : textarea
                 ? "top-3 translate-y-0 text-base leading-none"
                 : "top-1/2 -translate-y-1/2 text-base leading-none",
-            invalid
+            invalid && !active
               ? "text-destructive"
               : active
                 ? undefined
@@ -207,9 +206,9 @@ function InfieldShell({
                   : "text-muted-foreground"
           )}
         >
-          <span className={cn("truncate", active && !invalid && "gradient-text")}>{label}</span>
+          <span className={cn("truncate", active && "gradient-text")}>{label}</span>
           {required ? (
-            <span aria-hidden="true" className={cn("ms-0.5 shrink-0", active && !invalid && "gradient-text")}>
+            <span aria-hidden="true" className={cn("ms-0.5 shrink-0", active && "gradient-text")}>
               *
             </span>
           ) : null}
@@ -343,7 +342,7 @@ function InfieldInputField({
         }}
         className={cn(
           AUTOFILL_INPUT_CLASS,
-          "h-full w-full rounded-xl bg-transparent px-3 pt-6 pb-1.5 text-base text-foreground outline-none disabled:cursor-not-allowed md:text-sm",
+          "h-full w-full rounded-surface bg-transparent px-3 pt-6 pb-1.5 text-base text-foreground outline-none disabled:cursor-not-allowed md:text-sm",
           floating ? "placeholder:text-muted-foreground" : "placeholder:text-transparent"
         )}
       />
@@ -440,7 +439,7 @@ function InfieldTextareaField({
         }}
         className={cn(
           AUTOFILL_INPUT_CLASS,
-          "block min-h-28 w-full resize-y rounded-xl bg-transparent px-3 pt-8 pb-2 text-base text-foreground outline-none disabled:cursor-not-allowed md:text-sm",
+          "block min-h-28 w-full resize-y rounded-surface bg-transparent px-3 pt-8 pb-2 text-base text-foreground outline-none disabled:cursor-not-allowed md:text-sm",
           floating ? "placeholder:text-muted-foreground" : "placeholder:text-transparent"
         )}
       />
@@ -740,7 +739,7 @@ function InfieldComboboxField({
                 }
               }}
               className={cn(
-                "h-full w-full rounded-xl bg-transparent px-3 pt-6 pe-10 pb-1.5 text-base text-foreground outline-none disabled:cursor-not-allowed md:text-sm",
+                "h-full w-full rounded-surface bg-transparent px-3 pt-6 pe-10 pb-1.5 text-base text-foreground outline-none disabled:cursor-not-allowed md:text-sm",
                 floating ? "placeholder:text-muted-foreground" : "placeholder:text-transparent"
               )}
             />
@@ -798,7 +797,7 @@ function InfieldComboboxField({
                   aria-selected={isSelected}
                   aria-disabled={option.disabled || undefined}
                   className={cn(
-                    "flex cursor-pointer items-center gap-2 rounded-lg px-2 py-1.5 text-sm",
+                    "flex cursor-pointer items-center gap-2 rounded-inset px-2 py-1.5 text-sm",
                     index === highlighted && "bg-accent text-accent-foreground",
                     option.disabled && "pointer-events-none opacity-50"
                   )}

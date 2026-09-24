@@ -107,7 +107,7 @@ export function Navbar() {
         <div className={pageContainerClassName}>
           <div
             className={cn(
-              "flex h-14 items-center justify-between gap-3 rounded-full border px-3 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-200 sm:px-4",
+              "flex h-14 items-center justify-between gap-3 rounded-pill border px-3 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-200 sm:px-4",
               scrolled
                 ? "border-(--nav-glass-border) bg-(--nav-glass) shadow-[var(--surface-glass-shadow)] backdrop-blur-(--surface-glass-blur)"
                 : "border-transparent bg-transparent shadow-none backdrop-blur-none"
@@ -134,7 +134,7 @@ export function Navbar() {
       >
         <div
           className={cn(
-            "mx-auto overflow-hidden rounded-full border border-(--nav-glass-border) bg-(--nav-glass) shadow-[var(--surface-glass-shadow)] backdrop-blur-(--surface-glass-blur) transition-[width,padding] duration-200",
+            "mx-auto overflow-hidden rounded-pill border border-(--nav-glass-border) bg-(--nav-glass) shadow-[var(--surface-glass-shadow)] backdrop-blur-(--surface-glass-blur) transition-[width,padding] duration-200",
             compactTabs ? "w-[17rem] max-w-full px-1.5 py-1.5" : "w-full max-w-md px-0 py-1"
           )}
         >
@@ -195,12 +195,12 @@ export function Navbar() {
   );
 }
 
-const pillClassName = "rounded-full [background-image:var(--gradient-button)]";
+const pillClassName = "rounded-pill [background-image:var(--gradient-button)]";
 const pillHoverClassName =
-  "rounded-full [background-image:var(--gradient-button)] brightness-110 saturate-125";
+  "rounded-pill [background-image:var(--gradient-button)] brightness-110 saturate-125";
 
 const tabClassName =
-  "inline-flex flex-col items-center rounded-full px-3.5 py-1.5 text-[11px] leading-none font-medium text-(--color-text-secondary) transition-colors duration-150 ease-out [&_svg]:[stroke-width:1.75] [&_svg]:transition-[stroke-width] [&_svg]:duration-150 [&_svg]:ease-out data-[checked=true]:text-(--color-text-inverse) data-[checked=true]:delay-200 data-[checked=true]:duration-300 data-[checked=true]:[&_svg]:[stroke-width:2.25] data-[checked=true]:[&_svg]:delay-200 data-[checked=true]:[&_svg]:duration-300";
+  "inline-flex flex-col items-center rounded-pill px-3.5 py-1.5 text-[11px] leading-none font-medium text-(--color-text-secondary) transition-colors duration-150 ease-out [&_svg]:[stroke-width:1.75] [&_svg]:transition-[stroke-width] [&_svg]:duration-150 [&_svg]:ease-out data-[checked=true]:text-(--color-text-inverse) data-[checked=true]:delay-200 data-[checked=true]:duration-300 data-[checked=true]:[&_svg]:[stroke-width:2.25] data-[checked=true]:[&_svg]:delay-200 data-[checked=true]:[&_svg]:duration-300";
 
 function TabLabel({ compact, children }: { compact: boolean; children: string }) {
   return (
@@ -234,7 +234,7 @@ function ThemeChoices({ label, name }: { label: string; name: (choice: ThemeChoi
           onPointerDown={(event) => event.stopPropagation()}
           onClick={() => commitThemeChoice(item)}
           className={cn(
-            "flex items-center justify-between rounded-full px-4 py-2.5 text-sm",
+            "flex items-center justify-between rounded-pill px-4 py-2.5 text-sm",
             item === choice
               ? "bg-(--nav-highlight) text-(--color-text-primary)"
               : "text-(--color-text-secondary)"
@@ -283,7 +283,7 @@ function SettingsDrawer({
                 hrefLang={item}
                 onClick={() => onOpenChange(false)}
                 className={cn(
-                  "flex items-center justify-between rounded-full px-4 py-2.5 text-sm",
+                  "flex items-center justify-between rounded-pill px-4 py-2.5 text-sm",
                   item === locale
                     ? "bg-(--nav-highlight) text-(--color-text-primary)"
                     : "text-(--color-text-secondary)"
@@ -327,7 +327,7 @@ function NavLinks({
           onClick={(event) => {
             if (link.href === "/") onHomeClick?.(event);
           }}
-          className="inline-flex rounded-full px-3 py-1.5 text-sm text-(--color-text-secondary) transition-colors duration-150 ease-out data-[checked=true]:text-(--color-text-inverse) data-[checked=true]:delay-200 data-[checked=true]:duration-300"
+          className="inline-flex rounded-pill px-3 py-1.5 text-sm text-(--color-text-secondary) transition-colors duration-150 ease-out data-[checked=true]:text-(--color-text-inverse) data-[checked=true]:delay-200 data-[checked=true]:duration-300"
         >
           {label(link.id)}
         </Link>

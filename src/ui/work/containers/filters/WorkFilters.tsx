@@ -25,7 +25,7 @@ export function WorkFilters() {
       <div
         role="tablist"
         aria-label={t("filtersLabel")}
-        className="inline-flex w-max gap-1.5 rounded-full bg-(--surface-glass) p-1.5 shadow-[var(--hero-panel-shadow)] backdrop-blur-(--blur-md)"
+        className="inline-flex w-max gap-1.5 rounded-pill bg-(--surface-glass) p-1.5 shadow-[var(--hero-panel-shadow)] backdrop-blur-(--blur-md)"
       >
         {filters.map((filter) => {
           const selected = filter.id === active;
@@ -38,7 +38,7 @@ export function WorkFilters() {
               aria-selected={selected}
               onClick={() => setActive(filter.id)}
               className={cn(
-                "inline-flex h-[31px] items-center rounded-full px-3.5 text-[length:var(--text-button-size)] leading-[var(--text-button-leading)] whitespace-nowrap transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none",
+                "inline-flex h-[31px] items-center rounded-pill px-3.5 text-[length:var(--text-button-size)] leading-[var(--text-button-leading)] whitespace-nowrap transition-colors focus-visible:outline-none",
                 selected
                   ? "gradient-button font-semibold shadow-[var(--shadow-sm)]"
                   : "font-medium text-(--color-text-secondary) hover:bg-(--accent)"

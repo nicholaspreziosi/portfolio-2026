@@ -70,7 +70,7 @@ export function SocialDock() {
                     target={external ? "_blank" : undefined}
                     rel={external ? "noreferrer noopener" : undefined}
                     aria-label={detail ? `${name}, ${detail}` : name}
-                    className="flex size-full items-center justify-center rounded-full border border-(--line) bg-(--nav-glass) text-(--color-text-secondary) shadow-[var(--surface-glass-shadow)] backdrop-blur-(--surface-glass-blur) transition-colors duration-150 hover:text-(--color-text-primary) dark:border-(--nav-glass-border)"
+                    className="flex size-full items-center justify-center rounded-pill border border-(--line) bg-(--nav-glass) text-(--color-text-secondary) shadow-[var(--surface-glass-shadow)] backdrop-blur-(--surface-glass-blur) transition-colors duration-150 hover:text-(--color-text-primary) dark:border-(--nav-glass-border)"
                   >
                     <Icon className="size-1/2" />
                   </a>

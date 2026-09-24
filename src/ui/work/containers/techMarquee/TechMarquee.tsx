@@ -42,7 +42,7 @@ const fadeHorizontal =
 
 function TechPill({ name, src, mono }: Technology) {
   return (
-    <div className="flex items-center gap-3 rounded-full px-3.5 py-3">
+    <div className="flex items-center gap-3 rounded-pill px-3.5 py-3">
       <img
         src={src}
         alt=""

@@ -58,6 +58,10 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  --radius-full: 9999px;
+  --radius-pill: var(--radius-full);
+  --radius-surface: var(--radius-xl);
+  --radius-inset: var(--radius-md);
 }
 
 :root {
@@ -222,6 +226,10 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
   --radius-full: 9999px;
+  /* Roles. Pill is a capsule. Surface is shared chrome. Inset sits inside a surface. */
+  --radius-pill: var(--radius-full);
+  --radius-surface: var(--radius-xl);
+  --radius-inset: var(--radius-md);
 
   /* Layout */
   --container-sm: 768px;
@@ -680,7 +688,8 @@ body {
   ):focus-visible:not([aria-invalid="true"]):not([data-radix-focus-guard]):not(
     :is(.infield-label *, [data-slot="input-group"] *)
   )::before,
-:is(.infield-label, [data-slot="input-group"]):has(:focus-visible):not(:has([aria-invalid="true"]))::before {
+[data-slot="input-group"]:has(:focus-visible):not(:has([aria-invalid="true"]))::before,
+.infield-label[data-active="true"]::before {
   content: "";
   position: absolute;
   z-index: 1;
@@ -699,7 +708,8 @@ body {
   mask-composite: exclude;
 }
 
-:is(.infield-label, [data-slot="input-group"]):has(:focus-visible):not(:has([aria-invalid="true"])) {
+[data-slot="input-group"]:has(:focus-visible):not(:has([aria-invalid="true"])),
+.infield-label[data-active="true"] {
   --tw-ring-shadow: 0 0 #0000;
   --tw-ring-offset-shadow: 0 0 #0000;
   border-color: var(--border);
@@ -739,7 +749,8 @@ body {
   }
 
   :is(button, a, [tabindex], [role="button"]):focus-visible::before,
-  :is(.infield-label, [data-slot="input-group"]):has(:focus-visible)::before {
+  [data-slot="input-group"]:has(:focus-visible)::before,
+  .infield-label[data-active="true"]::before {
     content: none;
   }
 }
