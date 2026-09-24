@@ -273,7 +273,7 @@ export function ComponentShowcase() {
               <Skeleton className="h-4 w-full" />
               <Skeleton className="h-16 w-full" />
             </div>
-            <ScrollArea className="h-28 rounded-md border">
+            <ScrollArea className="h-28 rounded-3xl border">
               <ul className="space-y-2 p-3 text-sm">
                 {["Work", "About", "Contact", "Process", "Writing", "Notes"].map((item) => (
                   <li key={item}>{item}</li>
@@ -289,7 +289,7 @@ export function ComponentShowcase() {
             <CardDescription>A filterable list.</CardDescription>
           </CardHeader>
           <CardContent>
-            <Command className="max-w-sm rounded-lg border">
+            <Command className="max-w-sm rounded-3xl border">
               <KeepPageScroll />
               <CommandInput placeholder="Search pages" />
               <CommandList>
