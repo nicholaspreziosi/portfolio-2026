@@ -40,6 +40,18 @@
       "leadership": "Liderança"
     }
   },
+  "AboutPage": {
+    "headlineLine1": "Desenho, construo e lidero",
+    "headlineLine2": "produtos digitais.",
+    "body1": "Sou Nick Preziosi, líder de UI/UX e desenvolvedor front-end, com uma trajetória que abrange design de produto, desenvolvimento, marketing e estratégia digital.",
+    "body2": "Comecei a carreira em marketing antes de me aprofundar em desenvolvimento e UI/UX. Essa base multidisciplinar define como trabalho hoje — equilibrando as necessidades das pessoas, os objetivos do negócio, um design cuidadoso e os sistemas técnicos necessários para dar vida aos produtos.",
+    "badgeExperience": "10+ anos de experiência digital",
+    "badgeDevelopment": "4+ anos de desenvolvimento profissional",
+    "badgeArchitecture": "Arquitetura de UI/UX e front-end",
+    "name": "Nick Preziosi",
+    "location": "Miami, FL / Remoto",
+    "availability": "Aberto a oportunidades"
+  },
   "HomePage": {
     "eyebrow": "UI/UX • Produto • Front-end • Marketing",
     "headlineLine1": "Desenhando produtos intuitivos e",

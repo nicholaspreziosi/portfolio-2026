@@ -1,11 +1,14 @@
+import { AboutHero } from "@/ui/about/containers/hero/AboutHero";
+import { AmbientGradient } from "@/ui/patterns/AmbientGradient";
 import { pageContainerClassName } from "@/ui/shell/pageContainer";
 
-export function AboutView({ title }: { title: string }) {
+export function AboutView() {
   return (
-    <main className={`flex min-h-screen items-center justify-center ${pageContainerClassName}`}>
-      <h1 className="font-[family-name:var(--font-display)] text-4xl font-semibold text-(--color-text-primary)">
-        {title}
-      </h1>
+    <main>
+      <AmbientGradient variant="start" />
+      <div className={`relative z-10 pt-8 pb-28 sm:pt-28 sm:pb-20 ${pageContainerClassName}`}>
+        <AboutHero />
+      </div>
     </main>
   );
 }
