@@ -41,8 +41,8 @@
     }
   },
   "AboutPage": {
-    "headlineLine1": "I design, build, and lead",
-    "headlineLine2": "digital products.",
+    "bridgePrefix": "I bridge together",
+    "bridgeSummary": "I bridge together Development, UI/UX Design, Product, Marketing, Technology, and Management.",
     "body1": "I'm Nick Preziosi, a UI/UX leader and front-end developer with a background spanning product design, development, marketing, and digital strategy.",
     "body2": "I started my career in marketing before moving deeper into development and UI/UX. That multidisciplinary background shapes how I work today —balancing user needs, business goals, thoughtful design, and the technical systems required to bring products to life.",
     "badgeExperience": "10+ Years Digital Experience",
@@ -65,17 +65,13 @@
     "developmentLabel": "Professional Development",
     "executionValue": "Design + Code",
     "executionLabel": "End-to-End Execution",
-    "learnMore": "Learn More",
     "about": "About Me",
-    "acrossPrefix": "I work across",
     "acrossDevelopment": "Development",
     "acrossDesign": "UI/UX Design",
     "acrossProduct": "Product",
     "acrossMarketing": "Marketing",
     "acrossManagement": "Management",
-    "acrossTechnology": "Technology",
-    "acrossSummary": "I work across Development, UI/UX Design, Product, Marketing, Management, and Technology.",
-    "scrollHint": "Scroll"
+    "acrossTechnology": "Technology"
   },
   "Theme": {
     "label": "Theme",

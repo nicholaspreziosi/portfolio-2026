@@ -41,8 +41,8 @@
     }
   },
   "AboutPage": {
-    "headlineLine1": "Desenho, construo e lidero",
-    "headlineLine2": "produtos digitais.",
+    "bridgePrefix": "Reúno",
+    "bridgeSummary": "Reúno desenvolvimento, design UI/UX, produto, marketing, tecnologia e gestão.",
     "body1": "Sou Nick Preziosi, líder de UI/UX e desenvolvedor front-end, com uma trajetória que abrange design de produto, desenvolvimento, marketing e estratégia digital.",
     "body2": "Comecei a carreira em marketing antes de me aprofundar em desenvolvimento e UI/UX. Essa base multidisciplinar define como trabalho hoje — equilibrando as necessidades das pessoas, os objetivos do negócio, um design cuidadoso e os sistemas técnicos necessários para dar vida aos produtos.",
     "badgeExperience": "10+ anos de experiência digital",
@@ -65,17 +65,13 @@
     "developmentLabel": "Desenvolvimento profissional",
     "executionValue": "Design + código",
     "executionLabel": "Execução de ponta a ponta",
-    "learnMore": "Saiba mais",
     "about": "Sobre mim",
-    "acrossPrefix": "Trabalho em",
     "acrossDevelopment": "Desenvolvimento",
     "acrossDesign": "Design UI/UX",
     "acrossProduct": "Produto",
     "acrossMarketing": "Marketing",
     "acrossManagement": "Gestão",
-    "acrossTechnology": "Tecnologia",
-    "acrossSummary": "Trabalho em desenvolvimento, design UI/UX, produto, marketing, gestão e tecnologia.",
-    "scrollHint": "Role"
+    "acrossTechnology": "Tecnologia"
   },
   "Theme": {
     "label": "Tema",

@@ -1,6 +1,20 @@
 "use client";
 
+import { useCallback, useEffect, useState } from "react";
+import { useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
+import { InView } from "@/ui/shared/components/in-view";
+import { TextEffect } from "@/ui/shared/components/text-effect";
+import { TextLoop } from "@/ui/shared/components/text-loop";
+
+const roles = [
+  "acrossDevelopment",
+  "acrossDesign",
+  "acrossProduct",
+  "acrossMarketing",
+  "acrossTechnology",
+  "acrossManagement",
+] as const;
 
 const highlights = [
   { id: "badgeExperience", mark: "dot", tone: "bg-(--emerald-deep) dark:bg-(--emerald)" },
@@ -8,15 +22,97 @@ const highlights = [
   { id: "badgeArchitecture", mark: "icon", tone: "" },
 ] as const;
 
+const reveal = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0 },
+};
+
+const roleVariants = {
+  initial: { x: "100%", opacity: 0 },
+  animate: { x: "0%", opacity: 1 },
+  exit: { x: "-100%", opacity: 0 },
+};
+
+const reducedRoleVariants = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0 },
+};
+
 export function AboutHero() {
   const t = useTranslations("AboutPage");
+  const rolesT = useTranslations("HomePage");
+  const reduceMotion = useReducedMotion();
+  const labels = roles.map((role) => rolesT(role));
+  const [active, setActive] = useState(false);
+  const [roleReady, setRoleReady] = useState(false);
+  const enter = useCallback(() => setActive(true), []);
+
+  useEffect(() => {
+    if (!active || reduceMotion) return;
+    const timeout = window.setTimeout(() => setRoleReady(true), 420);
+    return () => window.clearTimeout(timeout);
+  }, [active, reduceMotion]);
+
+  const showRole = active && (Boolean(reduceMotion) || roleReady);
 
   return (
     <section className="grid items-center gap-10 lg:grid-cols-12 lg:gap-8">
       <div className="lg:col-span-7">
         <h1 className="font-[family-name:var(--font-display)] text-[2rem] leading-[1.14] font-semibold tracking-[var(--text-display-tracking)] text-(--color-text-primary) sm:text-[2.5rem] lg:text-[length:var(--text-display-size)] lg:leading-[var(--text-display-leading)]">
-          <span className="block">{t("headlineLine1")}</span>
-          <span className="block">{t("headlineLine2")}</span>
+          <span className="sr-only">{t("bridgeSummary")}</span>
+          <InView
+            once
+            viewOptions={{ once: true, margin: "-18% 0px -18% 0px" }}
+            variants={reduceMotion ? { hidden: { opacity: 0 }, visible: { opacity: 1 } } : reveal}
+            transition={{ duration: reduceMotion ? 0.01 : 0.7, ease: [0.22, 1, 0.36, 1] }}
+            onViewportEnter={enter}
+          >
+            <span aria-hidden className="block">
+              {active ? (
+                <TextEffect
+                  as="span"
+                  per="word"
+                  preset={reduceMotion ? "fade" : "fade-in-blur"}
+                  speedReveal={0.6}
+                  speedSegment={0.85}
+                  className="inline-block"
+                >
+                  {t("bridgePrefix")}
+                </TextEffect>
+              ) : (
+                <span className="invisible">{t("bridgePrefix")}</span>
+              )}
+            </span>
+            <span aria-hidden className="inline-grid leading-[1.15]">
+              {labels.map((label) => (
+                <span key={label} className="invisible col-start-1 row-start-1 whitespace-nowrap">
+                  {label}.
+                </span>
+              ))}
+              <span className="col-start-1 row-start-1 h-[1.4em] w-full overflow-hidden">
+                {showRole ? (
+                  <TextLoop
+                    initial
+                    className="h-full w-full"
+                    itemClassName="flex h-full w-full items-center justify-start"
+                    interval={1.6}
+                    transition={{
+                      duration: reduceMotion ? 0.2 : 0.55,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    variants={reduceMotion ? reducedRoleVariants : roleVariants}
+                  >
+                    {labels.map((label) => (
+                      <span key={label} className="gradient-text whitespace-nowrap">
+                        {label}.
+                      </span>
+                    ))}
+                  </TextLoop>
+                ) : null}
+              </span>
+            </span>
+          </InView>
         </h1>
 
         <div className="mt-6 flex max-w-xl flex-col gap-4 text-[length:var(--text-body-lg-size)] leading-[1.625] tracking-[-0.008em] text-(--color-text-secondary)">
