@@ -146,8 +146,10 @@ export function Navbar() {
       >
         <div
           className={cn(
-            "relative overflow-hidden rounded-pill border border-(--nav-glass-border) bg-(--nav-glass) shadow-[var(--surface-glass-shadow)] backdrop-blur-(--surface-glass-blur) transition-[width,height,padding] duration-300 ease-out",
-            compactTabs ? "h-[4.375rem] w-[4.375rem] p-0" : "h-[4.375rem] w-full min-w-0 px-0 py-1"
+            "relative overflow-hidden rounded-pill border border-(--line) bg-(--nav-glass) shadow-[var(--surface-glass-shadow)] backdrop-blur-(--surface-glass-blur) transition-[width,height,padding] duration-300 ease-out dark:border-(--nav-glass-border)",
+            compactTabs
+              ? "h-[4.375rem] w-[4.375rem] p-0"
+              : "h-[4.375rem] w-full min-w-0 px-0 py-1"
           )}
         >
           <div
@@ -205,7 +207,7 @@ export function Navbar() {
             tabIndex={compactTabs ? 0 : -1}
             onClick={expandTabs}
             className={cn(
-              "absolute inset-0 flex items-center justify-center text-(--color-text-primary) transition-opacity duration-300",
+              "absolute inset-0 flex items-center justify-center text-(--color-text-secondary) transition-[opacity,color] duration-300 hover:text-(--color-text-primary)",
               compactTabs ? "opacity-100" : "pointer-events-none opacity-0"
             )}
           >
