@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import {
   BriefcaseIcon,
   CheckIcon,
+  EllipsisIcon,
   HouseIcon,
   MailIcon,
   SettingsIcon,
@@ -54,9 +55,14 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [compactTabs, setCompactTabs] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const mounted = useSyncExternalStore(subscribeToClient, () => true, () => false);
+  const mounted = useSyncExternalStore(
+    subscribeToClient,
+    () => true,
+    () => false
+  );
   const sentinelRef = useRef<HTMLDivElement>(null);
   const lastScrollY = useRef(0);
+  const expandLockUntil = useRef(0);
   const activeId = links.find((link) => isActive(pathname, link.href))?.id ?? "";
 
   useEffect(() => {
@@ -75,8 +81,9 @@ export function Navbar() {
       const y = window.scrollY;
       const delta = y - lastScrollY.current;
       if (y <= 8) setCompactTabs(false);
-      else if (delta > 6) setCompactTabs(true);
-      else if (delta < -6) setCompactTabs(false);
+      else if (delta > 6) {
+        if (performance.now() >= expandLockUntil.current) setCompactTabs(true);
+      } else if (delta < -6) setCompactTabs(false);
       lastScrollY.current = y;
     };
 
@@ -89,6 +96,11 @@ export function Navbar() {
     if (pathname !== "/") return;
     event.preventDefault();
     window.scrollTo({ top: 0 });
+  }
+
+  function expandTabs() {
+    expandLockUntil.current = performance.now() + 500;
+    setCompactTabs(false);
   }
 
   return (
@@ -130,64 +142,75 @@ export function Navbar() {
       </header>
       <nav
         aria-label={t("menu")}
-        className="fixed inset-x-3 z-50 sm:hidden bottom-[max(0.75rem,env(safe-area-inset-bottom))]"
+        className="fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-50 flex justify-end sm:hidden"
       >
         <div
           className={cn(
-            "mx-auto overflow-hidden rounded-pill border border-(--nav-glass-border) bg-(--nav-glass) shadow-[var(--surface-glass-shadow)] backdrop-blur-(--surface-glass-blur) transition-[width,padding] duration-200",
-            compactTabs ? "w-[17rem] max-w-full px-1.5 py-1.5" : "w-full max-w-md px-0 py-1"
+            "relative overflow-hidden rounded-pill border border-(--nav-glass-border) bg-(--nav-glass) shadow-[var(--surface-glass-shadow)] backdrop-blur-(--surface-glass-blur) transition-[width,height,padding] duration-300 ease-out",
+            compactTabs ? "h-[4.375rem] w-[4.375rem] p-0" : "h-[4.375rem] w-full min-w-0 px-0 py-1"
           )}
         >
-          <AnimatedBackground
-            value={settingsOpen ? "settings" : activeId}
-            enableHover
-            className={pillClassName}
-            hoverClassName={pillHoverClassName}
-            containerClassName={
-              compactTabs ? "w-full justify-around" : "w-full justify-between py-1 px-2"
-            }
+          <div
+            inert={compactTabs || undefined}
+            aria-hidden={compactTabs}
+            className={cn(
+              "transition-opacity duration-300",
+              compactTabs ? "pointer-events-none opacity-0" : "opacity-100"
+            )}
           >
-            {links.map((link) => {
-              const Icon = link.icon;
-
-              return (
-                <Link
-                  key={link.id}
-                  data-id={link.id}
-                  href={link.href}
-                  aria-current={activeId === link.id ? "page" : undefined}
-                  onClick={(event) => {
-                    if (link.href === "/") scrollHome(event);
-                  }}
-                  className={tabClassName}
-                >
-                  <Icon
-                    className={cn(
-                      "transition-[width,height] duration-200",
-                      compactTabs ? "size-5" : "size-[1.375rem]"
-                    )}
-                  />
-                  <TabLabel compact={compactTabs}>{t(link.id)}</TabLabel>
-                </Link>
-              );
-            })}
-            <button
-              type="button"
-              data-id="settings"
-              aria-expanded={settingsOpen}
-              aria-haspopup="dialog"
-              onClick={() => setSettingsOpen(true)}
-              className={tabClassName}
+            <AnimatedBackground
+              value={settingsOpen ? "settings" : activeId}
+              enableHover
+              className={pillClassName}
+              hoverClassName={pillHoverClassName}
+              containerClassName="w-full justify-between px-2 py-1"
             >
-              <SettingsIcon
-                className={cn(
-                  "transition-[width,height] duration-200",
-                  compactTabs ? "size-5" : "size-[1.375rem]"
-                )}
-              />
-              <TabLabel compact={compactTabs}>{t("settings")}</TabLabel>
-            </button>
-          </AnimatedBackground>
+              {links.map((link) => {
+                const Icon = link.icon;
+
+                return (
+                  <Link
+                    key={link.id}
+                    data-id={link.id}
+                    href={link.href}
+                    aria-current={activeId === link.id ? "page" : undefined}
+                    onClick={(event) => {
+                      if (link.href === "/") scrollHome(event);
+                    }}
+                    className={tabClassName}
+                  >
+                    <Icon className="size-[1.375rem]" />
+                    <TabLabel>{t(link.id)}</TabLabel>
+                  </Link>
+                );
+              })}
+              <button
+                type="button"
+                data-id="settings"
+                aria-expanded={settingsOpen}
+                aria-haspopup="dialog"
+                onClick={() => setSettingsOpen(true)}
+                className={tabClassName}
+              >
+                <SettingsIcon className="size-[1.375rem]" />
+                <TabLabel>{t("settings")}</TabLabel>
+              </button>
+            </AnimatedBackground>
+          </div>
+          <button
+            type="button"
+            aria-label={t("menu")}
+            aria-expanded={false}
+            aria-hidden={!compactTabs}
+            tabIndex={compactTabs ? 0 : -1}
+            onClick={expandTabs}
+            className={cn(
+              "absolute inset-0 flex items-center justify-center text-(--color-text-primary) transition-opacity duration-300",
+              compactTabs ? "opacity-100" : "pointer-events-none opacity-0"
+            )}
+          >
+            <EllipsisIcon className="size-8" />
+          </button>
         </div>
       </nav>
       <SettingsDrawer open={settingsOpen} onOpenChange={setSettingsOpen} />
@@ -198,23 +221,13 @@ export function Navbar() {
 const pillClassName = "rounded-pill [background-image:var(--gradient-button)]";
 const pillHoverClassName =
   "rounded-pill [background-image:var(--gradient-button)] brightness-110 saturate-125";
+const desktopPillClassName = "rounded-pill bg-(--accent)";
 
 const tabClassName =
   "inline-flex flex-col items-center rounded-pill px-3.5 py-1.5 text-[11px] leading-none font-medium text-(--color-text-secondary) transition-colors duration-150 ease-out [&_svg]:[stroke-width:1.75] [&_svg]:transition-[stroke-width] [&_svg]:duration-150 [&_svg]:ease-out data-[checked=true]:text-(--color-text-inverse) data-[checked=true]:delay-200 data-[checked=true]:duration-300 data-[checked=true]:[&_svg]:[stroke-width:2.25] data-[checked=true]:[&_svg]:delay-200 data-[checked=true]:[&_svg]:duration-300";
 
-function TabLabel({ compact, children }: { compact: boolean; children: string }) {
-  return (
-    <span
-      className={cn(
-        "block min-w-0 overflow-hidden font-medium",
-        compact
-          ? "mt-0 h-0 max-w-0 opacity-0 transition-none"
-          : "mt-1 h-3.5 max-w-20 opacity-100 transition-[max-width,height,margin,opacity] duration-200"
-      )}
-    >
-      {children}
-    </span>
-  );
+function TabLabel({ children }: { children: string }) {
+  return <span className="mt-1 block h-3.5 max-w-20 font-medium">{children}</span>;
 }
 
 const themeChoices = ["light", "dark", "system"] as const satisfies readonly ThemeChoice[];
@@ -314,8 +327,8 @@ function NavLinks({
     <AnimatedBackground
       value={activeId}
       enableHover
-      className={pillClassName}
-      hoverClassName={pillHoverClassName}
+      className={desktopPillClassName}
+      hoverClassName={desktopPillClassName}
       containerClassName="gap-1"
     >
       {links.map((link) => (
@@ -327,7 +340,7 @@ function NavLinks({
           onClick={(event) => {
             if (link.href === "/") onHomeClick?.(event);
           }}
-          className="inline-flex rounded-pill px-3 py-1.5 text-sm text-(--color-text-secondary) transition-colors duration-150 ease-out data-[checked=true]:text-(--color-text-inverse) data-[checked=true]:delay-200 data-[checked=true]:duration-300"
+          className="inline-flex rounded-pill px-3 py-1.5 text-sm text-(--color-text-secondary) transition-colors duration-150 ease-out data-[checked=true]:text-(--accent-foreground)"
         >
           {label(link.id)}
         </Link>
