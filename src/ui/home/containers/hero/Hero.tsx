@@ -1,31 +1,67 @@
 "use client";
 
+import { useLayoutEffect, useRef, useState } from "react";
 import { ArrowDownIcon, ArrowRightIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { cn } from "cn";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/ui/shared/components/button";
 import { EyebrowBadge } from "@/ui/shared/components/eyebrow-badge";
 
 const stats = ["experience", "development", "execution"] as const;
 
+function wraps(elements: HTMLElement[]) {
+  const visible = elements.filter(
+    (element) => getComputedStyle(element).display !== "none" && element.offsetHeight > 0
+  );
+
+  return visible.some((element, index) => {
+    const previous = visible[index - 1];
+    return previous ? element.offsetTop >= previous.offsetTop + previous.offsetHeight : false;
+  });
+}
+
 export function Hero() {
   const t = useTranslations("HomePage");
+  const panelRef = useRef<HTMLDivElement>(null);
+  const [stacked, setStacked] = useState(false);
+
+  useLayoutEffect(() => {
+    const panel = panelRef.current;
+    if (!panel) return;
+
+    const measure = () => {
+      const children = [...panel.children] as HTMLElement[];
+      const items = [...panel.querySelectorAll("li")] as HTMLElement[];
+      setStacked(wraps(children) || wraps(items));
+    };
+
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(panel);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section className="flex min-h-screen w-full flex-col items-center justify-center pt-10 pb-28 text-center sm:pb-10">
+    <section className="flex min-h-screen w-full flex-col items-center justify-center pt-8 pb-28 text-center sm:pt-28 sm:pb-16">
       <EyebrowBadge>{t("eyebrow")}</EyebrowBadge>
 
-      <h1 className="mt-6 max-w-[896px] font-[family-name:var(--font-display)] text-[length:var(--text-display-size)] leading-[var(--text-display-leading)] font-semibold tracking-[var(--text-display-tracking)] text-(--color-text-primary) dark:font-bold">
-        {t("headlineLine1")}
-        <br />
-        {t("headlineLine2")}
+      <h1 className="mt-6 max-w-4xl font-[family-name:var(--font-display)] text-[2rem] leading-[1.14] font-semibold tracking-[-0.03em] text-(--color-text-primary) sm:text-[2.5rem] lg:text-[3rem] xl:text-[3.25rem] 2xl:text-[length:var(--text-display-size)] 2xl:leading-[var(--text-display-leading)] 2xl:tracking-[var(--text-display-tracking)]">
+        <span className="xl:block">{t("headlineLine1")} </span>
+        <span className="xl:block">{t("headlineLine2")}</span>
       </h1>
 
-      <p className="mt-4 max-w-[672px] text-[length:var(--text-body-lg-size)] leading-[var(--text-body-lg-leading)] tracking-[-0.008em] text-(--color-text-secondary)">
+      <p className="mt-4 max-w-2xl text-[length:var(--text-body-lg-size)] leading-[1.625] tracking-[-0.008em] text-(--color-text-secondary)">
         {t("body")}
       </p>
 
-      <div className="mt-8 inline-flex max-w-full flex-wrap items-center justify-center gap-x-6 gap-y-4 rounded-pill border border-(--hero-panel-border) bg-(--hero-panel-bg) px-5 py-3 shadow-[var(--hero-panel-shadow)] backdrop-blur-[6px] sm:px-6">
+      <div
+        ref={panelRef}
+        className={cn(
+          "mt-8 inline-flex max-w-full flex-wrap items-center justify-center gap-x-6 gap-y-4 border border-(--hero-panel-border) bg-(--hero-panel-bg) px-5 py-3 shadow-[var(--hero-panel-shadow)] backdrop-blur-[6px] sm:px-6",
+          stacked ? "rounded-3xl" : "rounded-pill"
+        )}
+      >
         <div className="flex items-center gap-3 text-left">
           <span className="relative size-14 shrink-0 overflow-hidden rounded-pill shadow-[var(--avatar-ring)]">
             <img
