@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRightIcon } from "lucide-react";
+import { ArrowDownIcon, ArrowRightIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/ui/shared/components/button";
@@ -30,42 +30,50 @@ export function Hero() {
         {t("body")}
       </p>
 
-      <div className="mt-6 flex max-w-full flex-wrap items-center justify-center gap-4 rounded-pill border border-(--hero-panel-border) bg-(--hero-panel-bg) py-2 pr-6 pl-4 shadow-[var(--hero-panel-shadow)] backdrop-blur-[6px]">
-        <div className="flex items-center gap-2 text-left">
-          <img
-            src="/images/nick-preziosi.png"
-            alt=""
-            width={40}
-            height={40}
-            className="size-10 rounded-pill object-cover shadow-[var(--avatar-ring)]"
-          />
+      <div className="mt-8 inline-flex max-w-full flex-wrap items-center justify-center gap-x-6 gap-y-4 rounded-pill border border-(--hero-panel-border) bg-(--hero-panel-bg) px-5 py-3 shadow-[var(--hero-panel-shadow)] backdrop-blur-[6px] sm:px-6">
+        <div className="flex items-center gap-3 text-left">
+          <span className="relative size-14 shrink-0 overflow-hidden rounded-pill shadow-[var(--avatar-ring)]">
+            <img
+              src="/images/about/nick-preziosi.webp"
+              alt=""
+              width={1024}
+              height={906}
+              className="absolute top-[-20%] left-[-78%] h-auto w-[256%] max-w-none"
+            />
+          </span>
           <div>
-            <p className="text-base leading-5 font-semibold tracking-[-0.01em] text-(--color-text-primary)">
+            <p className="text-sm leading-5 font-semibold tracking-[-0.01em] text-(--color-text-primary)">
               {t("name")}
             </p>
             <p className="text-xs leading-4 text-(--color-text-secondary)">{t("title")}</p>
           </div>
         </div>
-        <span aria-hidden className="hidden h-6 w-px bg-(--hero-divider) sm:block" />
-        <div className="flex flex-wrap items-start justify-center gap-4">
+        <span aria-hidden className="hidden h-8 w-px shrink-0 bg-(--hero-divider) sm:block" />
+        <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
           {stats.map((stat) => (
-            <div key={stat} className="flex w-[7.5rem] flex-col items-center gap-0.5">
-              <span className="gradient-button rounded-pill px-2.5 py-0.5 text-base leading-6 font-semibold tracking-[-0.01em]">
+            <li key={stat} className="flex flex-col items-center gap-1.5">
+              <span className="gradient-button rounded-pill px-3 py-1 text-sm leading-5 font-semibold tracking-[-0.01em] whitespace-nowrap">
                 {t(`${stat}Value`)}
               </span>
-              <span className="text-xs leading-4 text-(--color-text-secondary)">
+              <span className="text-center text-xs leading-4 whitespace-nowrap text-(--color-text-secondary)">
                 {t(`${stat}Label`)}
               </span>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
 
-      <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
+      <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
         <Button variant="gradient" asChild>
+          <Link href="/work">
+            {t("selectedWork")}
+            <ArrowDownIcon data-icon="inline-end" />
+          </Link>
+        </Button>
+        <Button asChild>
           <Link href="/about">
             {t("about")}
-            <ArrowRightIcon data-icon="inline-end" className="size-3" />
+            <ArrowRightIcon data-icon="inline-end" />
           </Link>
         </Button>
       </div>
