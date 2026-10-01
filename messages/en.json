@@ -24,10 +24,10 @@
     "headlineLine1": "Building the systems",
     "headlineLine2": "behind better product",
     "headlineLine3": "experiences.",
-    "body": "A curated selection of end-to-end product design, multi-tier design systems, and AI-accelerated front-end engineering shipped across fintech, developer tooling, and enterprise platforms.",
-    "metricShipped": "8+ Shipped Ecosystems",
-    "metricTokens": "Zero-Drift Token Architecture",
-    "metricAi": "Human-Led, AI-Accelerated",
+    "body": "A selection of products, design systems, and digital experiences I've designed and built across fintech, AI, and the web.",
+    "metricShipped": "8 Products · 1 Shared System",
+    "metricTokens": "Design + Code · End-to-End Execution",
+    "metricAi": "Human-Led · AI-Accelerated",
     "viewWork": "View Work",
     "filtersLabel": "Filter work by capability",
     "techLabel": "Technologies",
@@ -49,7 +49,7 @@
       "items": {
         "kLabEcosystem": {
           "title": "K Lab Product Ecosystem",
-          "description": "Unifying a suite of fintech products through a shared design system, reusable application patterns, and scalable front-end architecture.",
+          "description": "Unified a suite of fintech products through a shared design system and component library, reusable UI/UX patterns, and scalable front-end architecture.",
           "role": "UI/UX Manager & Software Developer",
           "detail": "8 Products · Shared Component Ecosystem",
           "alt": "Shared fintech product interfaces and design tokens on a desktop display",
@@ -57,7 +57,7 @@
         },
         "kLabWebsite": {
           "title": "K Lab Website",
-          "description": "Building a responsive corporate website and token-driven front-end system designed to evolve alongside the K Lab brand.",
+          "description": "Built a responsive corporate website and token-driven front-end system designed to evolve alongside the K Lab brand.",
           "role": "UI/UX & Front-End Development",
           "detail": "Next.js · Sanity · Motion",
           "alt": "K Lab corporate website on a laptop",
@@ -65,7 +65,7 @@
         },
         "kasserole": {
           "title": "Kasserole",
-          "description": "Modernizing the UI and front-end architecture of an AI-powered recipe platform that generates recipes from ingredients, URLs, photos, and prompts.",
+          "description": "Modernized the UI and front-end architecture of an AI-powered recipe platform that generates recipes from ingredients, URLs, photos, and prompts.",
           "role": "Front-End Engineer",
           "detail": "React · AI Product · UI/UX",
           "alt": "AI recipe app on a phone and a laptop",
@@ -73,7 +73,7 @@
         },
         "vmWaste": {
           "title": "V&M Waste Services",
-          "description": "Developing a high-performance service website from Figma designs with an emphasis on responsive UX, accessibility, SEO, and minimal client-side JavaScript.",
+          "description": "Developed a high-performance service website from Figma designs with an emphasis on responsive UX, accessibility, SEO, and minimal client-side JavaScript.",
           "role": "Web Developer",
           "detail": "Next.js · Tailwind CSS · Performance",
           "alt": "V&M Waste Services website on a laptop",
@@ -81,7 +81,7 @@
         },
         "drivenByAuto": {
           "title": "Driven By Auto",
-          "description": "Building a subscription-based automotive career platform with membership management, billing, editorial content, events, and customer-facing workflows.",
+          "description": "Built a subscription-based automotive career platform with membership management, billing, editorial content, events, and customer-facing workflows.",
           "role": "Web Developer",
           "detail": "Next.js · Contentful · Zoho Billing",
           "alt": "Automotive career platform with membership plans and events",
@@ -89,7 +89,7 @@
         },
         "knightsTravails": {
           "title": "Knights Travails",
-          "description": "Visualizing the shortest path of a chess knight through an interactive application built around a custom graph structure and breadth-first search.",
+          "description": "Visualized the shortest path of a chess knight through an interactive application built around a custom graph structure and breadth-first search.",
           "role": "Designer & Developer",
           "detail": "JavaScript · Graphs · BFS",
           "alt": "Shortest path of a chess knight across a board",
@@ -97,7 +97,7 @@
         },
         "nickprez": {
           "title": "nickprez.dev",
-          "description": "Designing and building a personal portfolio as a reusable product system, combining responsive UI, purposeful motion, interactive case studies, and AI-assisted experiences.",
+          "description": "Designed and built a personal portfolio as a reusable product system, combining responsive UI, purposeful motion, interactive case studies, and AI-assisted experiences.",
           "role": "Designer & Developer",
           "detail": "Next.js · TypeScript · Motion",
           "alt": "Personal portfolio with a gradient field and case study cards",

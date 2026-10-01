@@ -24,10 +24,10 @@
     "headlineLine1": "Construindo os sistemas",
     "headlineLine2": "por trás de melhores",
     "headlineLine3": "experiências de produto.",
-    "body": "Uma seleção de design de produto de ponta a ponta, design systems em várias camadas e engenharia front-end acelerada por IA, entregue em fintech, ferramentas para desenvolvedores e plataformas empresariais.",
-    "metricShipped": "8+ ecossistemas publicados",
-    "metricTokens": "Arquitetura de tokens sem deriva",
-    "metricAi": "Liderado por pessoas, acelerado por IA",
+    "body": "Uma seleção de produtos, design systems e experiências digitais que desenhei e construí em fintech, IA e na web.",
+    "metricShipped": "8 produtos · 1 sistema compartilhado",
+    "metricTokens": "Design + código · Execução de ponta a ponta",
+    "metricAi": "Liderado por pessoas · Acelerado por IA",
     "viewWork": "Ver trabalho",
     "filtersLabel": "Filtrar o trabalho por capacidade",
     "techLabel": "Tecnologias",
@@ -49,7 +49,7 @@
       "items": {
         "kLabEcosystem": {
           "title": "K Lab Product Ecosystem",
-          "description": "Unificação de um conjunto de produtos fintech por meio de um design system compartilhado, padrões de aplicação reutilizáveis e uma arquitetura front-end escalável.",
+          "description": "Unifiquei um conjunto de produtos fintech por meio de um design system e uma biblioteca de componentes compartilhados, padrões de UI/UX reutilizáveis e uma arquitetura front-end escalável.",
           "role": "Gerente de UI/UX e desenvolvedor de software",
           "detail": "8 produtos · Ecossistema de componentes compartilhado",
           "alt": "Interfaces de produtos fintech que compartilham um design system",
@@ -57,7 +57,7 @@
         },
         "kLabWebsite": {
           "title": "K Lab Website",
-          "description": "Construção de um site corporativo responsivo e um sistema front-end orientado a tokens, feito para evoluir junto com a marca K Lab.",
+          "description": "Construí um site corporativo responsivo e um sistema front-end orientado a tokens, feito para evoluir junto com a marca K Lab.",
           "role": "UI/UX e desenvolvimento front-end",
           "detail": "Next.js · Sanity · Motion",
           "alt": "Site corporativo da K Lab em um laptop",
@@ -65,7 +65,7 @@
         },
         "kasserole": {
           "title": "Kasserole",
-          "description": "Modernização da interface e da arquitetura front-end de uma plataforma de receitas com IA que gera receitas a partir de ingredientes, URLs, fotos e prompts.",
+          "description": "Modernizei a interface e a arquitetura front-end de uma plataforma de receitas com IA que gera receitas a partir de ingredientes, URLs, fotos e prompts.",
           "role": "Engenheiro front-end",
           "detail": "React · Produto de IA · UI/UX",
           "alt": "Aplicativo de receitas com IA em um celular e um laptop",
@@ -73,7 +73,7 @@
         },
         "vmWaste": {
           "title": "V&M Waste Services",
-          "description": "Desenvolvimento de um site de serviços de alto desempenho a partir de designs do Figma, com ênfase em UX responsiva, acessibilidade, SEO e o mínimo de JavaScript no cliente.",
+          "description": "Desenvolvi um site de serviços de alto desempenho a partir de designs do Figma, com ênfase em UX responsiva, acessibilidade, SEO e o mínimo de JavaScript no cliente.",
           "role": "Desenvolvedor web",
           "detail": "Next.js · Tailwind CSS · Desempenho",
           "alt": "Site de serviços da V&M Waste em um laptop",
@@ -81,7 +81,7 @@
         },
         "drivenByAuto": {
           "title": "Driven By Auto",
-          "description": "Construção de uma plataforma de carreiras automotivas por assinatura, com gestão de associações, cobrança, conteúdo editorial, eventos e fluxos para o cliente.",
+          "description": "Construí uma plataforma de carreiras automotivas por assinatura, com gestão de associações, cobrança, conteúdo editorial, eventos e fluxos para o cliente.",
           "role": "Desenvolvedor web",
           "detail": "Next.js · Contentful · Zoho Billing",
           "alt": "Plataforma de carreiras automotivas com assinaturas e eventos",
@@ -89,7 +89,7 @@
         },
         "knightsTravails": {
           "title": "Knights Travails",
-          "description": "Visualização do caminho mais curto de um cavalo de xadrez em uma aplicação interativa construída em torno de um grafo próprio e busca em largura.",
+          "description": "Visualizei o caminho mais curto de um cavalo de xadrez em uma aplicação interativa construída em torno de um grafo próprio e busca em largura.",
           "role": "Designer e desenvolvedor",
           "detail": "JavaScript · Grafos · BFS",
           "alt": "Caminho mais curto de um cavalo de xadrez em um tabuleiro",
@@ -97,7 +97,7 @@
         },
         "nickprez": {
           "title": "nickprez.dev",
-          "description": "Design e desenvolvimento de um portfólio pessoal como sistema de produto reutilizável, combinando interface responsiva, movimento com propósito, estudos de caso interativos e experiências assistidas por IA.",
+          "description": "Desenhei e desenvolvi um portfólio pessoal como sistema de produto reutilizável, combinando interface responsiva, movimento com propósito, estudos de caso interativos e experiências assistidas por IA.",
           "role": "Designer e desenvolvedor",
           "detail": "Next.js · TypeScript · Motion",
           "alt": "Portfólio pessoal com um fundo em degradê e estudos de caso",
