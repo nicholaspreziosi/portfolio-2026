@@ -166,6 +166,10 @@
     "send": "Send",
     "close": "Close"
   },
+  "Footer": {
+    "tagline": "UI/UX leader and front-end developer focused on intuitive products, scalable design systems, and thoughtful digital experiences.",
+    "copyright": "© {year} Nick Preziosi. Designed and built end to end."
+  },
   "Social": {
     "label": "Contact",
     "email": "Email",

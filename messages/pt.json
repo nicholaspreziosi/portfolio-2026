@@ -166,6 +166,10 @@
     "send": "Enviar",
     "close": "Fechar"
   },
+  "Footer": {
+    "tagline": "Líder de UI/UX e desenvolvedor front-end focado em produtos intuitivos, sistemas de design escaláveis e experiências digitais cuidadosas.",
+    "copyright": "© {year} Nick Preziosi. Projetado e construído de ponta a ponta."
+  },
   "Social": {
     "label": "Contato",
     "email": "E-mail",

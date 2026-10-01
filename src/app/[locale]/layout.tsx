@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { DocumentLangSync } from "@/ui/shell/DocumentLangSync";
+import { Footer } from "@/ui/shell/Footer";
 import { Navbar } from "@/ui/shell/Navbar";
 import { SocialDock } from "@/ui/shell/SocialDock";
 
@@ -60,6 +61,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
       <Navbar />
       <SocialDock />
       {children}
+      <Footer />
     </NextIntlClientProvider>
   );
 }
