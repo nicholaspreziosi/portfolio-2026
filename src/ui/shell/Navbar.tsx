@@ -162,9 +162,7 @@ export function Navbar() {
           >
             <AnimatedBackground
               value={settingsOpen ? "settings" : activeId}
-              enableHover
               className={pillClassName}
-              hoverClassName={pillHoverClassName}
               containerClassName="w-full justify-between px-2 py-1"
             >
               {links.map((link) => {
@@ -221,12 +219,9 @@ export function Navbar() {
 }
 
 const pillClassName = "rounded-pill [background-image:var(--gradient-button)]";
-const pillHoverClassName =
-  "rounded-pill [background-image:var(--gradient-button)] brightness-110 saturate-125";
-const desktopPillClassName = "rounded-pill bg-(--accent)";
 
 const tabClassName =
-  "inline-flex flex-col items-center rounded-pill px-3.5 py-1.5 text-[11px] leading-none font-medium text-(--color-text-secondary) transition-colors duration-150 ease-out [&_svg]:[stroke-width:1.75] [&_svg]:transition-[stroke-width] [&_svg]:duration-150 [&_svg]:ease-out data-[checked=true]:text-(--color-text-inverse) data-[checked=true]:delay-200 data-[checked=true]:duration-300 data-[checked=true]:[&_svg]:[stroke-width:2.25] data-[checked=true]:[&_svg]:delay-200 data-[checked=true]:[&_svg]:duration-300";
+  "inline-flex flex-col items-center rounded-pill px-3.5 py-1.5 text-[11px] leading-none font-medium text-(--color-text-secondary) transition-colors duration-150 ease-out [&_svg]:[stroke-width:1.75] [&_svg]:transition-[stroke-width] [&_svg]:duration-150 [&_svg]:ease-out data-[checked=true]:text-(--color-text-inverse) data-[checked=true]:delay-150 data-[checked=true]:[&_svg]:[stroke-width:2.25] data-[checked=true]:[&_svg]:delay-150";
 
 function TabLabel({ children }: { children: string }) {
   return <span className="mt-1 block h-3.5 max-w-20 font-medium">{children}</span>;
@@ -328,9 +323,7 @@ function NavLinks({
   return (
     <AnimatedBackground
       value={activeId}
-      enableHover
-      className={desktopPillClassName}
-      hoverClassName={desktopPillClassName}
+      className={pillClassName}
       containerClassName="gap-1"
     >
       {links.map((link) => (
@@ -342,7 +335,7 @@ function NavLinks({
           onClick={(event) => {
             if (link.href === "/") onHomeClick?.(event);
           }}
-          className="inline-flex rounded-pill px-3 py-1.5 text-sm text-(--color-text-secondary) transition-colors duration-150 ease-out data-[checked=true]:text-(--accent-foreground)"
+          className="inline-flex rounded-pill px-3 py-1.5 text-sm text-(--color-text-secondary) transition-colors duration-150 ease-out data-[checked=true]:text-(--color-text-inverse) data-[checked=true]:delay-150"
         >
           {label(link.id)}
         </Link>
