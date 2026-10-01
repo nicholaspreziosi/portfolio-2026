@@ -5,13 +5,13 @@ import { useTranslations } from "next-intl";
 import { AnimatedBackground } from "@/ui/shared/components/animated-background";
 
 const filters = [
-  { id: "all", count: 5 },
-  { id: "uiux", count: 4 },
+  { id: "all", count: 7 },
+  { id: "uiux", count: 3 },
   { id: "systems", count: 3 },
-  { id: "frontend", count: 4 },
-  { id: "product", count: 3 },
+  { id: "frontend", count: 6 },
+  { id: "product", count: 4 },
   { id: "ai", count: 2 },
-  { id: "leadership", count: 2 },
+  { id: "leadership", count: 1 },
 ] as const;
 
 type FilterId = (typeof filters)[number]["id"];

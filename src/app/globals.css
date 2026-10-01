@@ -425,42 +425,6 @@
   --sidebar-accent: rgb(255 255 255 / 0.06);
 }
 
-/* Portfolio case studies stay on the light canvas from the frames, in either theme. */
-.study-canvas {
-  background: #fff;
-  color-scheme: light;
-  --ink: #1b1b1d;
-  --ink-secondary: #414753;
-  --ink-tertiary: #717784;
-  --link: #0059b5;
-  --paper: #fff;
-  --paper-muted: #f6f3f5;
-  --line-subtle: #f0edef;
-  --color-text-primary: #1b1b1d;
-  --color-text-secondary: #414753;
-  --color-text-tertiary: #717784;
-  --color-text-accent: #0059b5;
-  --success: #006c49;
-  --success-fill: #006c49;
-  --study-card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --study-chip-accent-bg: #d7e2ff;
-  --study-chip-accent-fg: #001b3f;
-  --study-chip-muted-bg: #f0edef;
-  --study-chip-muted-fg: #414753;
-  --study-chip-positive-bg: #6cf8bb;
-  --study-chip-positive-fg: #00714d;
-  --study-chip-positive-soft-bg: rgb(111 251 190 / 0.15);
-  --study-chip-positive-soft-fg: #006c49;
-  --study-chip-info-soft-bg: rgb(215 226 255 / 0.2);
-  --study-chip-info-soft-fg: #0059b5;
-  --study-media-bg: #f0edef;
-  --study-footer-bg: #f6f3f5;
-  --study-footer-border: rgb(193 198 214 / 0.3);
-  --study-overlay: rgb(255 255 255 / 0.9);
-  --study-overlay-soft: rgb(255 255 255 / 0.8);
-  --study-active-bg: rgb(0 108 73 / 0.1);
-}
-
 .ambient {
   position: fixed;
   inset: 0;

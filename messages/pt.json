@@ -39,6 +39,71 @@
       "product": "Produto",
       "ai": "IA",
       "leadership": "Liderança"
+    },
+    "studies": {
+      "label": "Estudos de caso",
+      "role": "Função",
+      "flagship": "Principal",
+      "explore": "Explorar estudo de caso",
+      "view": "Ver estudo de caso",
+      "items": {
+        "kLabEcosystem": {
+          "title": "K Lab Product Ecosystem",
+          "description": "Unificação de um conjunto de produtos fintech por meio de um design system compartilhado, padrões de aplicação reutilizáveis e uma arquitetura front-end escalável.",
+          "role": "Gerente de UI/UX e desenvolvedor de software",
+          "detail": "8 produtos · Ecossistema de componentes compartilhado",
+          "alt": "Interfaces de produtos fintech que compartilham um design system",
+          "tags": ["UI/UX", "Design systems", "Front-end", "Fintech"]
+        },
+        "kLabWebsite": {
+          "title": "K Lab Website",
+          "description": "Construção de um site corporativo responsivo e um sistema front-end orientado a tokens, feito para evoluir junto com a marca K Lab.",
+          "role": "UI/UX e desenvolvimento front-end",
+          "detail": "Next.js · Sanity · Motion",
+          "alt": "Site corporativo da K Lab em um laptop",
+          "tags": ["Web design", "Front-end", "Design systems", "CMS"]
+        },
+        "kasserole": {
+          "title": "Kasserole",
+          "description": "Modernização da interface e da arquitetura front-end de uma plataforma de receitas com IA que gera receitas a partir de ingredientes, URLs, fotos e prompts.",
+          "role": "Engenheiro front-end",
+          "detail": "React · Produto de IA · UI/UX",
+          "alt": "Aplicativo de receitas com IA em um celular e um laptop",
+          "tags": ["IA", "Front-end", "UI/UX", "React"]
+        },
+        "vmWaste": {
+          "title": "V&M Waste Services",
+          "description": "Desenvolvimento de um site de serviços de alto desempenho a partir de designs do Figma, com ênfase em UX responsiva, acessibilidade, SEO e o mínimo de JavaScript no cliente.",
+          "role": "Desenvolvedor web",
+          "detail": "Next.js · Tailwind CSS · Desempenho",
+          "alt": "Site de serviços da V&M Waste em um laptop",
+          "tags": ["Desenvolvimento web", "Desempenho", "SEO", "Acessibilidade"]
+        },
+        "drivenByAuto": {
+          "title": "Driven By Auto",
+          "description": "Construção de uma plataforma de carreiras automotivas por assinatura, com gestão de associações, cobrança, conteúdo editorial, eventos e fluxos para o cliente.",
+          "role": "Desenvolvedor web",
+          "detail": "Next.js · Contentful · Zoho Billing",
+          "alt": "Plataforma de carreiras automotivas com assinaturas e eventos",
+          "tags": ["Desenvolvimento web", "Assinaturas", "CMS", "Integrações"]
+        },
+        "knightsTravails": {
+          "title": "Knights Travails",
+          "description": "Visualização do caminho mais curto de um cavalo de xadrez em uma aplicação interativa construída em torno de um grafo próprio e busca em largura.",
+          "role": "Designer e desenvolvedor",
+          "detail": "JavaScript · Grafos · BFS",
+          "alt": "Caminho mais curto de um cavalo de xadrez em um tabuleiro",
+          "tags": ["Algoritmos", "Estruturas de dados", "JavaScript"]
+        },
+        "nickprez": {
+          "title": "nickprez.dev",
+          "description": "Design e desenvolvimento de um portfólio pessoal como sistema de produto reutilizável, combinando interface responsiva, movimento com propósito, estudos de caso interativos e experiências assistidas por IA.",
+          "role": "Designer e desenvolvedor",
+          "detail": "Next.js · TypeScript · Motion",
+          "alt": "Portfólio pessoal com um fundo em degradê e estudos de caso",
+          "tags": ["Design systems", "Front-end", "Motion", "IA"]
+        }
+      }
     }
   },
   "AboutPage": {
