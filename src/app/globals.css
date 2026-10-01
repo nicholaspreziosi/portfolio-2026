@@ -172,6 +172,25 @@
   --hero-dot-shadow: none;
   --avatar-ring: 0 0 0 1px rgb(255 255 255 / 0.15);
 
+  /* Case-study chips and frames. Light values match the portfolio frames. */
+  --study-card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --study-chip-accent-bg: #d7e2ff;
+  --study-chip-accent-fg: #001b3f;
+  --study-chip-muted-bg: var(--line-subtle);
+  --study-chip-muted-fg: var(--ink-secondary);
+  --study-chip-positive-bg: #6cf8bb;
+  --study-chip-positive-fg: #00714d;
+  --study-chip-positive-soft-bg: rgb(111 251 190 / 0.15);
+  --study-chip-positive-soft-fg: #006c49;
+  --study-chip-info-soft-bg: rgb(215 226 255 / 0.2);
+  --study-chip-info-soft-fg: #0059b5;
+  --study-media-bg: var(--line-subtle);
+  --study-footer-bg: var(--paper-muted);
+  --study-footer-border: rgb(193 198 214 / 0.3);
+  --study-overlay: rgb(255 255 255 / 0.9);
+  --study-overlay-soft: rgb(255 255 255 / 0.8);
+  --study-active-bg: rgb(0 108 73 / 0.1);
+
   /* Elevation */
   --shadow-sm: 0 1px 1px rgb(0 0 0 / 0.05);
   --shadow-elevated: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
@@ -346,6 +365,22 @@
   --hero-panel-shadow: 0 8px 24px rgb(0 0 0 / 0.4);
   --hero-dot-shadow: 0 0 8px rgb(from var(--cyan) r g b / 0.8);
 
+  --study-card-shadow: 0 8px 24px rgb(0 0 0 / 0.4);
+  --study-chip-accent-bg: rgb(215 226 255 / 0.16);
+  --study-chip-accent-fg: #d7e2ff;
+  --study-chip-positive-bg: rgb(108 248 187 / 0.16);
+  --study-chip-positive-fg: #6cf8bb;
+  --study-chip-positive-soft-bg: rgb(111 251 190 / 0.12);
+  --study-chip-positive-soft-fg: #6cf8bb;
+  --study-chip-info-soft-bg: rgb(215 226 255 / 0.14);
+  --study-chip-info-soft-fg: #9ec1ff;
+  --study-media-bg: rgb(255 255 255 / 0.04);
+  --study-footer-bg: rgb(255 255 255 / 0.04);
+  --study-footer-border: rgb(255 255 255 / 0.1);
+  --study-overlay: rgb(15 23 42 / 0.88);
+  --study-overlay-soft: rgb(15 23 42 / 0.8);
+  --study-active-bg: rgb(16 185 129 / 0.16);
+
   --shadow-sm: 0 1px 1px rgb(0 0 0 / 0.35);
   --shadow-elevated: 0 8px 32px rgb(0 0 0 / 0.45);
   --shadow-overlay: 0 0 0 1px rgb(255 255 255 / 0.08), 0 12px 48px rgb(0 0 0 / 0.45);
@@ -388,6 +423,42 @@
   --input: rgb(255 255 255 / 0.08);
   --sidebar: rgb(19 24 37);
   --sidebar-accent: rgb(255 255 255 / 0.06);
+}
+
+/* Portfolio case studies stay on the light canvas from the frames, in either theme. */
+.study-canvas {
+  background: #fff;
+  color-scheme: light;
+  --ink: #1b1b1d;
+  --ink-secondary: #414753;
+  --ink-tertiary: #717784;
+  --link: #0059b5;
+  --paper: #fff;
+  --paper-muted: #f6f3f5;
+  --line-subtle: #f0edef;
+  --color-text-primary: #1b1b1d;
+  --color-text-secondary: #414753;
+  --color-text-tertiary: #717784;
+  --color-text-accent: #0059b5;
+  --success: #006c49;
+  --success-fill: #006c49;
+  --study-card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --study-chip-accent-bg: #d7e2ff;
+  --study-chip-accent-fg: #001b3f;
+  --study-chip-muted-bg: #f0edef;
+  --study-chip-muted-fg: #414753;
+  --study-chip-positive-bg: #6cf8bb;
+  --study-chip-positive-fg: #00714d;
+  --study-chip-positive-soft-bg: rgb(111 251 190 / 0.15);
+  --study-chip-positive-soft-fg: #006c49;
+  --study-chip-info-soft-bg: rgb(215 226 255 / 0.2);
+  --study-chip-info-soft-fg: #0059b5;
+  --study-media-bg: #f0edef;
+  --study-footer-bg: #f6f3f5;
+  --study-footer-border: rgb(193 198 214 / 0.3);
+  --study-overlay: rgb(255 255 255 / 0.9);
+  --study-overlay-soft: rgb(255 255 255 / 0.8);
+  --study-active-bg: rgb(0 108 73 / 0.1);
 }
 
 .ambient {
@@ -654,40 +725,24 @@ body {
   --focus-outline-offset: 2px;
 }
 
-:is(
-    button,
-    input,
-    select,
-    textarea,
-    a,
-    [tabindex],
-    [role="button"]
-  ):focus-visible:not([aria-invalid="true"]):not([data-radix-focus-guard]) {
+:is(button, input, select, textarea, a, [tabindex], [role="button"]):focus-visible:not(
+    [aria-invalid="true"]
+  ):not([data-radix-focus-guard]) {
   outline: none;
   --tw-ring-shadow: 0 0 #0000;
   --tw-ring-offset-shadow: 0 0 #0000;
   --ring: transparent;
 }
 
-:is(
-    button,
-    a,
-    [tabindex],
-    [role="button"]
-  ):focus-visible:not([aria-invalid="true"]):not([data-radix-focus-guard]):not(
-    :is(.absolute, .relative, .fixed, .sticky)
-  ) {
+:is(button, a, [tabindex], [role="button"]):focus-visible:not([aria-invalid="true"]):not(
+    [data-radix-focus-guard]
+  ):not(:is(.absolute, .relative, .fixed, .sticky)) {
   position: relative;
 }
 
-:is(
-    button,
-    a,
-    [tabindex],
-    [role="button"]
-  ):focus-visible:not([aria-invalid="true"]):not([data-radix-focus-guard]):not(
-    :is(.infield-label *, [data-slot="input-group"] *)
-  )::before,
+:is(button, a, [tabindex], [role="button"]):focus-visible:not([aria-invalid="true"]):not(
+    [data-radix-focus-guard]
+  ):not(:is(.infield-label *, [data-slot="input-group"] *))::before,
 [data-slot="input-group"]:has(:focus-visible):not(:has([aria-invalid="true"]))::before,
 .infield-label[data-active="true"]::before {
   content: "";
@@ -715,11 +770,7 @@ body {
   border-color: var(--border);
 }
 
-:is(
-    input,
-    select,
-    textarea
-  ):focus-visible:not([aria-invalid="true"]):not(
+:is(input, select, textarea):focus-visible:not([aria-invalid="true"]):not(
     :is(
       .infield-label *,
       [data-slot="input-group"] *,

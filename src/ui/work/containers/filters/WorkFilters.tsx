@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { cn } from "cn";
+import { AnimatedBackground } from "@/ui/shared/components/animated-background";
 
 const filters = [
   { id: "all", count: 5 },
@@ -25,37 +25,30 @@ export function WorkFilters() {
       <div
         role="tablist"
         aria-label={t("filtersLabel")}
-        className="inline-flex w-max gap-1.5 rounded-pill bg-(--surface-glass) p-1.5 shadow-[var(--hero-panel-shadow)] backdrop-blur-(--blur-md)"
+        className="inline-flex w-max rounded-pill bg-(--study-footer-bg) p-1.5 shadow-[var(--shadow-sm)]"
       >
-        {filters.map((filter) => {
-          const selected = filter.id === active;
-
-          return (
+        <AnimatedBackground
+          value={active}
+          className="rounded-pill [background-image:var(--gradient-button)]"
+          containerClassName="gap-1.5"
+        >
+          {filters.map((filter) => (
             <button
               key={filter.id}
               type="button"
               role="tab"
-              aria-selected={selected}
+              data-id={filter.id}
+              aria-selected={filter.id === active}
               onClick={() => setActive(filter.id)}
-              className={cn(
-                "inline-flex h-[31px] items-center rounded-pill px-3.5 text-[length:var(--text-button-size)] leading-[var(--text-button-leading)] whitespace-nowrap transition-colors focus-visible:outline-none",
-                selected
-                  ? "gradient-button font-semibold shadow-[var(--shadow-sm)]"
-                  : "font-medium text-(--color-text-secondary) hover:bg-(--accent)"
-              )}
+              className="inline-flex h-[31px] items-center rounded-pill px-3.5 text-[length:var(--text-button-size)] leading-[var(--text-button-leading)] font-medium whitespace-nowrap text-(--color-text-secondary) transition-colors duration-150 ease-out focus-visible:outline-none data-[checked=true]:text-(--color-text-inverse) data-[checked=true]:delay-150"
             >
               {t(`filter.${filter.id}`)}
-              <span
-                className={cn(
-                  "ms-1.5 text-[length:var(--text-eyebrow-size)] leading-[var(--text-eyebrow-leading)]",
-                  selected ? "font-semibold text-white/80" : "font-medium text-(--color-text-tertiary)"
-                )}
-              >
+              <span className="ms-1.5 text-[length:var(--text-eyebrow-size)] leading-[var(--text-eyebrow-leading)] font-medium text-current opacity-70 transition-none">
                 {filter.count}
               </span>
             </button>
-          );
-        })}
+          ))}
+        </AnimatedBackground>
       </div>
     </div>
   );

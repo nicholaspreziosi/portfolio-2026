@@ -1,6 +1,8 @@
 "use client";
 
+import { ArrowDownIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { Button } from "@/ui/shared/components/button";
 import { TechMarquee } from "@/ui/work/containers/techMarquee/TechMarquee";
 
 const metrics = [
@@ -28,7 +30,7 @@ export function WorkHero() {
   const t = useTranslations("WorkPage");
 
   return (
-    <section className="flex flex-col gap-10">
+    <section className="flex h-full flex-col justify-center gap-10">
       <div className="max-w-3xl">
         <p className="inline-flex items-center gap-1 rounded-pill bg-(--surface-glass) px-2 py-1 text-[length:var(--text-eyebrow-size)] leading-[var(--text-eyebrow-leading)] font-semibold tracking-[var(--text-eyebrow-tracking)] text-(--color-text-secondary) uppercase shadow-[var(--shadow-sm)] backdrop-blur-(--blur-sm)">
           <span aria-hidden className="gradient-accent inline-block size-2 rounded-full" />
@@ -56,6 +58,17 @@ export function WorkHero() {
             </li>
           ))}
         </ul>
+
+        <Button
+          variant="gradient"
+          className="mt-8"
+          onClick={() => {
+            document.getElementById("work")?.scrollIntoView({ behavior: "smooth" });
+          }}
+        >
+          {t("viewWork")}
+          <ArrowDownIcon data-icon="inline-end" />
+        </Button>
       </div>
 
       <TechMarquee orientation="horizontal" />
