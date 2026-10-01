@@ -107,6 +107,7 @@
     }
   },
   "AboutPage": {
+    "eyebrow": "About Me",
     "bridgePrefix": "I bridge together",
     "bridgeSummary": "I bridge together Development, UI/UX Design, Product, Marketing, Technology, and Management.",
     "body1": "I'm Nick Preziosi, a UI/UX leader and front-end developer with a background spanning product design, development, marketing, and digital strategy.",

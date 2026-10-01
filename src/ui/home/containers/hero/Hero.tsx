@@ -4,6 +4,7 @@ import { ArrowDownIcon, ArrowRightIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/ui/shared/components/button";
+import { EyebrowBadge } from "@/ui/shared/components/eyebrow-badge";
 
 const stats = ["experience", "development", "execution"] as const;
 
@@ -12,13 +13,7 @@ export function Hero() {
 
   return (
     <section className="flex min-h-screen w-full flex-col items-center justify-center pt-10 pb-28 text-center sm:pb-10">
-      <p className="inline-flex items-center gap-1 rounded-pill border border-(--hero-chip-border) bg-(--hero-chip-bg) px-3.5 py-1.5 text-[length:var(--text-eyebrow-size)] leading-[var(--text-eyebrow-leading)] font-semibold tracking-[var(--text-eyebrow-tracking)] text-(--hero-chip-fg) uppercase shadow-[var(--hero-chip-shadow)]">
-        <span
-          aria-hidden
-          className="gradient-button inline-block size-2 rounded-full shadow-[var(--hero-dot-shadow)]"
-        />
-        {t("eyebrow")}
-      </p>
+      <EyebrowBadge>{t("eyebrow")}</EyebrowBadge>
 
       <h1 className="mt-6 max-w-[896px] font-[family-name:var(--font-display)] text-[length:var(--text-display-size)] leading-[var(--text-display-leading)] font-semibold tracking-[var(--text-display-tracking)] text-(--color-text-primary) dark:font-bold">
         {t("headlineLine1")}

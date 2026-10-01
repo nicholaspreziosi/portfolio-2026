@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
+import { EyebrowBadge } from "@/ui/shared/components/eyebrow-badge";
 import { InView } from "@/ui/shared/components/in-view";
 import { TextEffect } from "@/ui/shared/components/text-effect";
 import { TextLoop } from "@/ui/shared/components/text-loop";
@@ -59,7 +60,8 @@ export function AboutHero() {
   return (
     <section className="grid items-center gap-10 lg:grid-cols-12 lg:gap-8">
       <div className="lg:col-span-7">
-        <h1 className="font-[family-name:var(--font-display)] text-[2rem] leading-[1.14] font-semibold tracking-[var(--text-display-tracking)] text-(--color-text-primary) sm:text-[2.5rem] lg:text-[length:var(--text-display-size)] lg:leading-[var(--text-display-leading)]">
+        <EyebrowBadge>{t("eyebrow")}</EyebrowBadge>
+        <h1 className="mt-6 font-[family-name:var(--font-display)] text-[2rem] leading-[1.14] font-semibold tracking-[var(--text-display-tracking)] text-(--color-text-primary) sm:text-[2.5rem] lg:text-[length:var(--text-display-size)] lg:leading-[var(--text-display-leading)]">
           <span className="sr-only">{t("bridgeSummary")}</span>
           <InView
             once

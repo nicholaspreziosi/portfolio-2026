@@ -107,6 +107,7 @@
     }
   },
   "AboutPage": {
+    "eyebrow": "Sobre mim",
     "bridgePrefix": "Reúno",
     "bridgeSummary": "Reúno desenvolvimento, design UI/UX, produto, marketing, tecnologia e gestão.",
     "body1": "Sou Nick Preziosi, líder de UI/UX e desenvolvedor front-end, com uma trajetória que abrange design de produto, desenvolvimento, marketing e estratégia digital.",

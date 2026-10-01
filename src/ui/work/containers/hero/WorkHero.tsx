@@ -3,6 +3,7 @@
 import { ArrowDownIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/ui/shared/components/button";
+import { EyebrowBadge } from "@/ui/shared/components/eyebrow-badge";
 import { TechMarquee } from "@/ui/work/containers/techMarquee/TechMarquee";
 
 const metrics = [
@@ -32,10 +33,7 @@ export function WorkHero() {
   return (
     <section className="flex h-full flex-col justify-center gap-10">
       <div className="max-w-3xl">
-        <p className="inline-flex items-center gap-1 rounded-pill bg-(--surface-glass) px-2 py-1 text-[length:var(--text-eyebrow-size)] leading-[var(--text-eyebrow-leading)] font-semibold tracking-[var(--text-eyebrow-tracking)] text-(--color-text-secondary) uppercase shadow-[var(--shadow-sm)] backdrop-blur-(--blur-sm)">
-          <span aria-hidden className="gradient-accent inline-block size-2 rounded-full" />
-          {t("eyebrow")}
-        </p>
+        <EyebrowBadge>{t("eyebrow")}</EyebrowBadge>
 
         <h1 className="mt-6 font-[family-name:var(--font-display)] text-[2rem] leading-[1.14] font-semibold tracking-[-0.03em] text-(--color-text-primary) sm:text-[2.5rem] lg:text-[3rem] xl:text-[3.25rem] 2xl:text-[length:var(--text-display-size)] 2xl:leading-[var(--text-display-leading)]">
           <span className="xl:block">{t("headlineLine1")} </span>
