@@ -32,76 +32,86 @@
     "filtersLabel": "Filter work by capability",
     "techLabel": "Technologies",
     "filter": {
-      "all": "All Work",
-      "uiux": "UI/UX",
-      "systems": "Design Systems",
+      "all": "All",
+      "uiux": "UI/UX Design",
       "frontend": "Front-End",
-      "product": "Product",
+      "backend": "Back-End",
       "ai": "AI",
       "leadership": "Leadership"
     },
     "studies": {
       "label": "Case studies",
       "role": "Role",
+      "tools": "Tools",
       "flagship": "Flagship",
       "explore": "Explore Case Study",
       "view": "View Case Study",
+      "live": "View Live Project",
+      "repo": "View Repo",
       "items": {
         "kLabEcosystem": {
           "title": "K Lab Product Ecosystem",
           "description": "Unified a suite of fintech products through a shared design system and component library, reusable UI/UX patterns, and scalable front-end architecture.",
           "role": "UI/UX Manager & Software Developer",
-          "detail": "8 Products · Shared Component Ecosystem",
-          "alt": "Shared fintech product interfaces and design tokens on a desktop display",
-          "tags": ["UI/UX", "Design Systems", "Front-End", "Fintech"]
+          "tools": "Next.js · TypeScript · Tailwind CSS · shadcn/ui",
+          "detail": "8 Products · Shared Component Library · Reusable Product Patterns",
+          "alt": "Shared fintech product interfaces and design tokens on a desktop display"
         },
         "kLabWebsite": {
           "title": "K Lab Website",
           "description": "Built a responsive corporate website and token-driven front-end system designed to evolve alongside the K Lab brand.",
           "role": "UI/UX & Front-End Development",
-          "detail": "Next.js · Sanity · Motion",
-          "alt": "K Lab corporate website on a laptop",
-          "tags": ["Web Design", "Front-End", "Design Systems", "CMS"]
+          "tools": "Next.js · Radix UI · CSS Modules · Motion · Sanity",
+          "detail": "Token-Driven UI · CMS-Managed Content · Brand Rework",
+          "alt": "K Lab corporate website on a laptop"
         },
         "kasserole": {
           "title": "Kasserole",
           "description": "Modernized the UI and front-end architecture of an AI-powered recipe platform that generates recipes from ingredients, URLs, photos, and prompts.",
           "role": "Front-End Engineer",
-          "detail": "React · AI Product · UI/UX",
-          "alt": "AI recipe app on a phone and a laptop",
-          "tags": ["AI", "Front-End", "UI/UX", "React"]
+          "tools": "React · JavaScript · CSS · React Bootstrap",
+          "detail": "AI Recipe Generation · UI Modernization · Codebase Refactor",
+          "alt": "AI recipe app on a phone and a laptop"
         },
         "vmWaste": {
           "title": "V&M Waste Services",
           "description": "Developed a high-performance service website from Figma designs with an emphasis on responsive UX, accessibility, SEO, and minimal client-side JavaScript.",
           "role": "Web Developer",
-          "detail": "Next.js · Tailwind CSS · Performance",
-          "alt": "V&M Waste Services website on a laptop",
-          "tags": ["Web Development", "Performance", "SEO", "Accessibility"]
+          "tools": "Next.js · TypeScript · Tailwind CSS · DaisyUI · Figma",
+          "detail": "Performance, Accessibility, & SEO Optimized",
+          "alt": "V&M Waste Services website on a laptop"
         },
         "drivenByAuto": {
           "title": "Driven By Auto",
           "description": "Built a subscription-based automotive career platform with membership management, billing, editorial content, events, and customer-facing workflows.",
           "role": "Web Developer",
-          "detail": "Next.js · Contentful · Zoho Billing",
-          "alt": "Automotive career platform with membership plans and events",
-          "tags": ["Web Development", "Subscriptions", "CMS", "Integrations"]
+          "tools": "Next.js · TypeScript · Contentful · Zoho Billing · Headless UI",
+          "detail": "Subscription Platform · CMS-Managed Content · Billing Integration",
+          "alt": "Automotive career platform with membership plans and events"
         },
         "knightsTravails": {
           "title": "Knights Travails",
           "description": "Visualized the shortest path of a chess knight through an interactive application built around a custom graph structure and breadth-first search.",
           "role": "Designer & Developer",
-          "detail": "JavaScript · Graphs · BFS",
-          "alt": "Shortest path of a chess knight across a board",
-          "tags": ["Algorithms", "Data Structures", "JavaScript"]
+          "tools": "JavaScript · HTML · CSS · Webpack",
+          "detail": "Shortest-Path Algorithm · Data Structures · Breadth First Search",
+          "alt": "Shortest path of a chess knight across a board"
         },
         "nickprez": {
           "title": "nickprez.dev",
           "description": "Designed and built a personal portfolio as a reusable product system, combining responsive UI, purposeful motion, interactive case studies, and AI-assisted experiences.",
           "role": "Designer & Developer",
-          "detail": "Next.js · TypeScript · Motion",
-          "alt": "Personal portfolio with a gradient field and case study cards",
-          "tags": ["Design Systems", "Front-End", "Motion", "AI"]
+          "tools": "Next.js · TypeScript · Tailwind CSS · Motion · Vercel AI SDK · Motion Primitives",
+          "detail": "Custom Design System · Interactive Case Studies · AI Portfolio Assistant",
+          "alt": "Personal portfolio with a gradient field and case study cards"
+        },
+        "flowFitness": {
+          "title": "Flow Fitness",
+          "description": "Designed and built a full-stack workout tracking application focused on making it fast and intuitive to plan workouts, log training, and track progress over time.",
+          "role": "Product Designer & Full-Stack Developer",
+          "tools": "React Native · Nativewind · React Native Reusables · NativewindUI · Expo · TypeScript · Node.js",
+          "detail": "Full-Stack Application · Workout Planning · Mobile Native UI/UX",
+          "alt": "Workout tracking app for planning sessions and logging progress"
         }
       }
     }

@@ -1,24 +1,17 @@
 "use client";
 
-import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { AnimatedBackground } from "@/ui/shared/components/animated-background";
+import { filterIds, type FilterId } from "@/ui/work/containers/caseStudies/studies";
 
-const filters = [
-  { id: "all", count: 7 },
-  { id: "uiux", count: 3 },
-  { id: "systems", count: 3 },
-  { id: "frontend", count: 6 },
-  { id: "product", count: 4 },
-  { id: "ai", count: 2 },
-  { id: "leadership", count: 1 },
-] as const;
+type WorkFiltersProps = {
+  active: FilterId;
+  counts: Record<FilterId, number>;
+  onChange: (id: FilterId) => void;
+};
 
-type FilterId = (typeof filters)[number]["id"];
-
-export function WorkFilters() {
+export function WorkFilters({ active, counts, onChange }: WorkFiltersProps) {
   const t = useTranslations("WorkPage");
-  const [active, setActive] = useState<FilterId>("all");
 
   return (
     <div className="-mx-[var(--page-padding-x)] overflow-x-auto px-[var(--page-padding-x)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -32,19 +25,19 @@ export function WorkFilters() {
           className="rounded-pill [background-image:var(--gradient-button)]"
           containerClassName="gap-1.5"
         >
-          {filters.map((filter) => (
+          {filterIds.map((id) => (
             <button
-              key={filter.id}
+              key={id}
               type="button"
               role="tab"
-              data-id={filter.id}
-              aria-selected={filter.id === active}
-              onClick={() => setActive(filter.id)}
+              data-id={id}
+              aria-selected={id === active}
+              onClick={() => onChange(id)}
               className="inline-flex h-[31px] items-center rounded-pill px-3.5 text-[length:var(--text-button-size)] leading-[var(--text-button-leading)] font-medium whitespace-nowrap text-(--color-text-secondary) transition-colors duration-150 ease-out focus-visible:outline-none data-[checked=true]:text-(--color-text-inverse) data-[checked=true]:delay-150"
             >
-              {t(`filter.${filter.id}`)}
+              {t(`filter.${id}`)}
               <span className="ms-1.5 text-[length:var(--text-eyebrow-size)] leading-[var(--text-eyebrow-leading)] font-medium text-current opacity-70 transition-none">
-                {filter.count}
+                {counts[id]}
               </span>
             </button>
           ))}

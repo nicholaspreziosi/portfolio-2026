@@ -32,76 +32,86 @@
     "filtersLabel": "Filtrar o trabalho por capacidade",
     "techLabel": "Tecnologias",
     "filter": {
-      "all": "Todo o trabalho",
-      "uiux": "UI/UX",
-      "systems": "Design systems",
+      "all": "Tudo",
+      "uiux": "UI/UX Design",
       "frontend": "Front-end",
-      "product": "Produto",
+      "backend": "Back-end",
       "ai": "IA",
       "leadership": "Liderança"
     },
     "studies": {
       "label": "Estudos de caso",
       "role": "Função",
+      "tools": "Ferramentas",
       "flagship": "Principal",
       "explore": "Explorar estudo de caso",
       "view": "Ver estudo de caso",
+      "live": "Ver projeto ao vivo",
+      "repo": "Ver repositório",
       "items": {
         "kLabEcosystem": {
           "title": "K Lab Product Ecosystem",
           "description": "Unifiquei um conjunto de produtos fintech por meio de um design system e uma biblioteca de componentes compartilhados, padrões de UI/UX reutilizáveis e uma arquitetura front-end escalável.",
           "role": "Gerente de UI/UX e desenvolvedor de software",
-          "detail": "8 produtos · Ecossistema de componentes compartilhado",
-          "alt": "Interfaces de produtos fintech que compartilham um design system",
-          "tags": ["UI/UX", "Design systems", "Front-end", "Fintech"]
+          "tools": "Next.js · TypeScript · Tailwind CSS · shadcn/ui",
+          "detail": "8 produtos · Biblioteca de componentes compartilhada · Padrões de produto reutilizáveis",
+          "alt": "Interfaces de produtos fintech que compartilham um design system"
         },
         "kLabWebsite": {
           "title": "K Lab Website",
           "description": "Construí um site corporativo responsivo e um sistema front-end orientado a tokens, feito para evoluir junto com a marca K Lab.",
           "role": "UI/UX e desenvolvimento front-end",
-          "detail": "Next.js · Sanity · Motion",
-          "alt": "Site corporativo da K Lab em um laptop",
-          "tags": ["Web design", "Front-end", "Design systems", "CMS"]
+          "tools": "Next.js · Radix UI · CSS Modules · Motion · Sanity",
+          "detail": "Interface orientada a tokens · Conteúdo gerenciado por CMS · Reformulação da marca",
+          "alt": "Site corporativo da K Lab em um laptop"
         },
         "kasserole": {
           "title": "Kasserole",
           "description": "Modernizei a interface e a arquitetura front-end de uma plataforma de receitas com IA que gera receitas a partir de ingredientes, URLs, fotos e prompts.",
           "role": "Engenheiro front-end",
-          "detail": "React · Produto de IA · UI/UX",
-          "alt": "Aplicativo de receitas com IA em um celular e um laptop",
-          "tags": ["IA", "Front-end", "UI/UX", "React"]
+          "tools": "React · JavaScript · CSS · React Bootstrap",
+          "detail": "Geração de receitas com IA · Modernização da interface · Refatoração do código",
+          "alt": "Aplicativo de receitas com IA em um celular e um laptop"
         },
         "vmWaste": {
           "title": "V&M Waste Services",
           "description": "Desenvolvi um site de serviços de alto desempenho a partir de designs do Figma, com ênfase em UX responsiva, acessibilidade, SEO e o mínimo de JavaScript no cliente.",
           "role": "Desenvolvedor web",
-          "detail": "Next.js · Tailwind CSS · Desempenho",
-          "alt": "Site de serviços da V&M Waste em um laptop",
-          "tags": ["Desenvolvimento web", "Desempenho", "SEO", "Acessibilidade"]
+          "tools": "Next.js · TypeScript · Tailwind CSS · DaisyUI · Figma",
+          "detail": "Otimizado em desempenho, acessibilidade e SEO",
+          "alt": "Site de serviços da V&M Waste em um laptop"
         },
         "drivenByAuto": {
           "title": "Driven By Auto",
           "description": "Construí uma plataforma de carreiras automotivas por assinatura, com gestão de associações, cobrança, conteúdo editorial, eventos e fluxos para o cliente.",
           "role": "Desenvolvedor web",
-          "detail": "Next.js · Contentful · Zoho Billing",
-          "alt": "Plataforma de carreiras automotivas com assinaturas e eventos",
-          "tags": ["Desenvolvimento web", "Assinaturas", "CMS", "Integrações"]
+          "tools": "Next.js · TypeScript · Contentful · Zoho Billing · Headless UI",
+          "detail": "Plataforma de assinatura · Conteúdo gerenciado por CMS · Integração de cobrança",
+          "alt": "Plataforma de carreiras automotivas com assinaturas e eventos"
         },
         "knightsTravails": {
           "title": "Knights Travails",
           "description": "Visualizei o caminho mais curto de um cavalo de xadrez em uma aplicação interativa construída em torno de um grafo próprio e busca em largura.",
           "role": "Designer e desenvolvedor",
-          "detail": "JavaScript · Grafos · BFS",
-          "alt": "Caminho mais curto de um cavalo de xadrez em um tabuleiro",
-          "tags": ["Algoritmos", "Estruturas de dados", "JavaScript"]
+          "tools": "JavaScript · HTML · CSS · Webpack",
+          "detail": "Algoritmo de caminho mais curto · Estruturas de dados · Busca em largura",
+          "alt": "Caminho mais curto de um cavalo de xadrez em um tabuleiro"
         },
         "nickprez": {
           "title": "nickprez.dev",
           "description": "Desenhei e desenvolvi um portfólio pessoal como sistema de produto reutilizável, combinando interface responsiva, movimento com propósito, estudos de caso interativos e experiências assistidas por IA.",
           "role": "Designer e desenvolvedor",
-          "detail": "Next.js · TypeScript · Motion",
-          "alt": "Portfólio pessoal com um fundo em degradê e estudos de caso",
-          "tags": ["Design systems", "Front-end", "Motion", "IA"]
+          "tools": "Next.js · TypeScript · Tailwind CSS · Motion · Vercel AI SDK · Motion Primitives",
+          "detail": "Design system próprio · Estudos de caso interativos · Assistente de portfólio com IA",
+          "alt": "Portfólio pessoal com um fundo em degradê e estudos de caso"
+        },
+        "flowFitness": {
+          "title": "Flow Fitness",
+          "description": "Desenhei e desenvolvi uma aplicação full-stack de acompanhamento de treinos, pensada para tornar rápido e intuitivo planejar treinos, registrar o treino e acompanhar o progresso ao longo do tempo.",
+          "role": "Product designer e desenvolvedor full-stack",
+          "tools": "React Native · Nativewind · React Native Reusables · NativewindUI · Expo · TypeScript · Node.js",
+          "detail": "Aplicação full-stack · Planejamento de treinos · UI/UX nativa mobile",
+          "alt": "Aplicativo para planejar sessões e registrar o progresso"
         }
       }
     }
