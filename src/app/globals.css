@@ -452,10 +452,11 @@
   translate: -50% 0;
 }
 
-/* About frame: 1280 wide, pinned to the start edge. No centered hero accent. */
+/* Start frame: follows the content column (capped at --container-xl) so the orbs sit by the copy at any width. No centered hero accent. */
 .ambient--start .ambient__stage {
-  width: 1280px;
-  inset-inline-start: 0;
+  left: 50%;
+  width: min(100%, var(--container-xl));
+  translate: -50% 0;
 }
 
 .ambient__wash,
