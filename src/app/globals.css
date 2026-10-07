@@ -199,18 +199,20 @@
   /* Hero glows. Centered is a fixed-size radial behind centered copy; start runs left to right behind split copy. */
   --ambient-centered: radial-gradient(
     1000px 620px at 50% 42%,
-    rgb(from var(--blue) r g b / 0.4) 0%,
-    rgb(from var(--cyan-bright) r g b / 0.25) 45%,
-    rgb(from var(--emerald) r g b / 0.12) 75%,
+    rgb(from var(--blue) r g b / 0.5) 0%,
+    rgb(from var(--cyan-bright) r g b / 0.33) 45%,
+    rgb(from var(--emerald) r g b / 0.18) 75%,
     transparent 100%
   );
   --ambient-start: linear-gradient(
     90deg,
-    rgb(from var(--blue) r g b / 0.35) 0%,
-    rgb(from var(--emerald) r g b / 0.18) 40%,
+    rgb(from var(--blue) r g b / 0.45) 0%,
+    rgb(from var(--emerald) r g b / 0.25) 40%,
     transparent 80%
   );
   --ambient-blur: 60px;
+  --ambient-frost: rgb(from var(--paper) r g b / 0.12);
+  --ambient-frost-blur: 60px;
 
   --gradient-brand: linear-gradient(90deg, var(--blue) 0%, var(--emerald) 100%);
   --gradient-text: var(--gradient-brand);
@@ -373,18 +375,20 @@
 
   --ambient-centered: radial-gradient(
     1000px 620px at 50% 42%,
-    rgb(from var(--blue) r g b / 0.35) 0%,
-    rgb(from var(--cyan) r g b / 0.2) 45%,
-    rgb(from var(--emerald) r g b / 0.12) 75%,
+    rgb(from var(--blue) r g b / 0.45) 0%,
+    rgb(from var(--cyan) r g b / 0.28) 45%,
+    rgb(from var(--emerald) r g b / 0.18) 75%,
     transparent 100%
   );
   --ambient-start: linear-gradient(
     90deg,
-    rgb(from var(--blue) r g b / 0.3) 0%,
-    rgb(from var(--emerald) r g b / 0.15) 40%,
+    rgb(from var(--blue) r g b / 0.4) 0%,
+    rgb(from var(--emerald) r g b / 0.22) 40%,
     transparent 80%
   );
   --ambient-blur: 65px;
+  --ambient-frost: rgb(from var(--paper) r g b / 0.18);
+  --ambient-frost-blur: 60px;
 
   --gradient-brand: linear-gradient(135deg, var(--blue) 0%, var(--cyan) 50%, var(--emerald) 100%);
 
@@ -419,7 +423,7 @@
 /* One glow per variant. Centered holds its px size so it reads the same at any width; start runs from the viewport edge through the content column. */
 .ambient__glow {
   position: absolute;
-  inset: 0;
+  inset: calc(-1 * var(--ambient-blur));
   display: block;
   background: var(--ambient-centered);
   filter: blur(var(--ambient-blur));
@@ -429,6 +433,15 @@
   inset-inline-end: auto;
   width: min(100%, calc(50% + var(--container-xl) / 2));
   background: var(--ambient-start);
+}
+
+/* Frosted pane over the glow. Sits inside .ambient, so it frosts the gradient and not the page content above it. */
+.ambient__frost {
+  position: absolute;
+  inset: 0;
+  display: block;
+  background: var(--ambient-frost);
+  backdrop-filter: blur(var(--ambient-frost-blur));
 }
 
 .gradient-text {

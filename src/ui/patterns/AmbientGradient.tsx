@@ -13,6 +13,7 @@ export function AmbientGradient({
       className={`ambient ambient--${variant}${contained ? " ambient--contained" : ""}`}
     >
       <span className="ambient__glow" />
+      <span className="ambient__frost" />
     </div>
   );
 }
