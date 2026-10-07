@@ -196,23 +196,35 @@
   --shadow-elevated: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   --shadow-overlay: 0 0 0 1px rgb(0 0 0 / 0.05), 0 12px 48px rgb(0 0 0 / 0.18);
 
-  /* Hero glows. Centered is a fixed-size radial behind centered copy; start runs left to right behind split copy. */
-  --ambient-centered: radial-gradient(
-    1000px 620px at 50% 42%,
-    rgb(from var(--blue) r g b / 0.5) 0%,
-    rgb(from var(--cyan-bright) r g b / 0.33) 45%,
-    rgb(from var(--emerald) r g b / 0.18) 75%,
+  /* Homepage light fields, including the hero accent that holds color to its edge. */
+  --ambient-wash: radial-gradient(
+    778px 919px at center top,
+    rgb(from var(--blue) r g b / 0.35) 0%,
+    rgb(from var(--cyan-bright) r g b / 0.2) 50%,
     transparent 100%
   );
-  --ambient-start: linear-gradient(
-    90deg,
-    rgb(from var(--blue) r g b / 0.45) 0%,
-    rgb(from var(--emerald) r g b / 0.25) 40%,
-    transparent 80%
+  --ambient-hero: radial-gradient(
+    672px 339px at center,
+    rgb(from var(--blue) r g b / 0.4) 0%,
+    rgb(from var(--cyan-bright) r g b / 0.25) 50%,
+    rgb(from var(--emerald) r g b / 0.15) 100%
   );
-  --ambient-blur: 60px;
-  --ambient-frost: rgb(from var(--paper) r g b / 0.12);
-  --ambient-frost-blur: 60px;
+  --ambient-start: radial-gradient(
+    495px circle at center,
+    rgb(from var(--emerald) r g b / 0.3) 0%,
+    rgb(from var(--emerald-mid) r g b / 0.15) 50%,
+    transparent 100%
+  );
+  --ambient-end: radial-gradient(
+    530px circle at center,
+    rgb(from var(--blue) r g b / 0.3) 0%,
+    rgb(from var(--emerald) r g b / 0.2) 50%,
+    transparent 100%
+  );
+  --ambient-wash-blur: 60px;
+  --ambient-hero-blur: 55px;
+  --ambient-orb-blur: 70px;
+  --ambient-end-opacity: 1;
 
   --gradient-brand: linear-gradient(90deg, var(--blue) 0%, var(--emerald) 100%);
   --gradient-text: var(--gradient-brand);
@@ -373,22 +385,29 @@
   --shadow-elevated: 0 8px 32px rgb(0 0 0 / 0.45);
   --shadow-overlay: 0 0 0 1px rgb(255 255 255 / 0.08), 0 12px 48px rgb(0 0 0 / 0.45);
 
-  --ambient-centered: radial-gradient(
-    1000px 620px at 50% 42%,
-    rgb(from var(--blue) r g b / 0.45) 0%,
-    rgb(from var(--cyan) r g b / 0.28) 45%,
-    rgb(from var(--emerald) r g b / 0.18) 75%,
+  --ambient-wash: radial-gradient(
+    778px 919px at center top,
+    rgb(from var(--blue) r g b / 0.3) 0%,
+    rgb(from var(--cyan) r g b / 0.15) 50%,
     transparent 100%
   );
-  --ambient-start: linear-gradient(
-    90deg,
-    rgb(from var(--blue) r g b / 0.4) 0%,
-    rgb(from var(--emerald) r g b / 0.22) 40%,
-    transparent 80%
+  --ambient-hero: radial-gradient(
+    672px 339px at center,
+    rgb(from var(--blue) r g b / 0.35) 0%,
+    rgb(from var(--cyan) r g b / 0.2) 50%,
+    rgb(from var(--emerald) r g b / 0.15) 100%
   );
-  --ambient-blur: 65px;
-  --ambient-frost: rgb(from var(--paper) r g b / 0.18);
-  --ambient-frost-blur: 60px;
+  --ambient-start: radial-gradient(
+    530px circle at center,
+    rgb(from var(--emerald) r g b / 0.2) 0%,
+    rgb(from var(--blue) r g b / 0.1) 50%,
+    transparent 100%
+  );
+  --ambient-end: transparent;
+  --ambient-wash-blur: 65px;
+  --ambient-hero-blur: 60px;
+  --ambient-orb-blur: 75px;
+  --ambient-end-opacity: 0;
 
   --gradient-brand: linear-gradient(135deg, var(--blue) 0%, var(--cyan) 50%, var(--emerald) 100%);
 
@@ -413,6 +432,7 @@
   height: 100dvh;
   overflow: hidden;
   pointer-events: none;
+  container-type: inline-size;
 }
 
 .ambient--contained {
@@ -420,28 +440,110 @@
   height: 100%;
 }
 
-/* One glow per variant. Centered holds its px size so it reads the same at any width; start runs from the viewport edge through the content column. */
-.ambient__glow {
+/* Laid out at 1360px, then scaled to the viewport so browser zoom grows and shrinks the whole glow together. */
+.ambient__stage {
   position: absolute;
-  inset: calc(-1 * var(--ambient-blur));
-  display: block;
-  background: var(--ambient-centered);
-  filter: blur(var(--ambient-blur));
+  top: 0;
+  left: 50%;
+  width: 1360px;
+  height: calc(100% / var(--ambient-scale));
+  --ambient-scale: calc(100cqw / 1360px);
+  transform-origin: center top;
+  translate: -50% 0;
+  scale: var(--ambient-scale);
 }
 
-.ambient--start .ambient__glow {
-  inset-inline-end: auto;
-  width: min(100%, calc(50% + var(--container-xl) / 2));
+.ambient__wash,
+.ambient__hero,
+.ambient__field {
+  position: absolute;
+  display: block;
+}
+
+.ambient__wash {
+  top: -120px;
+  left: 50%;
+  width: 1100px;
+  height: 650px;
+  translate: -50% 0;
+  background: var(--ambient-wash);
+  filter: blur(var(--ambient-wash-blur));
+}
+
+.ambient__hero {
+  top: 88px;
+  left: 50%;
+  width: 950px;
+  height: 480px;
+  translate: -50% 0;
+  border-radius: var(--radius-full);
+  background: var(--ambient-hero);
+  filter: blur(var(--ambient-hero-blur));
+}
+
+.ambient--start .ambient__hero {
+  display: none;
+}
+
+.ambient__field--start {
+  top: 280px;
+  width: 700px;
+  height: 700px;
+  border-radius: var(--radius-full);
+  inset-inline-start: -192px;
+  background: var(--ambient-start);
+  filter: blur(var(--ambient-orb-blur));
+}
+
+.ambient__field--end {
+  top: 480px;
+  width: 750px;
+  height: 750px;
+  border-radius: var(--radius-full);
+  opacity: var(--ambient-end-opacity);
+  inset-inline-end: -192px;
+  background: var(--ambient-end);
+  filter: blur(var(--ambient-orb-blur));
+}
+
+.dark .ambient__wash {
+  top: -96px;
+}
+
+.dark .ambient__field--start {
+  top: 256px;
+  width: 750px;
+  height: 750px;
+}
+
+.ambient--start .ambient__field--end {
+  opacity: 0;
+}
+
+/* Centered only. The end orb is hidden on start in both themes. */
+.ambient--centered .ambient__field--end {
+  top: 280px;
+  width: 700px;
+  height: 700px;
   background: var(--ambient-start);
 }
 
-/* Frosted pane over the glow. Sits inside .ambient, so it frosts the gradient and not the page content above it. */
-.ambient__frost {
-  position: absolute;
-  inset: 0;
-  display: block;
-  background: var(--ambient-frost);
-  backdrop-filter: blur(var(--ambient-frost-blur));
+.dark .ambient--centered {
+  --ambient-end: radial-gradient(
+    530px circle at center,
+    rgb(from var(--blue) r g b / 0.3) 0%,
+    rgb(from var(--emerald) r g b / 0.2) 50%,
+    transparent 100%
+  );
+  --ambient-end-opacity: 1;
+}
+
+.dark .ambient--centered .ambient__field--start,
+.dark .ambient--centered .ambient__field--end {
+  top: 464px;
+  width: 800px;
+  height: 800px;
+  background: var(--ambient-end);
 }
 
 .gradient-text {
