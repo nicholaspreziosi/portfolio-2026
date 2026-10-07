@@ -12,12 +12,7 @@ export function AmbientGradient({
       aria-hidden
       className={`ambient ambient--${variant}${contained ? " ambient--contained" : ""}`}
     >
-      <div className="ambient__stage">
-        <span className="ambient__wash" />
-        <span className="ambient__hero" />
-        <span className="ambient__field ambient__field--start" />
-        <span className="ambient__field ambient__field--end" />
-      </div>
+      <span className="ambient__glow" />
     </div>
   );
 }
