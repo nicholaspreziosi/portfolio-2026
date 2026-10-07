@@ -2,6 +2,7 @@
 
 import { ArrowDownIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { Hero } from "@/ui/patterns/Hero";
 import { Button } from "@/ui/shared/components/button";
 import { EyebrowBadge } from "@/ui/shared/components/eyebrow-badge";
 import { TechMarquee } from "@/ui/work/containers/techMarquee/TechMarquee";
@@ -31,14 +32,24 @@ export function WorkHero() {
   const t = useTranslations("WorkPage");
 
   return (
-    <section className="flex h-full flex-col justify-center gap-10">
-      <div className="max-w-3xl">
+    <Hero
+      layout="split"
+      gradient="start"
+      className="lg:grid-cols-none lg:gap-10 xl:grid-cols-[minmax(0,1fr)_auto] xl:content-stretch xl:gap-x-16"
+    >
+      <Hero.Content className="max-w-3xl">
         <EyebrowBadge>{t("eyebrow")}</EyebrowBadge>
 
         <h1 className="mt-6 font-[family-name:var(--font-display)] text-[2rem] leading-[1.14] font-semibold tracking-[-0.03em] text-(--color-text-primary) sm:text-[2.5rem] lg:text-[3rem] xl:text-[3.25rem] 2xl:text-[length:var(--text-display-size)] 2xl:leading-[var(--text-display-leading)]">
-          <span className="xl:block">{t("headlineLine1")} </span>
-          <span className="xl:block">{t("headlineLine2")} </span>
-          <span className="xl:block">{t("headlineLine3")}</span>
+          <span className="xl:block">
+            <Hero.Text>{t("headlineLine1")}</Hero.Text>{" "}
+          </span>
+          <span className="xl:block">
+            <Hero.Text delay={0.2}>{t("headlineLine2")}</Hero.Text>{" "}
+          </span>
+          <span className="xl:block">
+            <Hero.Text delay={0.4}>{t("headlineLine3")}</Hero.Text>
+          </span>
         </h1>
 
         <p className="mt-4 max-w-3xl text-[length:var(--text-body-lg-size)] leading-[1.625] tracking-[-0.008em] text-(--color-text-secondary)">
@@ -67,9 +78,22 @@ export function WorkHero() {
           {t("viewWork")}
           <ArrowDownIcon data-icon="inline-end" />
         </Button>
-      </div>
+      </Hero.Content>
 
-      <TechMarquee orientation="horizontal" />
-    </section>
+      {/*
+        At xl the aside adds no height of its own (h-0) so the hero row is sized by the copy and
+        stretched to the viewport, then min-h-full fills that row. Inside, one 1fr row with
+        min-h-0 children keeps the marquee from growing the aside past that height.
+      */}
+      <Hero.Aside className="min-h-0 xl:grid xl:h-0 xl:min-h-full xl:grid-rows-[minmax(0,1fr)] xl:overflow-hidden xl:*:min-h-0">
+        <div className="h-full min-h-0">
+          <TechMarquee orientation="horizontal" />
+          <TechMarquee
+            orientation="vertical"
+            className="hidden h-full min-h-0 overflow-hidden xl:flex"
+          />
+        </div>
+      </Hero.Aside>
+    </Hero>
   );
 }

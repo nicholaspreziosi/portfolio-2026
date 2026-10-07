@@ -1,16 +1,14 @@
 "use client";
 
-import { Hero } from "@/ui/home/containers/hero/Hero";
+import { HomeHero } from "@/ui/home/containers/hero/Hero";
 import { ComponentShowcase } from "@/ui/home/containers/componentShowcase/ComponentShowcase";
-import { HeroAmbient } from "@/ui/home/containers/heroAmbient/HeroAmbient";
 import { pageContainerClassName } from "@/ui/shell/pageContainer";
 
 export function HomeView() {
   return (
     <main>
-      <HeroAmbient />
+      <HomeHero />
       <div className={`relative z-10 ${pageContainerClassName}`}>
-        <Hero />
         <ComponentShowcase />
       </div>
     </main>
