@@ -1,0 +1,548 @@
+{
+  "slug": "k-lab-product-ecosystem",
+  "title": "K Lab Product Ecosystem",
+  "eyebrow": "Fintech · UI/UX · Front-end architecture",
+  "summary": "Built a shared component library and scalable front-end architecture that unified eight fintech applications, streamlined development, and established a consistent product experience.",
+  "year": 2026,
+  "role": "UI/UX Manager & Software Developer",
+  "timeline": "2025–2026",
+  "capabilities": ["UI/UX Design", "Front-End", "AI", "Leadership"],
+  "technologies": ["Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui", "Radix UI", "Vercel AI SDK"],
+  "highlights": ["8 Applications", "Installable Component Library", "Shared Product Architecture"],
+  "featured": true,
+  "published": true,
+  "relatedSlug": "k-lab-website",
+  "hero": {
+    "id": "hero",
+    "src": "/images/work/k-lab-ecosystem.webp",
+    "darkSrc": "/images/work/k-lab-ecosystem-dark.webp",
+    "alt": "Shared fintech product interfaces and design tokens on a desktop display",
+    "kind": "image",
+    "width": 1024,
+    "height": 640
+  },
+  "sections": [
+    {
+      "id": "overview",
+      "navLabel": "Overview",
+      "heading": "One connected product ecosystem.",
+      "blocks": [
+        {
+          "type": "paragraphs",
+          "text": [
+            "K Lab was developing a growing suite of fintech applications, each addressing different business workflows and operational needs.",
+            "I led UI/UX and front-end development across the ecosystem, creating both the visual design system and the underlying reusable development infrastructure.",
+            "At the center was a shared React component library, distributed as an npm package with CLI-based installation, allowing developers across K Lab to integrate standardized components and application patterns into their projects.",
+            "My responsibilities included product UX, component architecture, front-end implementation, technical planning, and leading a small development team."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "challenge",
+      "navLabel": "Challenge",
+      "heading": "Different products. Fragmented experiences.",
+      "blocks": [
+        {
+          "type": "paragraphs",
+          "text": [
+            "As K Lab's product suite expanded, applications had inconsistent interfaces, navigation patterns, and interaction models.",
+            "Developers were repeatedly implementing similar functionality across separate codebases, creating duplicated effort and making consistent updates more difficult.",
+            "The challenge extended beyond visual consistency. We needed a reusable development foundation that could:"
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            "Standardize the UI/UX across applications.",
+            "Eliminate unnecessary duplication.",
+            "Simplify the implementation of common functionality.",
+            "Support multiple brand identities.",
+            "Allow developers to install and reuse components across independent applications.",
+            "Remain flexible enough for different product requirements."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "approach",
+      "navLabel": "Approach",
+      "heading": "Build once. Install anywhere. Extend as needed.",
+      "blocks": [
+        {
+          "type": "paragraphs",
+          "text": [
+            "Rather than treating the design system as a collection of Figma assets, I approached it as a shared product development platform.",
+            "The goal was to give developers a consistent starting point without limiting their ability to customize components for specific applications."
+          ]
+        },
+        {
+          "type": "layers",
+          "items": [
+            {
+              "title": "Design tokens",
+              "body": "Shared typography, colors, spacing, and theming."
+            },
+            {
+              "title": "Component library",
+              "body": "Reusable React components built on accessible primitives."
+            },
+            {
+              "title": "npm distribution",
+              "body": "A shared package developers could integrate across K Lab applications."
+            },
+            {
+              "title": "CLI installation",
+              "body": "A streamlined way to install components and accelerate adoption."
+            },
+            {
+              "title": "Application patterns",
+              "body": "Reusable navigation, authentication, tables, layouts, and workflows."
+            },
+            {
+              "title": "Multi-brand support",
+              "body": "Theme-based styling that could adapt to different product identities."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "infrastructure",
+      "navLabel": "Infrastructure",
+      "heading": "More than a design system.",
+      "lede": "The component library became a reusable development foundation shared across K Lab applications.",
+      "blocks": [
+        {
+          "type": "paragraphs",
+          "text": [
+            "It evolved through several levels of abstraction. This approach connected UI/UX design decisions directly to implementation, making consistency an architectural feature rather than a manual design exercise."
+          ]
+        },
+        {
+          "type": "layers",
+          "numbered": true,
+          "items": [
+            {
+              "title": "UI primitives",
+              "body": "Buttons, inputs, dialogs, cards, form controls, and other foundational components."
+            },
+            {
+              "title": "Composite components",
+              "body": "More sophisticated components combining multiple primitives into reusable interactions."
+            },
+            {
+              "title": "Application-level patterns",
+              "body": "Complete interface structures and workflows, including authentication and login layouts, application launch pages, navigation and sidebar systems, data tables with filtering, search, pagination, and actions, and support interfaces."
+            },
+            {
+              "title": "Distribution and developer experience",
+              "body": "Packaging and CLI-based installation enabled developers to bring components into different application codebases without rebuilding them."
+            }
+          ]
+        },
+        {
+          "type": "media",
+          "group": {
+            "id": "system-sequence",
+            "presentation": "transition",
+            "items": [
+              {
+                "id": "get-started",
+                "src": "/images/work/k-lab/components/klab-components-get-started-light.webp",
+                "darkSrc": "/images/work/k-lab/components/klab-components-get-started-dark.webp",
+                "alt": "Get started page for the K Lab component library",
+                "caption": "Get started guide",
+                "kind": "tall-screenshot",
+                "width": 1920,
+                "height": 10747
+              },
+              {
+                "id": "buttons",
+                "src": "/images/work/k-lab/components/klab-components-button-light.webp",
+                "darkSrc": "/images/work/k-lab/components/klab-components-button-dark.webp",
+                "alt": "Button components in the K Lab library",
+                "caption": "Button primitives",
+                "kind": "tall-screenshot",
+                "width": 1920,
+                "height": 4347
+              },
+              {
+                "id": "theming",
+                "src": "/images/work/k-lab/components/klab-components-theming-light.webp",
+                "darkSrc": "/images/work/k-lab/components/klab-components-theming-dark.webp",
+                "alt": "Theming documentation for the K Lab component library",
+                "caption": "Theming",
+                "kind": "tall-screenshot",
+                "width": 1920,
+                "height": 10923
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "featured",
+      "navLabel": "Featured work",
+      "heading": "One foundation. Multiple applications.",
+      "lede": "The same component library and shared architecture supported different product requirements.",
+      "blocks": [
+        {
+          "type": "featured",
+          "items": [
+            {
+              "id": "component-library",
+              "heading": "Component library",
+              "body": "The foundation of the ecosystem: an installable React component library distributed through npm and a CLI. These screens show the reusable primitives, composite components, and theming used across applications — a working development tool, not only a visual reference.",
+              "media": {
+                "id": "library-gallery",
+                "presentation": "carousel",
+                "items": [
+                  {
+                    "id": "library-tabs",
+                    "src": "/images/work/k-lab/components/klab-components-tabs-light.webp",
+                    "darkSrc": "/images/work/k-lab/components/klab-components-tabs-dark.webp",
+                    "alt": "Tabs in the K Lab component library",
+                    "caption": "Tabs",
+                    "kind": "tall-screenshot",
+                    "width": 1920,
+                    "height": 4267
+                  },
+                  {
+                    "id": "library-stepper",
+                    "src": "/images/work/k-lab/components/klab-components-stepper-light.webp",
+                    "darkSrc": "/images/work/k-lab/components/klab-components-stepper-dark.webp",
+                    "alt": "Stepper components in the K Lab library",
+                    "caption": "Stepper",
+                    "kind": "tall-screenshot",
+                    "width": 1920,
+                    "height": 5467
+                  },
+                  {
+                    "id": "library-accordion",
+                    "src": "/images/work/k-lab/components/klab-components-accordion-light.webp",
+                    "darkSrc": "/images/work/k-lab/components/klab-components-accordion-dark.webp",
+                    "alt": "Accordion components in the K Lab library",
+                    "caption": "Accordion",
+                    "kind": "tall-screenshot",
+                    "width": 1920,
+                    "height": 5333
+                  },
+                  {
+                    "id": "library-slider",
+                    "src": "/images/work/k-lab/components/klab-component-slider-light.webp",
+                    "darkSrc": "/images/work/k-lab/components/klab-component-slider-dark.webp",
+                    "alt": "Slider component in the K Lab library",
+                    "caption": "Slider",
+                    "kind": "tall-screenshot",
+                    "width": 1920,
+                    "height": 3573
+                  },
+                  {
+                    "id": "library-tiles",
+                    "src": "/images/work/k-lab/components/klab-components-tile-light.webp",
+                    "darkSrc": "/images/work/k-lab/components/klab-components-tile-dark.webp",
+                    "alt": "Tile components in the K Lab library",
+                    "caption": "Tiles",
+                    "kind": "tall-screenshot",
+                    "width": 1920,
+                    "height": 9333
+                  },
+                  {
+                    "id": "library-logos",
+                    "src": "/images/work/k-lab/components/klab-components-logos-light.webp",
+                    "darkSrc": "/images/work/k-lab/components/klab-components-logos-dark.webp",
+                    "alt": "Logo components in the K Lab library",
+                    "caption": "Logos",
+                    "kind": "tall-screenshot",
+                    "width": 1920,
+                    "height": 4773
+                  }
+                ]
+              }
+            },
+            {
+              "id": "kim",
+              "heading": "KIM — Invoice management",
+              "body": "An invoice management application built around shared UI patterns, reusable data tables, navigation, and operational workflows. The library supported a data-heavy business application while keeping the interface consistent.",
+              "media": {
+                "id": "kim-gallery",
+                "presentation": "carousel",
+                "items": [
+                  {
+                    "id": "kim-dashboard",
+                    "src": "/images/work/k-lab/kim/kim-dashboard-light.webp",
+                    "darkSrc": "/images/work/k-lab/kim/kim-dashboard-dark.webp",
+                    "alt": "KIM invoice dashboard with status counts and aging",
+                    "caption": "Invoice dashboard",
+                    "kind": "tall-screenshot",
+                    "width": 1920,
+                    "height": 2133
+                  },
+                  {
+                    "id": "kim-invoices",
+                    "src": "/images/work/k-lab/kim/kim-invoices-light.webp",
+                    "darkSrc": "/images/work/k-lab/kim/kim-invoices-dark.webp",
+                    "alt": "KIM invoice list",
+                    "caption": "Invoice list",
+                    "kind": "tall-screenshot",
+                    "width": 1920,
+                    "height": 1680
+                  },
+                  {
+                    "id": "kim-detail",
+                    "src": "/images/work/k-lab/kim/kim-invoice-detail-light.webp",
+                    "darkSrc": "/images/work/k-lab/kim/kim-invoice-detail.webp",
+                    "alt": "KIM invoice detail",
+                    "caption": "Invoice detail",
+                    "kind": "image",
+                    "width": 1920,
+                    "height": 1333
+                  },
+                  {
+                    "id": "kim-create",
+                    "src": "/images/work/k-lab/kim/kim-invoices-create-light.webp",
+                    "darkSrc": "/images/work/k-lab/kim/kim-invoices-create-dark.webp",
+                    "alt": "KIM create invoice screen",
+                    "caption": "Create invoice",
+                    "kind": "tall-screenshot",
+                    "width": 1920,
+                    "height": 1867
+                  },
+                  {
+                    "id": "kim-uploads",
+                    "src": "/images/work/k-lab/kim/kim-invoices-uploads-light.webp",
+                    "darkSrc": "/images/work/k-lab/kim/kim-invoices-uploads-dark.webp",
+                    "alt": "KIM invoice uploads",
+                    "caption": "Invoice uploads",
+                    "kind": "image",
+                    "width": 1920,
+                    "height": 1200
+                  },
+                  {
+                    "id": "kim-help",
+                    "src": "/images/work/k-lab/kim/kim-help-center-light.webp",
+                    "darkSrc": "/images/work/k-lab/kim/kim-help-center-dark.webp",
+                    "alt": "KIM help center",
+                    "caption": "Help center",
+                    "kind": "tall-screenshot",
+                    "width": 1920,
+                    "height": 1867
+                  }
+                ]
+              }
+            },
+            {
+              "id": "kleads",
+              "heading": "K Leads — Lead management",
+              "body": "A lead management application showing how shared components and application patterns could be adapted to a different business workflow, including navigation, data presentation, and workflow-specific screens.",
+              "media": {
+                "id": "kleads-gallery",
+                "presentation": "carousel",
+                "items": [
+                  {
+                    "id": "kleads-home",
+                    "src": "/images/work/k-lab/kleads/kleads-dashboard-light.webp",
+                    "darkSrc": "/images/work/k-lab/kleads/kleads-dashboard-dark.webp",
+                    "alt": "K Leads home with links to the network map, lead ranking, model performance, and methodology",
+                    "caption": "Lead intelligence home",
+                    "kind": "tall-screenshot",
+                    "width": 1920,
+                    "height": 1680
+                  },
+                  {
+                    "id": "kleads-map",
+                    "src": "/images/work/k-lab/kleads/kleads-map-light.webp",
+                    "darkSrc": "/images/work/k-lab/kleads/kleads-map-dark.webp",
+                    "alt": "K Leads network map",
+                    "caption": "Network map",
+                    "kind": "image",
+                    "width": 1920,
+                    "height": 1333
+                  },
+                  {
+                    "id": "kleads-map-lead",
+                    "src": "/images/work/k-lab/kleads/kleads-map-lead-light.webp",
+                    "darkSrc": "/images/work/k-lab/kleads/kleads-map-lead-dark.webp",
+                    "alt": "A lead selected on the K Leads network map",
+                    "caption": "Lead on the map",
+                    "kind": "image",
+                    "width": 1920,
+                    "height": 1333
+                  },
+                  {
+                    "id": "kleads-ranking",
+                    "src": "/images/work/k-lab/kleads/kleads-lead-ranking-light.webp",
+                    "darkSrc": "/images/work/k-lab/kleads/kleads-lead-ranking-dark.webp",
+                    "alt": "K Leads lead ranking",
+                    "caption": "Lead ranking",
+                    "kind": "tall-screenshot",
+                    "width": 1920,
+                    "height": 3467
+                  },
+                  {
+                    "id": "kleads-model",
+                    "src": "/images/work/k-lab/kleads/kleads-model-performance-light.webp",
+                    "darkSrc": "/images/work/k-lab/kleads/kleads-model-performance-dark.webp",
+                    "alt": "K Leads model performance",
+                    "caption": "Model performance",
+                    "kind": "tall-screenshot",
+                    "width": 1920,
+                    "height": 2800
+                  },
+                  {
+                    "id": "kleads-methodology",
+                    "src": "/images/work/k-lab/kleads/kleads-methodology-light.webp",
+                    "darkSrc": "/images/work/k-lab/kleads/kleads-methodology-dark.webp",
+                    "alt": "K Leads methodology",
+                    "caption": "Methodology",
+                    "kind": "tall-screenshot",
+                    "width": 1920,
+                    "height": 5333
+                  }
+                ]
+              }
+            },
+            {
+              "id": "ktalk",
+              "heading": "K Talk — AI-powered conversations",
+              "body": "A conversational AI application showing how the shared design language could extend beyond conventional business dashboards into AI-powered experiences, including conversation, library, and contract views.",
+              "media": {
+                "id": "ktalk-gallery",
+                "presentation": "carousel",
+                "items": [
+                  {
+                    "id": "ktalk-home",
+                    "src": "/images/work/k-lab/ktalk/ktalk-chat-light.webp",
+                    "darkSrc": "/images/work/k-lab/ktalk/ktalk-chat-dark.webp",
+                    "alt": "K Talk home with suggested questions and recent chats",
+                    "caption": "Conversation home",
+                    "kind": "image",
+                    "width": 1920,
+                    "height": 1333
+                  },
+                  {
+                    "id": "ktalk-chat-1",
+                    "src": "/images/work/k-lab/ktalk/ktalk-chat1-light.webp",
+                    "darkSrc": "/images/work/k-lab/ktalk/ktalk-chat1-dark.webp",
+                    "alt": "A K Talk conversation",
+                    "caption": "Conversation",
+                    "kind": "image",
+                    "width": 1920,
+                    "height": 1333
+                  },
+                  {
+                    "id": "ktalk-chat-2",
+                    "src": "/images/work/k-lab/ktalk/ktalk-chat2-light.webp",
+                    "darkSrc": "/images/work/k-lab/ktalk/ktalk-chat2-dark.webp",
+                    "alt": "Another K Talk conversation",
+                    "caption": "Conversation",
+                    "kind": "image",
+                    "width": 1920,
+                    "height": 1333
+                  },
+                  {
+                    "id": "ktalk-sidebar",
+                    "src": "/images/work/k-lab/ktalk/ktalk-chat-sidebar-closed-light.webp",
+                    "darkSrc": "/images/work/k-lab/ktalk/ktalk-chat-sidebar-closed-dark.webp",
+                    "alt": "K Talk with the sidebar closed",
+                    "caption": "Sidebar closed",
+                    "kind": "image",
+                    "width": 1920,
+                    "height": 1333
+                  },
+                  {
+                    "id": "ktalk-library",
+                    "src": "/images/work/k-lab/ktalk/ktalk-library-light.webp",
+                    "darkSrc": "/images/work/k-lab/ktalk/ktalk-library-dark.webp",
+                    "alt": "K Talk library",
+                    "caption": "Library",
+                    "kind": "image",
+                    "width": 1920,
+                    "height": 1333
+                  },
+                  {
+                    "id": "ktalk-contract",
+                    "src": "/images/work/k-lab/ktalk/ktalk-contract-overview-light.webp",
+                    "darkSrc": "/images/work/k-lab/ktalk/ktalk-contract-overview-dark.webp",
+                    "alt": "Contract overview in K Talk",
+                    "caption": "Contract overview",
+                    "kind": "image",
+                    "width": 1920,
+                    "height": 1333
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ai",
+      "navLabel": "AI workflow",
+      "heading": "Accelerating execution without sacrificing judgment.",
+      "blocks": [
+        {
+          "type": "paragraphs",
+          "text": [
+            "AI-assisted development became part of my workflow for planning, implementation, refactoring, and iteration.",
+            "This helped a small UI and front-end team work across a broad product ecosystem while keeping architectural decisions, UX quality, and implementation standards human-led."
+          ]
+        },
+        {
+          "type": "steps",
+          "items": [
+            {
+              "title": "Define the work",
+              "body": "Define product requirements and constraints."
+            },
+            {
+              "title": "Set the plan",
+              "body": "Establish architecture, UX patterns, and implementation plans."
+            },
+            {
+              "title": "Delegate bounded tasks",
+              "body": "Delegate bounded implementation tasks to AI tools."
+            },
+            {
+              "title": "Review the result",
+              "body": "Review, test, refine, and validate the results."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "results",
+      "navLabel": "Results",
+      "heading": "A foundation built to scale.",
+      "blocks": [
+        {
+          "type": "paragraphs",
+          "text": [
+            "The project established shared design and front-end development infrastructure across K Lab's eight-application ecosystem."
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            "An installable React component library distributed through npm and a CLI.",
+            "Reusable components and complete application-level patterns.",
+            "Reduced need to repeatedly implement common UI functionality.",
+            "More consistent navigation, styling, and interactions.",
+            "Shared theming and multi-brand flexibility.",
+            "A more standardized developer experience across applications.",
+            "A maintainable foundation for future product development."
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "Takeaway",
+          "body": "The most valuable outcome wasn't an individual interface. It was building a reusable system that connected design and engineering, allowing developers to create consistent product experiences without starting from scratch."
+        }
+      ]
+    }
+  ]
+}

@@ -188,5 +188,31 @@
     "linkedin": "LinkedIn",
     "facebook": "Facebook",
     "instagram": "Instagram"
+  },
+  "CaseStudyPage": {
+    "back": "Back to case studies",
+    "sections": "Case study sections",
+    "role": "Role",
+    "timeline": "Timeline",
+    "capabilities": "Capabilities",
+    "technologies": "Technologies",
+    "highlights": "Highlights",
+    "live": "View live project",
+    "repository": "View repository",
+    "viewStudy": "View case study",
+    "placeholder": "Image coming soon",
+    "moreContext": "More context",
+    "openImage": "Open image",
+    "close": "Close",
+    "previous": "Previous",
+    "next": "Next",
+    "goToItem": "Go to item {index}",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "zoomReset": "Reset zoom",
+    "info": "Image information",
+    "before": "Before",
+    "after": "After",
+    "nextProject": "Next project"
   }
 }

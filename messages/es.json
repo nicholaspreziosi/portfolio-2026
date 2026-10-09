@@ -188,5 +188,31 @@
     "linkedin": "LinkedIn",
     "facebook": "Facebook",
     "instagram": "Instagram"
+  },
+  "CaseStudyPage": {
+    "back": "Volver a casos de estudio",
+    "sections": "Secciones del caso de estudio",
+    "role": "Rol",
+    "timeline": "Periodo",
+    "capabilities": "Capacidades",
+    "technologies": "Tecnologías",
+    "highlights": "Puntos clave",
+    "live": "Ver proyecto en vivo",
+    "repository": "Ver repositorio",
+    "viewStudy": "Ver caso de estudio",
+    "placeholder": "Imagen próximamente",
+    "moreContext": "Más contexto",
+    "openImage": "Abrir imagen",
+    "close": "Cerrar",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "goToItem": "Ir al elemento {index}",
+    "zoomIn": "Acercar",
+    "zoomOut": "Alejar",
+    "zoomReset": "Restablecer zoom",
+    "info": "Información de la imagen",
+    "before": "Antes",
+    "after": "Después",
+    "nextProject": "Siguiente proyecto"
   }
 }

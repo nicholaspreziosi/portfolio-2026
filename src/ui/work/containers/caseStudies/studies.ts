@@ -7,7 +7,7 @@ export const filterIds = ["all", ...capabilityIds] as const;
 export type FilterId = (typeof filterIds)[number];
 
 export type ProjectAction =
-  | { type: "caseStudy"; href: "/work" }
+  | { type: "caseStudy"; href: "/work" | `/work/${string}` }
   | { type: "liveProject"; href: string }
   | { type: "repo"; href: string };
 
@@ -28,6 +28,7 @@ export type StudySpan = 5 | 7 | 12;
 
 export type Study = {
   id: StudyId;
+  slug?: string;
   span: StudySpan;
   capabilities: readonly CapabilityId[];
   actions: readonly ProjectAction[];
@@ -42,9 +43,10 @@ const caseStudy = { type: "caseStudy", href: "/work" } as const;
 export const studies = [
   {
     id: "kLabEcosystem",
+    slug: "k-lab-product-ecosystem",
     span: 12,
     capabilities: ["uiux", "frontend", "ai", "leadership"],
-    actions: [caseStudy],
+    actions: [{ type: "caseStudy", href: "/work/k-lab-product-ecosystem" }],
     image: "/images/work/k-lab-ecosystem.webp",
     darkImage: "/images/work/k-lab-ecosystem-dark.webp",
     width: 1024,
@@ -52,6 +54,7 @@ export const studies = [
   },
   {
     id: "kLabWebsite",
+    slug: "k-lab-website",
     span: 7,
     capabilities: ["frontend"],
     actions: [caseStudy, { type: "liveProject", href: "https://k-lab.ai/en" }],
@@ -122,7 +125,11 @@ export const studies = [
       { type: "repo", href: "https://github.com/nicholaspreziosi/fitness-app" },
     ],
   },
-] as const satisfies readonly Study[];
+] satisfies readonly Study[];
+
+export function studyBySlug(slug: string) {
+  return studies.find((study) => study.slug === slug);
+}
 
 export function countByFilter(items: readonly Study[]): Record<FilterId, number> {
   const counts: Record<FilterId, number> = {

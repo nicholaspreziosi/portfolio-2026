@@ -1,22 +1,104 @@
-export type Capability =
-  "product-design" | "design-systems" | "frontend-engineering" | "ai" | "brand" | "research";
-
 export type MediaKind = "image" | "video" | "tall-screenshot";
 
+export type MediaPresentation = "single" | "carousel" | "transition" | "comparison";
+
 export type MediaAsset = {
+  id: string;
   src: string;
+  darkSrc?: string;
   alt: string;
-  caption?: string;
   kind: MediaKind;
   width?: number;
   height?: number;
+  caption?: string;
+  detail?: string;
+  placeholder?: boolean;
 };
+
+export type MediaComparison = {
+  id: string;
+  before: MediaAsset;
+  after: MediaAsset;
+  caption?: string;
+  detail?: string;
+};
+
+export type MediaGroup = {
+  id: string;
+  presentation: MediaPresentation;
+  items: MediaAsset[];
+  comparison?: MediaComparison;
+};
+
+export type CaseStudyTextBlock = {
+  title: string;
+  body: string;
+};
+
+export type CaseStudyParagraphsBlock = {
+  type: "paragraphs";
+  text: string[];
+};
+
+export type CaseStudyListBlock = {
+  type: "list";
+  items: string[];
+};
+
+export type CaseStudyLayersBlock = {
+  type: "layers";
+  numbered?: boolean;
+  items: CaseStudyTextBlock[];
+};
+
+export type CaseStudyStepsBlock = {
+  type: "steps";
+  items: CaseStudyTextBlock[];
+};
+
+export type CaseStudyCalloutBlock = {
+  type: "callout";
+  title?: string;
+  body: string;
+};
+
+export type CaseStudyMediaBlock = {
+  type: "media";
+  group: MediaGroup;
+};
+
+export type FeaturedWorkItem = {
+  id: string;
+  heading: string;
+  body: string;
+  media: MediaGroup;
+};
+
+export type CaseStudyFeaturedBlock = {
+  type: "featured";
+  items: FeaturedWorkItem[];
+};
+
+export type CaseStudyBlock =
+  | CaseStudyParagraphsBlock
+  | CaseStudyListBlock
+  | CaseStudyLayersBlock
+  | CaseStudyStepsBlock
+  | CaseStudyCalloutBlock
+  | CaseStudyMediaBlock
+  | CaseStudyFeaturedBlock;
 
 export type CaseStudySection = {
   id: string;
-  title: string;
-  body: string;
-  media?: MediaAsset[];
+  navLabel?: string;
+  heading: string;
+  lede?: string;
+  blocks: CaseStudyBlock[];
+};
+
+export type CaseStudyLinks = {
+  live?: string;
+  repository?: string;
 };
 
 export type CaseStudy = {
@@ -26,19 +108,17 @@ export type CaseStudy = {
   year: number;
   client?: string;
   role: string;
-  scope?: string;
-  capabilities: Capability[];
+  eyebrow: string;
+  timeline: string;
+  capabilities: string[];
+  technologies?: string[];
+  highlights?: string[];
+  links?: CaseStudyLinks;
   featured: boolean;
   published: boolean;
   hero: MediaAsset;
-  overview: string;
-  problem?: string;
-  process?: string;
-  decisions?: string;
-  results?: string[];
-  sections?: CaseStudySection[];
-  gallery?: MediaAsset[];
-  relatedSlugs?: string[];
+  sections: CaseStudySection[];
+  relatedSlug?: string;
 };
 
 export type ExperienceItem = {

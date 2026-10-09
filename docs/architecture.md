@@ -146,35 +146,27 @@ Each published study is one JSON file in `src/content/case-studies/`. Loaders ex
 
 ### Fields
 
-Required for every published study: `slug`, `title`, `summary`, `year`, `role`, `capabilities`, `featured`, `published`, `hero`, `overview`.
+Required for every published study: `slug`, `title`, `summary`, `year`, `role`, `eyebrow`, `timeline`, `capabilities`, `featured`, `published`, `hero`, `sections`.
 
-Optional, in the order the detail page renders them when present: `client`, `scope`, `problem`, `process`, `decisions`, `results`, `sections`, `gallery`, `relatedSlugs`.
+Optional: `client`, `technologies`, `highlights`, `links` (`live`, `repository`), `relatedSlug`.
 
-`sections` is the extension point for a study that needs a block the shared template does not name. A section has `id`, `title`, `body`, and optional `media`. Use it for custom narrative. Do not fork the detail page per project.
+`capabilities`, `technologies`, and `highlights` are the labels shown on the detail page. The work listing keeps its own filter ids in `studies.ts`.
 
-### Capabilities
+`sections` is an ordered list. Each section has `id`, an optional `navLabel`, `heading`, an optional `lede`, and `blocks`. Omit `navLabel` to keep a section out of the sticky navigation. The template renders sections in array order. A study opts out of a section by leaving it out of the file. Do not fork the detail page per project.
 
-```text
-product-design | design-systems | frontend-engineering | ai | brand | research
-```
+Blocks are `paragraphs`, `list`, `layers`, `steps`, `callout`, `media`, or `featured`. A featured block is a set of product subsections, each with its own media group.
 
-The listing filters on these values. Cards and filters read the same union. Adding a capability means updating the type, the content, and the filter labels together.
+Media on any block uses `MediaAsset` (`id`, `src`, `alt`, `kind`, optional `darkSrc`, `caption`, `detail`, `width`, `height`, `placeholder`). `kind` is `image`, `video`, or `tall-screenshot`. A media group sets `presentation` to `single`, `carousel`, `transition`, or `comparison`. Presentation rules are in the UI guidelines.
 
 ### Detail composition
 
-`/work/[slug]` renders one template, in this order, skipping empty optional blocks:
+`/work/[slug]` renders one template:
 
-1. Hero (`hero` media, title, year, role)
-2. Overview, role, and scope
-3. Problem
-4. Process
-5. Decisions
-6. Results
-7. Custom `sections`
-8. Gallery (images, video, tall screenshots, captions, lightbox)
-9. Related work (`relatedSlugs` resolved through the loader)
+1. Hero (eyebrow, title, summary, role, timeline, capabilities, technologies, highlights, hero media, optional links)
+2. Ordered `sections`
+3. Next project, resolved from `relatedSlug`
 
-Media on any block uses `MediaAsset` (`src`, `alt`, `kind`, optional `caption`, `width`, `height`). `kind` is `image`, `video`, or `tall-screenshot`. Presentation rules for each kind are in the UI guidelines.
+Empty optional hero fields are omitted. A single media item does not show carousel controls.
 
 ### Bespoke sequences
 
