@@ -2,10 +2,11 @@
 
 import { useEffect, useLayoutEffect, useRef, useState, type RefObject } from "react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, InfoIcon, RotateCcwIcon, ZoomInIcon, ZoomOutIcon } from "lucide-react";
+import { ChevronLeft, ChevronRight, RotateCcwIcon, ZoomInIcon, ZoomOutIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Disclosure, DisclosureContent, DisclosureTrigger } from "@/ui/shared/components/disclosure";
+import { MorphingDialogDescription } from "@/ui/shared/components/morphing-dialog";
 import type { MediaAsset } from "@/lib/content/types";
+import { CaseStudyMediaDisclosure } from "@/ui/work/containers/caseStudy/CaseStudyMediaDisclosure";
 
 const MIN_ZOOM = 1;
 const MAX_ZOOM = 2.5;
@@ -14,9 +15,17 @@ type CaseStudyLightboxProps = {
   items: MediaAsset[];
   index: number;
   onIndexChange: (index: number) => void;
+  detailsOpen: boolean;
+  onDetailsOpenChange: (open: boolean) => void;
 };
 
-export function CaseStudyLightbox({ items, index, onIndexChange }: CaseStudyLightboxProps) {
+export function CaseStudyLightbox({
+  items,
+  index,
+  onIndexChange,
+  detailsOpen,
+  onDetailsOpenChange,
+}: CaseStudyLightboxProps) {
   const t = useTranslations("CaseStudyPage");
   const item = items[index];
   const [zoom, setZoom] = useState(1);
@@ -92,13 +101,13 @@ export function CaseStudyLightbox({ items, index, onIndexChange }: CaseStudyLigh
 
   return (
     <div className="flex max-h-[88vh] w-[min(96vw,1120px)] flex-col">
-      <div className="relative flex min-h-0 flex-1 flex-col">
+      <div className="relative min-h-0 flex-1 overflow-hidden rounded-[16px] bg-black">
         <div
           ref={frameRef}
           className={
             still
-              ? "min-h-0 flex-1 overflow-auto rounded-[16px] bg-black [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-              : "grid min-h-[40vh] flex-1 place-items-center overflow-hidden rounded-[16px] bg-black"
+              ? "h-full min-h-0 overflow-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              : "grid h-full min-h-[40vh] place-items-center overflow-hidden"
           }
           onPointerDown={onPointerDown}
           onPointerUp={onPointerUp}
@@ -108,6 +117,9 @@ export function CaseStudyLightbox({ items, index, onIndexChange }: CaseStudyLigh
         </div>
         {scroll.overflowY ? <ScrollIndicator axis="y" offset={scroll.y} size={scroll.height} /> : null}
         {scroll.overflowX ? <ScrollIndicator axis="x" offset={scroll.x} size={scroll.width} /> : null}
+        <MorphingDialogDescription className="absolute inset-x-0 bottom-0 z-20">
+          <CaseStudyMediaDisclosure item={item} open={detailsOpen} onOpenChange={onDetailsOpenChange} />
+        </MorphingDialogDescription>
       </div>
       <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
         {multiple ? (
@@ -143,20 +155,6 @@ export function CaseStudyLightbox({ items, index, onIndexChange }: CaseStudyLigh
           </p>
         ) : null}
       </div>
-      {item.caption || item.detail ? (
-        <Disclosure className="mt-3 text-white">
-          <DisclosureTrigger className="mx-auto flex items-center gap-1.5 text-sm text-white/90">
-            <InfoIcon className="size-4" />
-            {t("info")}
-          </DisclosureTrigger>
-          <DisclosureContent>
-            <div className="mx-auto max-w-lg pt-2 text-center text-sm leading-6 text-white/80">
-              {item.caption ? <p>{item.caption}</p> : null}
-              {item.detail ? <p className="mt-1">{item.detail}</p> : null}
-            </div>
-          </DisclosureContent>
-        </Disclosure>
-      ) : null}
     </div>
   );
 }
@@ -237,8 +235,8 @@ function ScrollIndicator({ axis, offset, size }: { axis: "x" | "y"; offset: numb
       aria-hidden
       className={
         vertical
-          ? "pointer-events-none absolute inset-y-4 end-2 w-1 rounded-full bg-black/45"
-          : "pointer-events-none absolute inset-x-4 bottom-2 h-1 rounded-full bg-black/45"
+          ? "pointer-events-none absolute end-2 top-4 bottom-16 w-1 rounded-full bg-black/45"
+          : "pointer-events-none absolute inset-x-4 bottom-16 h-1 rounded-full bg-black/45"
       }
     >
       <div

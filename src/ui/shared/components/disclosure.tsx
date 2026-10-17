@@ -42,11 +42,13 @@ export function Disclosure({
   transition,
   variants,
 }: DisclosureProps) {
-  const [open, setOpen] = useState(openProp);
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(openProp);
+  const controlled = onOpenChange !== undefined;
+  const open = controlled ? openProp : uncontrolledOpen;
 
   const toggle = () => {
     const next = !open;
-    setOpen(next);
+    if (!controlled) setUncontrolledOpen(next);
     onOpenChange?.(next);
   };
 

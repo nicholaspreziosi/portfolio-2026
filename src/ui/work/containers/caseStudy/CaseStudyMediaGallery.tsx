@@ -16,6 +16,7 @@ import {
   MorphingDialogClose,
   MorphingDialogContainer,
   MorphingDialogContent,
+  MorphingDialogDescription,
   MorphingDialogTrigger,
 } from "@/ui/shared/components/morphing-dialog";
 import type { MediaAsset, MediaComparison, MediaGroup } from "@/lib/content/types";
@@ -28,6 +29,13 @@ export function CaseStudyMediaGallery({ group }: { group: MediaGroup }) {
   const t = useTranslations("CaseStudyPage");
   const reduceMotion = Boolean(useReducedMotion());
   const [index, setIndex] = useState(0);
+  const [detailsOpen, setDetailsOpen] = useState(false);
+  const [detailsIndex, setDetailsIndex] = useState(index);
+
+  if (detailsIndex !== index) {
+    setDetailsIndex(index);
+    setDetailsOpen(false);
+  }
 
   if (group.presentation === "comparison" && group.comparison) {
     return <ComparisonFrames comparison={group.comparison} reduceMotion={reduceMotion} />;
@@ -48,7 +56,7 @@ export function CaseStudyMediaGallery({ group }: { group: MediaGroup }) {
             disableDrag={reduceMotion}
             itemCount={items.length}
           >
-            <div className="relative">
+            <div className="relative overflow-hidden rounded-[16px]">
               <MorphingDialogTrigger
                 ariaLabel={t("openImage")}
                 className="block w-full border-0 bg-transparent p-0 text-start"
@@ -61,23 +69,36 @@ export function CaseStudyMediaGallery({ group }: { group: MediaGroup }) {
                   ))}
                 </CarouselContent>
               </MorphingDialogTrigger>
-              <CarouselNavigation alwaysShow previousLabel={t("previous")} nextLabel={t("next")} />
+              <CarouselNavigation alwaysShow className="z-30" previousLabel={t("previous")} nextLabel={t("next")} />
+              <MorphingDialogDescription className="absolute inset-x-0 bottom-0 z-20">
+                <CaseStudyMediaDisclosure item={active} open={detailsOpen} onOpenChange={setDetailsOpen} />
+              </MorphingDialogDescription>
             </div>
             <CarouselIndicator label={(itemIndex) => t("goToItem", { index: itemIndex })} />
           </Carousel>
         ) : (
-          <MorphingDialogTrigger
-            ariaLabel={t("openImage")}
-            className="block w-full border-0 bg-transparent p-0 text-start"
-          >
-            <MediaFrame item={items[0]} />
-          </MorphingDialogTrigger>
+          <div className="relative overflow-hidden rounded-[16px]">
+            <MorphingDialogTrigger
+              ariaLabel={t("openImage")}
+              className="block w-full border-0 bg-transparent p-0 text-start"
+            >
+              <MediaFrame item={items[0]} />
+            </MorphingDialogTrigger>
+            <MorphingDialogDescription className="absolute inset-x-0 bottom-0 z-20">
+              <CaseStudyMediaDisclosure item={active} open={detailsOpen} onOpenChange={setDetailsOpen} />
+            </MorphingDialogDescription>
+          </div>
         )}
-        <CaseStudyMediaDisclosure item={active} />
       </figure>
       <MorphingDialogContainer>
         <MorphingDialogContent className="bg-transparent">
-          <CaseStudyLightbox items={items} index={index} onIndexChange={setIndex} />
+          <CaseStudyLightbox
+            items={items}
+            index={index}
+            onIndexChange={setIndex}
+            detailsOpen={detailsOpen}
+            onDetailsOpenChange={setDetailsOpen}
+          />
           <MorphingDialogClose label={t("close")} />
         </MorphingDialogContent>
       </MorphingDialogContainer>
@@ -111,23 +132,34 @@ function ComparisonFrame({
   reduceMotion: boolean;
 }) {
   const t = useTranslations("CaseStudyPage");
+  const [detailsOpen, setDetailsOpen] = useState(false);
   return (
     <MorphingDialog transition={reduceMotion ? { duration: 0 } : dialogTransition}>
       <figure>
         <p className="mb-2 text-xs font-medium tracking-[0.12em] text-(--color-text-secondary) uppercase">
           {label}
         </p>
-        <MorphingDialogTrigger
-          ariaLabel={t("openImage")}
-          className="block w-full border-0 bg-transparent p-0 text-start"
-        >
-          <MediaFrame item={item} />
-        </MorphingDialogTrigger>
-        <CaseStudyMediaDisclosure item={item} />
+        <div className="relative overflow-hidden rounded-[16px]">
+          <MorphingDialogTrigger
+            ariaLabel={t("openImage")}
+            className="block w-full border-0 bg-transparent p-0 text-start"
+          >
+            <MediaFrame item={item} />
+          </MorphingDialogTrigger>
+          <MorphingDialogDescription className="absolute inset-x-0 bottom-0 z-20">
+            <CaseStudyMediaDisclosure item={item} open={detailsOpen} onOpenChange={setDetailsOpen} />
+          </MorphingDialogDescription>
+        </div>
       </figure>
       <MorphingDialogContainer>
         <MorphingDialogContent className="bg-transparent">
-          <CaseStudyLightbox items={[item]} index={0} onIndexChange={() => undefined} />
+          <CaseStudyLightbox
+            items={[item]}
+            index={0}
+            onIndexChange={() => undefined}
+            detailsOpen={detailsOpen}
+            onDetailsOpenChange={setDetailsOpen}
+          />
           <MorphingDialogClose label={t("close")} />
         </MorphingDialogContent>
       </MorphingDialogContainer>
@@ -140,7 +172,7 @@ function MediaFrame({ item }: { item: MediaAsset }) {
 
   if (item.placeholder || !item.src) {
     return (
-      <div className="flex aspect-[16/10] w-full flex-col items-center justify-center gap-2 rounded-[16px] bg-(--surface-muted) px-6 text-center">
+      <div className="flex aspect-[16/10] w-full flex-col items-center justify-center gap-2 bg-(--surface-muted) px-6 text-center">
         <p className="font-[family-name:var(--font-display)] text-lg font-medium text-(--color-text-primary)">
           {item.caption ?? item.alt}
         </p>
@@ -155,7 +187,7 @@ function MediaFrame({ item }: { item: MediaAsset }) {
         src={item.src}
         controls
         playsInline
-        className="aspect-[16/10] w-full rounded-[16px] bg-(--surface-muted) object-contain"
+        className="aspect-[16/10] w-full bg-(--surface-muted) object-contain"
       />
     );
   }
@@ -163,7 +195,7 @@ function MediaFrame({ item }: { item: MediaAsset }) {
   const crop = item.kind === "tall-screenshot" ? "object-cover object-top" : "object-cover object-center";
 
   return (
-    <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[16px] bg-(--surface-muted)">
+    <div className="relative aspect-[16/10] w-full overflow-hidden bg-(--surface-muted)">
       <Image
         src={item.src}
         alt={item.alt}

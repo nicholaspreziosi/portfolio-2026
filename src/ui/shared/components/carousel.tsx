@@ -80,7 +80,7 @@ export function CarouselNavigation({
   return (
     <div
       className={cn(
-        "pointer-events-none absolute inset-x-3 top-1/2 z-10 flex -translate-y-1/2 justify-between",
+        "pointer-events-none absolute inset-x-3 top-1/2 z-30 flex -translate-y-1/2 justify-between",
         className
       )}
     >
