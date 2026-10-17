@@ -1,7 +1,15 @@
 "use client";
 
 import { type RefObject } from "react";
-import { motion, useScroll, useSpring, type SpringOptions } from "motion/react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  type MotionValue,
+  type SpringOptions,
+  type UseScrollOptions,
+} from "motion/react";
 import { cn } from "cn";
 
 export type ScrollProgressProps = {
@@ -9,6 +17,8 @@ export type ScrollProgressProps = {
   springOptions?: SpringOptions;
   containerRef?: RefObject<HTMLElement | null>;
   targetRef?: RefObject<HTMLElement | null>;
+  progress?: MotionValue<number>;
+  offset?: UseScrollOptions["offset"];
   orientation?: "horizontal" | "vertical";
 };
 
@@ -23,19 +33,72 @@ export function ScrollProgress({
   springOptions,
   containerRef,
   targetRef,
+  progress,
+  offset = ["start start", "end end"],
   orientation = "horizontal",
 }: ScrollProgressProps) {
+  if (progress) {
+    return (
+      <ProgressIndicator
+        className={className}
+        orientation={orientation}
+        progress={progress}
+        springOptions={springOptions}
+      />
+    );
+  }
+
+  return (
+    <TargetScrollProgress
+      className={className}
+      containerRef={containerRef}
+      offset={offset}
+      orientation={orientation}
+      springOptions={springOptions}
+      targetRef={targetRef}
+    />
+  );
+}
+
+function TargetScrollProgress({
+  className,
+  springOptions,
+  containerRef,
+  targetRef,
+  offset,
+  orientation,
+}: Omit<ScrollProgressProps, "progress">) {
   const { scrollYProgress } = useScroll(
-    targetRef
-      ? { target: targetRef, offset: ["start start", "end end"] }
-      : { container: containerRef }
+    targetRef ? { target: targetRef, offset } : { container: containerRef }
   );
 
-  const scale = useSpring(scrollYProgress, {
+  return (
+    <ProgressIndicator
+      className={className}
+      orientation={orientation}
+      progress={scrollYProgress}
+      springOptions={springOptions}
+    />
+  );
+}
+
+function ProgressIndicator({
+  className,
+  orientation = "horizontal",
+  progress,
+  springOptions,
+}: {
+  className?: string;
+  orientation?: "horizontal" | "vertical";
+  progress: MotionValue<number>;
+  springOptions?: SpringOptions;
+}) {
+  const reduceMotion = useReducedMotion();
+  const sprung = useSpring(progress, {
     ...DEFAULT_SPRING_OPTIONS,
     ...(springOptions ?? {}),
   });
-
+  const scale = reduceMotion ? progress : sprung;
   const vertical = orientation === "vertical";
 
   return (

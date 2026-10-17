@@ -1,40 +1,51 @@
 "use client";
 
-import { useEffect, useState, type RefObject } from "react";
+import { useEffect, useMemo, useState, type RefObject } from "react";
 import { useTranslations } from "next-intl";
-import { useReducedMotion } from "motion/react";
+import { useReducedMotion, type UseScrollOptions } from "motion/react";
 import { cn } from "cn";
 import type { CaseStudySection } from "@/lib/content/types";
 import { ScrollProgress } from "@/ui/shared/components/scroll-progress";
+
+const sectionOffset: UseScrollOptions["offset"] = ["start 112px", "end 112px"];
+const sectionSpring = { stiffness: 500, damping: 46, restDelta: 0.001 };
 
 type NavSection = Pick<CaseStudySection, "id" | "navLabel">;
 
 export function useCaseStudyNav(sections: NavSection[]) {
   const reduceMotion = Boolean(useReducedMotion());
   const [active, setActive] = useState(sections[0]?.id ?? "");
-  const ids = sections.map((section) => section.id).join("|");
+  const sectionKey = sections.map((section) => section.id).join("|");
+  const sectionRefs = useMemo(
+    () =>
+      sectionKey
+        .split("|")
+        .filter(Boolean)
+        .map(() => ({ current: null }) as RefObject<HTMLElement | null>),
+    [sectionKey]
+  );
 
   useEffect(() => {
-    const nodes = ids
-      .split("|")
-      .filter(Boolean)
-      .map((id) => document.getElementById(id))
-      .filter((node): node is HTMLElement => Boolean(node));
-    if (nodes.length === 0) return;
+    const ids = sectionKey.split("|").filter(Boolean);
+    const measure = () => {
+      const line = 112;
+      let index = 0;
+      for (let i = 0; i < sectionRefs.length; i++) {
+        const node = sectionRefs[i]?.current;
+        if (node && node.getBoundingClientRect().top <= line) index = i;
+      }
+      const id = ids[index];
+      if (id) setActive((current) => (current === id ? current : id));
+    };
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-        const next = visible[0]?.target.id;
-        if (next) setActive(next);
-      },
-      { rootMargin: "-25% 0px -55% 0px", threshold: [0, 0.2, 0.5] }
-    );
-    nodes.forEach((node) => observer.observe(node));
-    return () => observer.disconnect();
-  }, [ids]);
+    measure();
+    window.addEventListener("scroll", measure, { passive: true });
+    window.addEventListener("resize", measure);
+    return () => {
+      window.removeEventListener("scroll", measure);
+      window.removeEventListener("resize", measure);
+    };
+  }, [sectionKey, sectionRefs]);
 
   const select = (id: string) => {
     setActive(id);
@@ -44,19 +55,41 @@ export function useCaseStudyNav(sections: NavSection[]) {
     });
   };
 
-  return { active, select };
+  return { active, select, sectionRefs };
+}
+
+function SectionTrack({
+  orientation,
+  targetRef,
+}: {
+  orientation: "horizontal" | "vertical";
+  targetRef: RefObject<HTMLElement | null>;
+}) {
+  const vertical = orientation === "vertical";
+
+  return (
+    <div className={cn("relative", vertical ? "h-full w-px" : "h-px w-full")}>
+      <div className={cn("absolute bg-(--line)", vertical ? "inset-y-0 w-px" : "inset-x-0 h-px")} />
+      <ScrollProgress
+        orientation={orientation}
+        targetRef={targetRef}
+        offset={sectionOffset}
+        springOptions={sectionSpring}
+      />
+    </div>
+  );
 }
 
 export function CaseStudySectionNav({
   variant,
   sections,
-  articleRef,
+  sectionRefs,
   active,
   onSelect,
 }: {
   variant: "rail" | "bar";
   sections: NavSection[];
-  articleRef: RefObject<HTMLElement | null>;
+  sectionRefs: Array<RefObject<HTMLElement | null>>;
   active: string;
   onSelect: (id: string) => void;
 }) {
@@ -68,28 +101,28 @@ export function CaseStudySectionNav({
         aria-label={t("sections")}
         className="sticky top-3 z-30 -mx-1 mb-2 rounded-[16px] bg-(--surface-glass) backdrop-blur-(--surface-glass-blur) sm:top-24 lg:hidden [@media(max-height:600px)]:lg:top-24 [@media(max-height:600px)]:lg:block"
       >
-        <div className="flex gap-1 overflow-x-auto px-1 py-2">
-          {sections.map((section) => (
-            <a
-              key={section.id}
-              href={`#${section.id}`}
-              aria-current={active === section.id ? "true" : undefined}
-              onClick={(event) => {
-                event.preventDefault();
-                onSelect(section.id);
-              }}
-              className={cn(
-                "shrink-0 rounded-full px-3 py-1 text-xs",
-                active === section.id ? "bg-foreground text-background" : "text-(--color-text-secondary)"
-              )}
-            >
-              {section.navLabel}
-            </a>
+        <div className="flex gap-1 overflow-x-auto px-1 pt-2 pb-1.5">
+          {sections.map((section, index) => (
+            <div key={section.id} className="flex shrink-0 flex-col">
+              <a
+                href={`#${section.id}`}
+                aria-current={active === section.id ? "true" : undefined}
+                onClick={(event) => {
+                  event.preventDefault();
+                  onSelect(section.id);
+                }}
+                className={cn(
+                  "rounded-full px-3 py-1 text-xs",
+                  active === section.id ? "bg-foreground text-background" : "text-(--color-text-secondary)"
+                )}
+              >
+                {section.navLabel}
+              </a>
+              <div className="px-3 pt-1">
+                <SectionTrack orientation="horizontal" targetRef={sectionRefs[index]} />
+              </div>
+            </div>
           ))}
-        </div>
-        <div className="relative h-px">
-          <div className="absolute inset-x-0 h-px bg-(--line)" />
-          <ScrollProgress orientation="horizontal" targetRef={articleRef} />
         </div>
       </nav>
     );
@@ -100,13 +133,10 @@ export function CaseStudySectionNav({
       aria-label={t("sections")}
       className="sticky top-28 hidden h-[calc(100dvh-8rem)] [@media(max-height:600px)]:hidden lg:flex"
     >
-      <div className="relative me-4 w-px">
-        <div className="absolute inset-y-0 w-px bg-(--line)" />
-        <ScrollProgress orientation="vertical" targetRef={articleRef} />
-      </div>
-      <ol className="flex min-h-0 flex-1 flex-col justify-between py-1">
-        {sections.map((section) => (
-          <li key={section.id}>
+      <ol className="flex h-full min-h-0 flex-1 flex-col">
+        {sections.map((section, index) => (
+          <li key={section.id} className="flex min-h-0 flex-1 gap-4">
+            <SectionTrack orientation="vertical" targetRef={sectionRefs[index]} />
             <a
               href={`#${section.id}`}
               aria-current={active === section.id ? "true" : undefined}
@@ -115,7 +145,7 @@ export function CaseStudySectionNav({
                 onSelect(section.id);
               }}
               className={cn(
-                "text-sm leading-5 transition-colors",
+                "self-start text-sm leading-5 transition-colors",
                 active === section.id
                   ? "font-medium text-(--color-text-primary)"
                   : "text-(--color-text-secondary) hover:text-(--color-text-primary)"

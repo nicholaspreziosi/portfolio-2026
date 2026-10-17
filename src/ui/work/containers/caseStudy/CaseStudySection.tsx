@@ -1,5 +1,6 @@
 "use client";
 
+import type { RefObject } from "react";
 import { useReducedMotion } from "motion/react";
 import type { CaseStudyBlock, CaseStudySection as CaseStudySectionData } from "@/lib/content/types";
 import { InView } from "@/ui/shared/components/in-view";
@@ -7,11 +8,21 @@ import { CaseStudyMediaGallery } from "@/ui/work/containers/caseStudy/CaseStudyM
 
 const prose = "max-w-2xl text-base leading-7 text-(--color-text-secondary)";
 
-export function CaseStudySection({ section }: { section: CaseStudySectionData }) {
+export function CaseStudySection({
+  section,
+  sectionRef,
+}: {
+  section: CaseStudySectionData;
+  sectionRef?: RefObject<HTMLElement | null>;
+}) {
   const reduceMotion = Boolean(useReducedMotion());
 
   return (
-    <section id={section.id} className="scroll-mt-28 border-t border-(--line) py-16 sm:py-20">
+    <section
+      ref={sectionRef}
+      id={section.id}
+      className="scroll-mt-28 border-t border-(--line) py-16 sm:py-20"
+    >
       <InView
         once
         viewOptions={{ once: true, margin: "0px 0px -80px 0px" }}

@@ -1,6 +1,5 @@
 "use client";
 
-import { useRef } from "react";
 import type { CaseStudy } from "@/lib/content/types";
 import { pageContainerClassName } from "@/ui/shell/pageContainer";
 import {
@@ -17,9 +16,8 @@ export function CaseStudyLayout({
   study: CaseStudy;
   nextProject: NextProject | null;
 }) {
-  const articleRef = useRef<HTMLElement>(null);
   const sections = study.sections.filter((section) => section.navLabel);
-  const { active, select } = useCaseStudyNav(sections);
+  const { active, select, sectionRefs } = useCaseStudyNav(sections);
 
   return (
     <div className={`${pageContainerClassName} relative z-10 pb-8`}>
@@ -27,7 +25,7 @@ export function CaseStudyLayout({
         <CaseStudySectionNav
           variant="rail"
           sections={sections}
-          articleRef={articleRef}
+          sectionRefs={sectionRefs}
           active={active}
           onSelect={select}
         />
@@ -35,14 +33,21 @@ export function CaseStudyLayout({
           <CaseStudySectionNav
             variant="bar"
             sections={sections}
-            articleRef={articleRef}
+            sectionRefs={sectionRefs}
             active={active}
             onSelect={select}
           />
-          <article ref={articleRef}>
-            {study.sections.map((section) => (
-              <CaseStudySection key={section.id} section={section} />
-            ))}
+          <article>
+            {study.sections.map((section) => {
+              const navIndex = sections.findIndex((item) => item.id === section.id);
+              return (
+                <CaseStudySection
+                  key={section.id}
+                  section={section}
+                  sectionRef={navIndex >= 0 ? sectionRefs[navIndex] : undefined}
+                />
+              );
+            })}
           </article>
           {nextProject ? <NextCaseStudy project={nextProject} /> : null}
         </div>
