@@ -50,9 +50,7 @@ export function Carousel({
 
   return (
     <CarouselContext.Provider value={{ index, setIndex, itemsCount: itemCount, disableDrag }}>
-      <div className={cn("group/hover relative", className)}>
-        <div className="overflow-hidden">{children}</div>
-      </div>
+      <div className={cn("group/hover relative", className)}>{children}</div>
     </CarouselContext.Provider>
   );
 }
@@ -74,7 +72,7 @@ export function CarouselNavigation({
 }: CarouselNavigationProps) {
   const { index, setIndex, itemsCount } = useCarousel();
   const buttonClass = cn(
-    "pointer-events-auto grid size-8 place-items-center rounded-full bg-(--surface-elevated) text-foreground shadow-[var(--shadow-sm)] transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground disabled:opacity-40",
+    "pointer-events-auto grid size-8 place-items-center rounded-full bg-(--ink) text-(--paper) shadow-[var(--shadow-sm)] transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground disabled:opacity-40",
     alwaysShow ? "opacity-100" : "opacity-0 group-hover/hover:opacity-100",
     classNameButton
   );
@@ -154,18 +152,20 @@ export function CarouselContent({ children, className, transition }: CarouselCon
   };
 
   return (
-    <motion.div
-      drag={disableDrag ? false : "x"}
-      dragConstraints={disableDrag ? undefined : { left: 0, right: 0 }}
-      dragMomentum={false}
-      style={{ x: disableDrag ? undefined : dragX }}
-      animate={{ translateX: `-${index * 100}%` }}
-      onDragEnd={disableDrag ? undefined : onDragEnd}
-      transition={transition ?? { type: "spring", stiffness: 220, damping: 28 }}
-      className={cn("flex", !disableDrag && "cursor-grab active:cursor-grabbing", className)}
-    >
-      {children}
-    </motion.div>
+    <div className="overflow-hidden">
+      <motion.div
+        drag={disableDrag ? false : "x"}
+        dragConstraints={disableDrag ? undefined : { left: 0, right: 0 }}
+        dragMomentum={false}
+        style={{ x: disableDrag ? undefined : dragX }}
+        animate={{ translateX: `-${index * 100}%` }}
+        onDragEnd={disableDrag ? undefined : onDragEnd}
+        transition={transition ?? { type: "spring", stiffness: 220, damping: 28 }}
+        className={cn("flex", !disableDrag && "cursor-grab active:cursor-grabbing", className)}
+      >
+        {children}
+      </motion.div>
+    </div>
   );
 }
 

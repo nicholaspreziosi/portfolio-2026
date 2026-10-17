@@ -145,7 +145,7 @@
           "type": "media",
           "group": {
             "id": "system-sequence",
-            "presentation": "transition",
+            "presentation": "carousel",
             "items": [
               {
                 "id": "get-started",

@@ -2,9 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useReducedMotion, type Transition, type Variant } from "motion/react";
+import { useReducedMotion, type Transition } from "motion/react";
 import {
   Carousel,
   CarouselContent,
@@ -19,7 +18,6 @@ import {
   MorphingDialogContent,
   MorphingDialogTrigger,
 } from "@/ui/shared/components/morphing-dialog";
-import { TransitionPanel } from "@/ui/shared/components/transition-panel";
 import type { MediaAsset, MediaComparison, MediaGroup } from "@/lib/content/types";
 import { CaseStudyLightbox } from "@/ui/work/containers/caseStudy/CaseStudyLightbox";
 import { CaseStudyMediaDisclosure } from "@/ui/work/containers/caseStudy/CaseStudyMediaDisclosure";
@@ -43,46 +41,38 @@ export function CaseStudyMediaGallery({ group }: { group: MediaGroup }) {
   return (
     <MorphingDialog transition={reduceMotion ? { duration: 0 } : dialogTransition}>
       <figure>
-        {multiple && group.presentation === "carousel" ? (
+        {multiple ? (
           <Carousel
             index={index}
             onIndexChange={setIndex}
             disableDrag={reduceMotion}
             itemCount={items.length}
           >
-            <MorphingDialogTrigger
-              ariaLabel={t("openImage")}
-              className="block w-full border-0 bg-transparent p-0 text-start"
-            >
-              <CarouselContent>
-                {items.map((item) => (
-                  <CarouselItem key={item.id}>
-                    <MediaFrame item={item} />
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-            </MorphingDialogTrigger>
-            <CarouselNavigation alwaysShow previousLabel={t("previous")} nextLabel={t("next")} />
+            <div className="relative">
+              <MorphingDialogTrigger
+                ariaLabel={t("openImage")}
+                className="block w-full border-0 bg-transparent p-0 text-start"
+              >
+                <CarouselContent>
+                  {items.map((item) => (
+                    <CarouselItem key={item.id}>
+                      <MediaFrame item={item} />
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+              </MorphingDialogTrigger>
+              <CarouselNavigation alwaysShow previousLabel={t("previous")} nextLabel={t("next")} />
+            </div>
             <CarouselIndicator label={(itemIndex) => t("goToItem", { index: itemIndex })} />
           </Carousel>
-        ) : null}
-        {multiple && group.presentation === "transition" ? (
-          <TransitionFrames
-            items={items}
-            index={index}
-            onIndexChange={setIndex}
-            reduceMotion={reduceMotion}
-            openLabel={t("openImage")}
-          />
-        ) : null}
-        {!multiple ? (
+        ) : (
           <MorphingDialogTrigger
             ariaLabel={t("openImage")}
             className="block w-full border-0 bg-transparent p-0 text-start"
           >
             <MediaFrame item={items[0]} />
           </MorphingDialogTrigger>
-        ) : null}
+        )}
         <CaseStudyMediaDisclosure item={active} />
       </figure>
       <MorphingDialogContainer>
@@ -92,87 +82,6 @@ export function CaseStudyMediaGallery({ group }: { group: MediaGroup }) {
         </MorphingDialogContent>
       </MorphingDialogContainer>
     </MorphingDialog>
-  );
-}
-
-function TransitionFrames({
-  items,
-  index,
-  onIndexChange,
-  reduceMotion,
-  openLabel,
-}: {
-  items: MediaAsset[];
-  index: number;
-  onIndexChange: (index: number) => void;
-  reduceMotion: boolean;
-  openLabel: string;
-}) {
-  const t = useTranslations("CaseStudyPage");
-  const [direction, setDirection] = useState(1);
-  const variants: { enter: Variant; center: Variant; exit: Variant } = reduceMotion
-    ? { enter: { opacity: 1 }, center: { opacity: 1 }, exit: { opacity: 1 } }
-    : {
-        enter: (value: number) => ({ opacity: 0, x: value > 0 ? 24 : -24 }),
-        center: { opacity: 1, x: 0 },
-        exit: (value: number) => ({ opacity: 0, x: value > 0 ? -24 : 24 }),
-      };
-
-  const go = (next: number) => {
-    setDirection(next > index ? 1 : -1);
-    onIndexChange(next);
-  };
-
-  return (
-    <div>
-      <MorphingDialogTrigger ariaLabel={openLabel} className="block w-full border-0 bg-transparent p-0 text-start">
-        <TransitionPanel
-          activeIndex={index}
-          custom={direction}
-          variants={variants}
-          transition={{ duration: reduceMotion ? 0 : 0.35, ease: [0.22, 1, 0.36, 1] }}
-          className="overflow-hidden rounded-[16px]"
-        >
-          {items.map((item) => (
-            <MediaFrame key={item.id} item={item} />
-          ))}
-        </TransitionPanel>
-      </MorphingDialogTrigger>
-      <div className="mt-4 flex items-center justify-between gap-3">
-        <div className="flex gap-2">
-          <button
-            type="button"
-            aria-label={t("previous")}
-            disabled={index === 0}
-            onClick={() => go(index - 1)}
-            className="grid size-8 place-items-center rounded-full bg-(--surface-elevated) text-foreground shadow-[var(--shadow-sm)] disabled:opacity-40"
-          >
-            <ChevronLeft className="size-4 rtl:rotate-180" />
-          </button>
-          <button
-            type="button"
-            aria-label={t("next")}
-            disabled={index === items.length - 1}
-            onClick={() => go(index + 1)}
-            className="grid size-8 place-items-center rounded-full bg-(--surface-elevated) text-foreground shadow-[var(--shadow-sm)] disabled:opacity-40"
-          >
-            <ChevronRight className="size-4 rtl:rotate-180" />
-          </button>
-        </div>
-        <div className="flex gap-2">
-          {items.map((item, itemIndex) => (
-            <button
-              key={item.id}
-              type="button"
-              aria-label={t("goToItem", { index: itemIndex + 1 })}
-              aria-current={itemIndex === index ? "true" : undefined}
-              onClick={() => go(itemIndex)}
-              className={itemIndex === index ? "size-2 rounded-full bg-foreground" : "size-2 rounded-full bg-foreground/35"}
-            />
-          ))}
-        </div>
-      </div>
-    </div>
   );
 }
 

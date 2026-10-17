@@ -1,6 +1,6 @@
 export type MediaKind = "image" | "video" | "tall-screenshot";
 
-export type MediaPresentation = "single" | "carousel" | "transition" | "comparison";
+export type MediaPresentation = "single" | "carousel" | "comparison";
 
 export type MediaAsset = {
   id: string;

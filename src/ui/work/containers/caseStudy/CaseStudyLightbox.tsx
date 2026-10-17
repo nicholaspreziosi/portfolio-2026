@@ -20,9 +20,7 @@ export function CaseStudyLightbox({ items, index, onIndexChange }: CaseStudyLigh
   const t = useTranslations("CaseStudyPage");
   const item = items[index];
   const [zoom, setZoom] = useState(1);
-  const [pan, setPan] = useState({ x: 0, y: 0 });
   const [zoomIndex, setZoomIndex] = useState(index);
-  const drag = useRef<{ x: number; y: number; px: number; py: number } | null>(null);
   const swipe = useRef<number | null>(null);
   const frameRef = useRef<HTMLDivElement>(null);
   const zoomAnchor = useRef<{ x: number; y: number; zoom: number } | null>(null);
@@ -33,7 +31,6 @@ export function CaseStudyLightbox({ items, index, onIndexChange }: CaseStudyLigh
   if (zoomIndex !== index) {
     setZoomIndex(index);
     setZoom(1);
-    setPan({ x: 0, y: 0 });
   }
 
   useEffect(() => {
@@ -64,12 +61,12 @@ export function CaseStudyLightbox({ items, index, onIndexChange }: CaseStudyLigh
 
   if (!item) return null;
 
-  const tall = item.kind === "tall-screenshot";
+  const still = item.kind !== "video";
 
   const setScale = (next: number) => {
     const scale = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, next));
     const frame = frameRef.current;
-    if (tall && frame && scale !== zoom) {
+    if (still && frame && scale !== zoom) {
       zoomAnchor.current = {
         x: frame.scrollLeft + frame.clientWidth / 2,
         y: frame.scrollTop + frame.clientHeight / 2,
@@ -77,25 +74,11 @@ export function CaseStudyLightbox({ items, index, onIndexChange }: CaseStudyLigh
       };
     }
     setZoom(scale);
-    if (!tall && scale === 1) setPan({ x: 0, y: 0 });
   };
 
   const onPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
-    if (!zoomable) return;
-    if (zoom > 1 && !tall) {
-      drag.current = { x: event.clientX, y: event.clientY, px: pan.x, py: pan.y };
-      event.currentTarget.setPointerCapture(event.pointerId);
-      return;
-    }
-    if (!tall) swipe.current = event.clientX;
-  };
-
-  const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
-    if (!drag.current) return;
-    setPan({
-      x: drag.current.px + event.clientX - drag.current.x,
-      y: drag.current.py + event.clientY - drag.current.y,
-    });
+    if (!zoomable || zoom !== 1 || item.kind === "tall-screenshot") return;
+    swipe.current = event.clientX;
   };
 
   const onPointerUp = (event: React.PointerEvent<HTMLDivElement>) => {
@@ -104,7 +87,6 @@ export function CaseStudyLightbox({ items, index, onIndexChange }: CaseStudyLigh
       if (delta > 48) onIndexChange(Math.max(0, index - 1));
       if (delta < -48) onIndexChange(Math.min(items.length - 1, index + 1));
     }
-    drag.current = null;
     swipe.current = null;
   };
 
@@ -114,16 +96,15 @@ export function CaseStudyLightbox({ items, index, onIndexChange }: CaseStudyLigh
         <div
           ref={frameRef}
           className={
-            tall
+            still
               ? "min-h-0 flex-1 overflow-auto rounded-[16px] bg-black [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
               : "grid min-h-[40vh] flex-1 place-items-center overflow-hidden rounded-[16px] bg-black"
           }
           onPointerDown={onPointerDown}
-          onPointerMove={onPointerMove}
           onPointerUp={onPointerUp}
           onPointerCancel={onPointerUp}
         >
-          <LightboxMedia item={item} zoom={zoom} pan={pan} tall={tall} />
+          <LightboxMedia item={item} zoom={zoom} />
         </div>
         {scroll.overflowY ? <ScrollIndicator axis="y" offset={scroll.y} size={scroll.height} /> : null}
         {scroll.overflowX ? <ScrollIndicator axis="x" offset={scroll.x} size={scroll.width} /> : null}
@@ -272,35 +253,17 @@ function ScrollIndicator({ axis, offset, size }: { axis: "x" | "y"; offset: numb
   );
 }
 
-function LightboxMedia({
-  item,
-  zoom,
-  pan,
-  tall,
-}: {
-  item: MediaAsset;
-  zoom: number;
-  pan: { x: number; y: number };
-  tall: boolean;
-}) {
+function LightboxMedia({ item, zoom }: { item: MediaAsset; zoom: number }) {
   if (item.kind === "video" && item.src) {
     return <video src={item.src} controls playsInline className="max-h-[78vh] max-w-full" />;
   }
 
   if (!item.src || item.placeholder) return null;
 
-  const transform = tall || zoom === 1 ? undefined : `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`;
-  const frameClass = tall ? "h-auto w-full" : "max-h-[78vh] w-auto max-w-full object-contain";
+  const frameClass = "h-auto w-full";
 
   return (
-    <div
-      className={tall ? undefined : "max-h-[78vh] max-w-full"}
-      style={
-        tall
-          ? { width: `${zoom * 100}%` }
-          : { transform, transformOrigin: "center center" }
-      }
-    >
+    <div style={{ width: `${zoom * 100}%` }}>
       <Image
         src={item.src}
         alt={item.alt}
