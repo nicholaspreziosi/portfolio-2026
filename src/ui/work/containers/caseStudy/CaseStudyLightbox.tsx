@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type RefObject } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, InfoIcon, RotateCcwIcon, ZoomInIcon, ZoomOutIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -24,6 +24,9 @@ export function CaseStudyLightbox({ items, index, onIndexChange }: CaseStudyLigh
   const [zoomIndex, setZoomIndex] = useState(index);
   const drag = useRef<{ x: number; y: number; px: number; py: number } | null>(null);
   const swipe = useRef<number | null>(null);
+  const frameRef = useRef<HTMLDivElement>(null);
+  const zoomAnchor = useRef<{ x: number; y: number; zoom: number } | null>(null);
+  const scroll = useLightboxScroll(frameRef, `${index}:${zoom}:${item?.src ?? ""}`);
   const multiple = items.length > 1;
   const zoomable = item?.kind !== "video" && !item?.placeholder && Boolean(item?.src);
 
@@ -49,25 +52,42 @@ export function CaseStudyLightbox({ items, index, onIndexChange }: CaseStudyLigh
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [index, items.length, multiple, onIndexChange]);
 
+  useLayoutEffect(() => {
+    const anchor = zoomAnchor.current;
+    const frame = frameRef.current;
+    if (!anchor || !frame) return;
+    const ratio = zoom / anchor.zoom;
+    frame.scrollLeft = anchor.x * ratio - frame.clientWidth / 2;
+    frame.scrollTop = anchor.y * ratio - frame.clientHeight / 2;
+    zoomAnchor.current = null;
+  }, [zoom]);
+
   if (!item) return null;
+
+  const tall = item.kind === "tall-screenshot";
 
   const setScale = (next: number) => {
     const scale = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, next));
+    const frame = frameRef.current;
+    if (tall && frame && scale !== zoom) {
+      zoomAnchor.current = {
+        x: frame.scrollLeft + frame.clientWidth / 2,
+        y: frame.scrollTop + frame.clientHeight / 2,
+        zoom,
+      };
+    }
     setZoom(scale);
-    if (scale === 1) setPan({ x: 0, y: 0 });
+    if (!tall && scale === 1) setPan({ x: 0, y: 0 });
   };
-
-  const tall = item.kind === "tall-screenshot";
-  const scrolling = tall && zoom === 1;
 
   const onPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
     if (!zoomable) return;
-    if (zoom > 1) {
+    if (zoom > 1 && !tall) {
       drag.current = { x: event.clientX, y: event.clientY, px: pan.x, py: pan.y };
       event.currentTarget.setPointerCapture(event.pointerId);
       return;
     }
-    if (!scrolling) swipe.current = event.clientX;
+    if (!tall) swipe.current = event.clientX;
   };
 
   const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
@@ -90,18 +110,23 @@ export function CaseStudyLightbox({ items, index, onIndexChange }: CaseStudyLigh
 
   return (
     <div className="flex max-h-[88vh] w-[min(96vw,1120px)] flex-col">
-      <div
-        className={
-          scrolling
-            ? "min-h-0 flex-1 overflow-auto rounded-[16px] bg-black"
-            : "grid min-h-[40vh] flex-1 place-items-center overflow-hidden rounded-[16px] bg-black"
-        }
-        onPointerDown={onPointerDown}
-        onPointerMove={onPointerMove}
-        onPointerUp={onPointerUp}
-        onPointerCancel={onPointerUp}
-      >
-        <LightboxMedia item={item} zoom={zoom} pan={pan} scrolling={scrolling} />
+      <div className="relative flex min-h-0 flex-1 flex-col">
+        <div
+          ref={frameRef}
+          className={
+            tall
+              ? "min-h-0 flex-1 overflow-auto rounded-[16px] bg-black [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              : "grid min-h-[40vh] flex-1 place-items-center overflow-hidden rounded-[16px] bg-black"
+          }
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={onPointerUp}
+          onPointerCancel={onPointerUp}
+        >
+          <LightboxMedia item={item} zoom={zoom} pan={pan} tall={tall} />
+        </div>
+        {scroll.overflowY ? <ScrollIndicator axis="y" offset={scroll.y} size={scroll.height} /> : null}
+        {scroll.overflowX ? <ScrollIndicator axis="x" offset={scroll.x} size={scroll.width} /> : null}
       </div>
       <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
         {multiple ? (
@@ -155,16 +180,108 @@ export function CaseStudyLightbox({ items, index, onIndexChange }: CaseStudyLigh
   );
 }
 
+type FrameScroll = {
+  overflowX: boolean;
+  overflowY: boolean;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+};
+
+function useLightboxScroll(frameRef: RefObject<HTMLDivElement | null>, watch: string) {
+  const [metrics, setMetrics] = useState<FrameScroll>({
+    overflowX: false,
+    overflowY: false,
+    x: 0,
+    y: 0,
+    width: 1,
+    height: 1,
+  });
+
+  useEffect(() => {
+    const frame = frameRef.current;
+    if (!frame) return;
+
+    const measure = () => {
+      const { scrollTop, scrollLeft, scrollHeight, scrollWidth, clientHeight, clientWidth } = frame;
+      const overflowY = scrollHeight > clientHeight + 1;
+      const overflowX = scrollWidth > clientWidth + 1;
+      const height = scrollHeight === 0 ? 1 : Math.min(1, Math.max(0.12, clientHeight / scrollHeight));
+      const width = scrollWidth === 0 ? 1 : Math.min(1, Math.max(0.12, clientWidth / scrollWidth));
+      const next: FrameScroll = {
+        overflowX,
+        overflowY,
+        x: overflowX ? scrollLeft / (scrollWidth - clientWidth) : 0,
+        y: overflowY ? scrollTop / (scrollHeight - clientHeight) : 0,
+        width,
+        height,
+      };
+      const round = (value: number) => Math.round(value * 1000) / 1000;
+      next.x = round(next.x);
+      next.y = round(next.y);
+      next.width = round(next.width);
+      next.height = round(next.height);
+      setMetrics((current) =>
+        current.overflowX === next.overflowX &&
+        current.overflowY === next.overflowY &&
+        current.x === next.x &&
+        current.y === next.y &&
+        current.width === next.width &&
+        current.height === next.height
+          ? current
+          : next
+      );
+    };
+
+    measure();
+    frame.addEventListener("scroll", measure, { passive: true });
+    const observer = new ResizeObserver(measure);
+    observer.observe(frame);
+    if (frame.firstElementChild) observer.observe(frame.firstElementChild);
+    return () => {
+      frame.removeEventListener("scroll", measure);
+      observer.disconnect();
+    };
+  }, [frameRef, watch]);
+
+  return metrics;
+}
+
+function ScrollIndicator({ axis, offset, size }: { axis: "x" | "y"; offset: number; size: number }) {
+  const vertical = axis === "y";
+
+  return (
+    <div
+      aria-hidden
+      className={
+        vertical
+          ? "pointer-events-none absolute inset-y-4 end-2 w-1 rounded-full bg-black/45"
+          : "pointer-events-none absolute inset-x-4 bottom-2 h-1 rounded-full bg-black/45"
+      }
+    >
+      <div
+        className="absolute rounded-full bg-white shadow-[0_0_0_1px_rgba(0,0,0,0.55)]"
+        style={
+          vertical
+            ? { top: `${offset * (1 - size) * 100}%`, height: `${size * 100}%`, left: 0, right: 0 }
+            : { insetInlineStart: `${offset * (1 - size) * 100}%`, width: `${size * 100}%`, top: 0, bottom: 0 }
+        }
+      />
+    </div>
+  );
+}
+
 function LightboxMedia({
   item,
   zoom,
   pan,
-  scrolling,
+  tall,
 }: {
   item: MediaAsset;
   zoom: number;
   pan: { x: number; y: number };
-  scrolling: boolean;
+  tall: boolean;
 }) {
   if (item.kind === "video" && item.src) {
     return <video src={item.src} controls playsInline className="max-h-[78vh] max-w-full" />;
@@ -172,28 +289,24 @@ function LightboxMedia({
 
   if (!item.src || item.placeholder) return null;
 
-  const transform =
-    zoom === 1 ? undefined : `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`;
+  const transform = tall || zoom === 1 ? undefined : `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`;
+  const frameClass = tall ? "h-auto w-full" : "max-h-[78vh] w-auto max-w-full object-contain";
 
   return (
     <div
-      className={scrolling ? "w-full" : "max-h-[78vh] max-w-full"}
-      style={{ transform, transformOrigin: "center center" }}
+      className={tall ? undefined : "max-h-[78vh] max-w-full"}
+      style={
+        tall
+          ? { width: `${zoom * 100}%` }
+          : { transform, transformOrigin: "center center" }
+      }
     >
       <Image
         src={item.src}
         alt={item.alt}
         width={item.width ?? 1920}
         height={item.height ?? 1080}
-        className={
-          item.darkSrc
-            ? scrolling
-              ? "h-auto w-full dark:hidden"
-              : "max-h-[78vh] w-auto max-w-full object-contain dark:hidden"
-            : scrolling
-              ? "h-auto w-full"
-              : "max-h-[78vh] w-auto max-w-full object-contain"
-        }
+        className={item.darkSrc ? `${frameClass} dark:hidden` : frameClass}
         sizes="100vw"
         unoptimized={Boolean(item.height && item.height > 4000)}
       />
@@ -203,11 +316,7 @@ function LightboxMedia({
           alt=""
           width={item.width ?? 1920}
           height={item.height ?? 1080}
-          className={
-            scrolling
-              ? "hidden h-auto w-full dark:block"
-              : "hidden max-h-[78vh] w-auto max-w-full object-contain dark:block"
-          }
+          className={`hidden dark:block ${frameClass}`}
           sizes="100vw"
           unoptimized={Boolean(item.height && item.height > 4000)}
         />
