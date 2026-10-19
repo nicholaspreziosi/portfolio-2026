@@ -101,13 +101,13 @@ export function CaseStudyLightbox({
 
   return (
     <div className="flex max-h-[88vh] w-[min(96vw,1120px)] flex-col">
-      <div className="relative min-h-0 flex-1 overflow-hidden rounded-[16px] bg-black">
+      <div className="relative flex min-h-0 flex-1 flex-col overflow-hidden rounded-[16px] bg-black contain-paint">
         <div
           ref={frameRef}
           className={
             still
-              ? "h-full min-h-0 overflow-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-              : "grid h-full min-h-[40vh] place-items-center overflow-hidden"
+              ? "min-h-0 flex-1 overflow-auto overscroll-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              : "grid min-h-[40vh] flex-1 place-items-center overflow-hidden"
           }
           onPointerDown={onPointerDown}
           onPointerUp={onPointerUp}
@@ -117,7 +117,7 @@ export function CaseStudyLightbox({
         </div>
         {scroll.overflowY ? <ScrollIndicator axis="y" offset={scroll.y} size={scroll.height} /> : null}
         {scroll.overflowX ? <ScrollIndicator axis="x" offset={scroll.x} size={scroll.width} /> : null}
-        <MorphingDialogDescription className="absolute inset-x-0 bottom-0 z-20">
+        <MorphingDialogDescription layoutKey="lightbox" className="absolute inset-x-0 bottom-0 z-20">
           <CaseStudyMediaDisclosure item={item} open={detailsOpen} onOpenChange={onDetailsOpenChange} />
         </MorphingDialogDescription>
       </div>

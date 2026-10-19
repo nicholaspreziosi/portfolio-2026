@@ -56,7 +56,7 @@ export function CaseStudyMediaGallery({ group }: { group: MediaGroup }) {
             disableDrag={reduceMotion}
             itemCount={items.length}
           >
-            <div className="relative overflow-hidden rounded-[16px]">
+            <div className="relative overflow-hidden rounded-[16px] contain-paint">
               <MorphingDialogTrigger
                 ariaLabel={t("openImage")}
                 className="block w-full border-0 bg-transparent p-0 text-start"
@@ -77,7 +77,7 @@ export function CaseStudyMediaGallery({ group }: { group: MediaGroup }) {
             <CarouselIndicator label={(itemIndex) => t("goToItem", { index: itemIndex })} />
           </Carousel>
         ) : (
-          <div className="relative overflow-hidden rounded-[16px]">
+          <div className="relative overflow-hidden rounded-[16px] contain-paint">
             <MorphingDialogTrigger
               ariaLabel={t("openImage")}
               className="block w-full border-0 bg-transparent p-0 text-start"
@@ -139,7 +139,7 @@ function ComparisonFrame({
         <p className="mb-2 text-xs font-medium tracking-[0.12em] text-(--color-text-secondary) uppercase">
           {label}
         </p>
-        <div className="relative overflow-hidden rounded-[16px]">
+        <div className="relative overflow-hidden rounded-[16px] contain-paint">
           <MorphingDialogTrigger
             ariaLabel={t("openImage")}
             className="block w-full border-0 bg-transparent p-0 text-start"

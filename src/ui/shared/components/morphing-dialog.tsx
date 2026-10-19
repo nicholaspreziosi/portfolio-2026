@@ -81,6 +81,7 @@ export function MorphingDialogTrigger({
         if (triggerRef) triggerRef.current = node;
       }}
       layoutId={`dialog-${uniqueId}`}
+      layoutDependency={`trigger:${isOpen}`}
       className={cn("relative cursor-zoom-in", className)}
       style={style}
       onClick={() => setIsOpen(!isOpen)}
@@ -139,7 +140,7 @@ export type MorphingDialogContentProps = {
 };
 
 export function MorphingDialogContent({ children, className, style }: MorphingDialogContentProps) {
-  const { setIsOpen, uniqueId, triggerRef } = useMorphingDialog();
+  const { setIsOpen, uniqueId, triggerRef, isOpen } = useMorphingDialog();
   const containerRef = useRef<HTMLDivElement>(null);
   const close = useCallback(() => setIsOpen(false), [setIsOpen]);
   useClickOutside(containerRef, close);
@@ -184,6 +185,7 @@ export function MorphingDialogContent({ children, className, style }: MorphingDi
     <motion.div
       ref={containerRef}
       layoutId={`dialog-${uniqueId}`}
+      layoutDependency={`content:${isOpen}`}
       className={cn("relative overflow-hidden outline-none", className)}
       style={style}
       role="dialog"
@@ -261,17 +263,20 @@ export function MorphingDialogDescription({
   children,
   className,
   disableLayoutAnimation,
+  layoutKey = "source",
   variants,
 }: {
   children: ReactNode;
   className?: string;
   disableLayoutAnimation?: boolean;
+  layoutKey?: string;
   variants?: { initial: Variant; animate: Variant; exit: Variant };
 }) {
-  const { uniqueId } = useMorphingDialog();
+  const { uniqueId, isOpen } = useMorphingDialog();
   return (
     <motion.div
       layoutId={disableLayoutAnimation ? undefined : `dialog-description-${uniqueId}`}
+      layoutDependency={`${layoutKey}:${isOpen}`}
       className={className}
       variants={variants}
       initial="initial"
