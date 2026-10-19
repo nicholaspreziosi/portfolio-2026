@@ -8,7 +8,6 @@ import type { CaseStudySection } from "@/lib/content/types";
 import { ScrollProgress } from "@/ui/shared/components/scroll-progress";
 
 const sectionOffset: UseScrollOptions["offset"] = ["start 112px", "end 112px"];
-const sectionSpring = { stiffness: 500, damping: 46, restDelta: 0.001 };
 
 type NavSection = Pick<CaseStudySection, "id" | "navLabel">;
 
@@ -74,7 +73,6 @@ function SectionTrack({
         orientation={orientation}
         targetRef={targetRef}
         offset={sectionOffset}
-        springOptions={sectionSpring}
       />
     </div>
   );
