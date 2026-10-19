@@ -62,9 +62,9 @@ export function CaseStudyMediaGallery({ group }: { group: MediaGroup }) {
                 className="block w-full border-0 bg-transparent p-0 text-start"
               >
                 <CarouselContent>
-                  {items.map((item) => (
+                  {items.map((item, itemIndex) => (
                     <CarouselItem key={item.id}>
-                      <MediaFrame item={item} />
+                      <MediaFrame item={item} eager={itemIndex === 0} />
                     </CarouselItem>
                   ))}
                 </CarouselContent>
@@ -82,7 +82,7 @@ export function CaseStudyMediaGallery({ group }: { group: MediaGroup }) {
               ariaLabel={t("openImage")}
               className="block w-full border-0 bg-transparent p-0 text-start"
             >
-              <MediaFrame item={items[0]} />
+              <MediaFrame item={items[0]} eager />
             </MorphingDialogTrigger>
             <MorphingDialogDescription className="absolute inset-x-0 bottom-0 z-20">
               <CaseStudyMediaDisclosure item={active} open={detailsOpen} onOpenChange={setDetailsOpen} />
@@ -144,7 +144,7 @@ function ComparisonFrame({
             ariaLabel={t("openImage")}
             className="block w-full border-0 bg-transparent p-0 text-start"
           >
-            <MediaFrame item={item} />
+            <MediaFrame item={item} eager />
           </MorphingDialogTrigger>
           <MorphingDialogDescription className="absolute inset-x-0 bottom-0 z-20">
             <CaseStudyMediaDisclosure item={item} open={detailsOpen} onOpenChange={setDetailsOpen} />
@@ -167,7 +167,7 @@ function ComparisonFrame({
   );
 }
 
-function MediaFrame({ item }: { item: MediaAsset }) {
+function MediaFrame({ item, eager = false }: { item: MediaAsset; eager?: boolean }) {
   const t = useTranslations("CaseStudyPage");
 
   if (item.placeholder || !item.src) {
@@ -200,11 +200,19 @@ function MediaFrame({ item }: { item: MediaAsset }) {
         src={item.src}
         alt={item.alt}
         fill
+        loading={eager ? "eager" : "lazy"}
         sizes="(min-width: 1024px) 880px, 100vw"
         className={item.darkSrc ? `${crop} dark:hidden` : crop}
       />
       {item.darkSrc ? (
-        <Image src={item.darkSrc} alt="" fill sizes="(min-width: 1024px) 880px, 100vw" className={`${crop} hidden dark:block`} />
+        <Image
+          src={item.darkSrc}
+          alt=""
+          fill
+          loading={eager ? "eager" : "lazy"}
+          sizes="(min-width: 1024px) 880px, 100vw"
+          className={`${crop} hidden dark:block`}
+        />
       ) : null}
     </div>
   );
